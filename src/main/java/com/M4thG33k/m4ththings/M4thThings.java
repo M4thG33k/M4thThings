@@ -4,6 +4,7 @@ import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.init.ModItems;
 import com.M4thG33k.m4ththings.init.ModTiles;
 import com.M4thG33k.m4ththings.proxy.CommonProxy;
+import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -27,6 +28,7 @@ public class M4thThings {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        Configurations.preInit(event);
         ModBlocks.init();
         ModTiles.init();
         ModItems.init();
