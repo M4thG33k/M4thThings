@@ -11,5 +11,4 @@ public class Reference {
     public static final String SERVER_PROXY_CLASS = "com.M4thG33k.m4ththings.proxy.ServerProxy";
     public static final String DEPENDENCIES = "";//"required-after:ExtraUtilities";
 
-    public static final int MAX_COBBLE_ALLOWED = 100;
 }
