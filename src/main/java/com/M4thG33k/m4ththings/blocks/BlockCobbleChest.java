@@ -90,7 +90,7 @@ public class BlockCobbleChest extends BlockContainer {
             }
             return false;
         }
-        world.markBlockForUpdate(x,y,z);
+        //world.markBlockForUpdate(x,y,z);
         return true;
     }
 

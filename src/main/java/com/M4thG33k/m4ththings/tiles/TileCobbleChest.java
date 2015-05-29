@@ -322,7 +322,8 @@ public class TileCobbleChest extends TileEntity implements IInventory {
         if (!isReinforced)
         {
             isReinforced = true;
-            worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+            //worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+            markDirty();
             return true;
         }
         return false;
@@ -344,5 +345,6 @@ public class TileCobbleChest extends TileEntity implements IInventory {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         this.readFromNBT(pkt.func_148857_g());
+        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
     }
 }
