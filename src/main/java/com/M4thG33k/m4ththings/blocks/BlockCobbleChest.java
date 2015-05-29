@@ -56,44 +56,42 @@ public class BlockCobbleChest extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 
-        if (world.isRemote) {
-            return true;
-        }
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (!world.isRemote) {
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        if (tileEntity == null || !(tileEntity instanceof TileCobbleChest)) {
+            if (tileEntity == null || !(tileEntity instanceof TileCobbleChest)) {
+                return false;
+            }
+            TileCobbleChest tEnt = (TileCobbleChest) tileEntity;
+            ItemStack held = player.getHeldItem();
+            if (player.isSneaking() && held == null) {
+                ChatHelper.sayMessage(world, player, "This chest currently holds " + tEnt.getCobble(0) + " cobblestone.");
+                return true;
+
+            }
+            if (!player.isSneaking() && held != null) {
+                if (held.getItem() == Item.getItemFromBlock(Blocks.obsidian)) {
+                    if (tEnt.makeReinforced()) {
+                        held.stackSize -= 1;
+                        ChatHelper.sayMessage(world, player, "This chest isn't going anywhere for a while...");
+                        return true;
+                    }
+                }
+            }
+            if (!player.isSneaking()) {
+                for (int i = 0; i < 36; i++) {
+                    ItemStack slot = player.inventory.getStackInSlot(i);
+                    if (slot != null && slot.getItem() == Item.getItemFromBlock(Blocks.cobblestone)) {
+                        player.inventory.setInventorySlotContents(i, tEnt.addCobble(slot));
+                    }
+                }
+                ((EntityPlayerMP) player).sendContainerToPlayer(player.openContainer);
+                return true;
+            }
             return false;
         }
-        TileCobbleChest tEnt = (TileCobbleChest) tileEntity;
-        ItemStack held = player.getHeldItem();
-        if (player.isSneaking() && held == null) {
-            ChatHelper.sayMessage(world, player, "This chest currently holds " + tEnt.getCobble(0) + " cobblestone.");
-            return true;
-
-        }
-        if (!player.isSneaking() && held!=null)
-        {
-            if (held.getItem() == Item.getItemFromBlock(Blocks.obsidian))
-            {
-                if (tEnt.makeReinforced())
-                {
-                    held.stackSize -= 1;
-                    ChatHelper.sayMessage(world, player, "This chest isn't going anywhere for a while...");
-                    return true;
-                }
-            }
-        }
-        if (!player.isSneaking()) {
-            for (int i = 0; i < 36; i++) {
-                ItemStack slot = player.inventory.getStackInSlot(i);
-                if (slot != null && slot.getItem() == Item.getItemFromBlock(Blocks.cobblestone)) {
-                    player.inventory.setInventorySlotContents(i, tEnt.addCobble(slot));
-                }
-            }
-            ((EntityPlayerMP) player).sendContainerToPlayer(player.openContainer);
-            return true;
-        }
-        return false;
+        world.markBlockForUpdate(x,y,z);
+        return true;
     }
 
     @Override
@@ -221,11 +219,11 @@ public class BlockCobbleChest extends BlockContainer {
 
         if (side==0 || side==1)
         {
-            iconLocation += 1;
+            iconLocation += 2;
         }
         else
         {
-            iconLocation += 2;
+            iconLocation += 1;
         }
 
         if (((TileCobbleChest)tEnt).getReinforced())

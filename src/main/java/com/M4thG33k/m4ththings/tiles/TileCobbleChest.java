@@ -13,6 +13,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
@@ -319,7 +322,7 @@ public class TileCobbleChest extends TileEntity implements IInventory {
         if (!isReinforced)
         {
             isReinforced = true;
-            FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().sendChatMsg(new ChatComponentText("Block at " + this.xCoord + " " + this.yCoord + " " + this.zCoord + " is reinforced"));
+            worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
             return true;
         }
         return false;
@@ -328,5 +331,18 @@ public class TileCobbleChest extends TileEntity implements IInventory {
     public boolean getReinforced()
     {
         return isReinforced;
+    }
+
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound data = new NBTTagCompound();
+
+        this.writeToNBT(data);
+        return new S35PacketUpdateTileEntity(this.xCoord,this.yCoord,this.zCoord,1,data);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.func_148857_g());
     }
 }
