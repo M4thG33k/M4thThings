@@ -4,6 +4,8 @@ import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -322,7 +324,7 @@ public class TileCobbleChest extends TileEntity implements IInventory {
         if (!isReinforced)
         {
             isReinforced = true;
-            //worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+            worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
             markDirty();
             return true;
         }
@@ -345,6 +347,6 @@ public class TileCobbleChest extends TileEntity implements IInventory {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         this.readFromNBT(pkt.func_148857_g());
-        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 }
