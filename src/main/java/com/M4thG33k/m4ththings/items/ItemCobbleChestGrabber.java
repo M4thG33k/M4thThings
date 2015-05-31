@@ -1,6 +1,7 @@
 package com.M4thG33k.m4ththings.items;
 
 import com.M4thG33k.m4ththings.creativetabs.CreativeTabM4thThings;
+import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,6 +25,7 @@ public class ItemCobbleChestGrabber extends Item {
         setUnlocalizedName(Reference.MOD_ID + "_" + "cobbleChestGrabber");
         setCreativeTab(CreativeTabM4thThings.M4THTHINGS_TAB);
         setMaxStackSize(1);
+        setTextureName(Reference.MOD_ID + ":" + "cobbleChestGrabber");
     }
 
     @SideOnly(Side.CLIENT)
@@ -51,22 +53,45 @@ public class ItemCobbleChestGrabber extends Item {
         return icons[0];
     }
 
+
+
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float px, float py, float pz) {
+        //If the grabber has a block
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey("Filled"))
         {
-            stack.getTagCompound().setBoolean("Filled",!stack.getTagCompound().getBoolean("Filled"));
+            //check if you can place the block on the side of the hit block
+            switch (side)
+            {
+                case 0:
+                    if (!world.isAirBlock(x,y-1,z))
+                    {
+                        return false;
+                    }
+                    world.setBlock(x,y-1,z, ModBlocks.blockCobbleChest);
+                    break;
+                case 1:
+                    if (!world.isAirBlock(x,y+1,z))
+                    {
+                        return false;
+                    }
+                    world.setBlock(x,y+1,z,ModBlocks.blockCobbleChest);
+                    break;
+                default:
+                    return false;
+            }
+            stack.getTagCompound().setBoolean("Filled", !stack.getTagCompound().getBoolean("Filled"));
             return true;
         }
         if (stack.hasTagCompound())
         {
             stack.getTagCompound().setBoolean("Filled",true);
-            return true;
+            return false;
         }
         NBTTagCompound tagCompound = new NBTTagCompound();
         tagCompound.setBoolean("Filled", true);
         stack.setTagCompound(tagCompound);
-        return true;
+        return false;
 
     }
 

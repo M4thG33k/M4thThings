@@ -2,44 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8678260a-8c24-48b0-b15f-adb3dd511f85" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/items/ItemCobbleChestGrabber.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/managers/VanillaCraftingManager.java" />
-      <change type="DELETED" beforePath="F:\Projects\Minecraft\1.7\M4thThings\eclipse\mods\Waila-1.5.10_1.7.10.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/2015-05-30-1.log.gz" afterPath="$PROJECT_DIR$/eclipse/logs/2015-05-30-1.log.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/2015-05-30-2.log.gz" afterPath="$PROJECT_DIR$/eclipse/logs/2015-05-30-2.log.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/playerdata/377f1ac0-6050-32e3-9d68-daf21c3caf7c.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/playerdata/377f1ac0-6050-32e3-9d68-daf21c3caf7c.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/NEI/local/New World-/NEI.dat" afterPath="$PROJECT_DIR$/eclipse/saves/NEI/local/New World-/NEI.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/playerdata/20c1711e-6e1a-34df-86a3-92ae832d2f9f.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/playerdata/20c1711e-6e1a-34df-86a3-92ae832d2f9f.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/playerdata/f0c5379b-0e4e-34aa-808d-37fef9b5ce6c.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/playerdata/f0c5379b-0e4e-34aa-808d-37fef9b5ce6c.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/level.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/level.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/level.dat_old" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/level.dat_old" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/outputFileStates.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.-1.0.mca" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.-1.0.mca" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.-1.1.mca" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.-1.1.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.0.0.mca" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.0.0.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.0.1.mca" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/region/r.0.1.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/session.lock" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/session.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.0/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/DIM-100/data/villages.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/DIM-100/data/villages.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/DIM-112/data/villages.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/DIM-112/data/villages.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/DIM-1/data/villages.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/DIM-1/data/villages.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/DIM1/data/villages.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/DIM1/data/villages.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/data/villages.dat" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/data/villages.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/stats/377f1ac0-6050-32e3-9d68-daf21c3caf7c.json" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/stats/377f1ac0-6050-32e3-9d68-daf21c3caf7c.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/blocks/BlockCobbleChest.java" afterPath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/blocks/BlockCobbleChest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/M4thThings.iml" afterPath="$PROJECT_DIR$/M4thThings.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/M4thThings.ipr" afterPath="$PROJECT_DIR$/M4thThings.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/stats/20c1711e-6e1a-34df-86a3-92ae832d2f9f.json" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/stats/20c1711e-6e1a-34df-86a3-92ae832d2f9f.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/items/ItemCobbleChestGrabber.java" afterPath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/items/ItemCobbleChestGrabber.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/M4thThings.iws" afterPath="$PROJECT_DIR$/M4thThings.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/M4thThings.java" afterPath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/M4thThings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/init/ModItems.java" afterPath="$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/init/ModItems.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/config/NEI/client.cfg" afterPath="$PROJECT_DIR$/eclipse/config/NEI/client.cfg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/assets/m4ththings/lang/en_US.lang" afterPath="$PROJECT_DIR$/src/main/resources/assets/m4ththings/lang/en_US.lang" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/saves/New World-/stats/f0c5379b-0e4e-34aa-808d-37fef9b5ce6c.json" afterPath="$PROJECT_DIR$/eclipse/saves/New World-/stats/f0c5379b-0e4e-34aa-808d-37fef9b5ce6c.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/fml-client-1.log" afterPath="$PROJECT_DIR$/eclipse/logs/fml-client-1.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/fml-client-2.log" afterPath="$PROJECT_DIR$/eclipse/logs/fml-client-2.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/fml-client-3.log" afterPath="$PROJECT_DIR$/eclipse/logs/fml-client-3.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/fml-client-latest.log" afterPath="$PROJECT_DIR$/eclipse/logs/fml-client-latest.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/fml-junk-earlystartup.log" afterPath="$PROJECT_DIR$/eclipse/logs/fml-junk-earlystartup.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/gradle.log" afterPath="$PROJECT_DIR$/.gradle/gradle.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/logs/latest.log" afterPath="$PROJECT_DIR$/eclipse/logs/latest.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/usernamecache.json" afterPath="$PROJECT_DIR$/eclipse/usernamecache.json" />
     </list>
@@ -202,21 +187,11 @@
       <file leaf-file-name="ItemCobbleChestGrabber.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/items/ItemCobbleChestGrabber.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2837838">
-              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.65106386">
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1291/forgeSrc-1.7.10-10.13.2.1291-sources.jar!/net/minecraft/item/Item.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7586207">
-              <caret line="1004" column="71" selection-start-line="1004" selection-start-column="64" selection-end-line="1004" selection-end-column="71" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1573,8 +1548,8 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20670995" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32900432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20670995" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2012,7 +1987,7 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1291/forgeSrc-1.7.10-10.13.2.1291-sources.jar!/net/minecraft/item/Item.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7586207">
+        <state vertical-scroll-proportion="0.39964476">
           <caret line="1004" column="71" selection-start-line="1004" selection-start-column="64" selection-end-line="1004" selection-end-column="71" />
           <folding />
         </state>
@@ -2020,8 +1995,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/M4thG33k/m4ththings/items/ItemCobbleChestGrabber.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2837838">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.65106386">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
