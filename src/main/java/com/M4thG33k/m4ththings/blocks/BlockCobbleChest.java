@@ -1,11 +1,11 @@
 package com.M4thG33k.m4ththings.blocks;
 
 import com.M4thG33k.m4ththings.creativetabs.CreativeTabM4thThings;
+import com.M4thG33k.m4ththings.init.ModItems;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileCobbleChest;
 import com.M4thG33k.m4ththings.utility.ChatHelper;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -24,13 +24,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * Created by M4thG33k on 5/28/2015.
  */
-public class BlockCobbleChest extends BlockContainer {
+public class BlockCobbleChest extends BlockContainer{
 
     public IIcon[] icons = new IIcon[5];
 
@@ -69,6 +68,33 @@ public class BlockCobbleChest extends BlockContainer {
                 return true;
 
             }
+//            if (player.isSneaking() && held != null)
+//            {
+//                if (held.getItem() == ModItems.cobbleChestGrabber)
+//                {
+//                    if (!held.hasTagCompound())
+//                    {
+//                        NBTTagCompound tagCompound = new NBTTagCompound();
+//                        tEnt.writeToNBT(tagCompound);
+//                        held.setTagCompound(tagCompound);
+//                        held.getTagCompound().setBoolean("Filled",true);
+//                        world.removeTileEntity(x,y,z);
+//                        world.setBlockToAir(x,y,z);
+//                    }
+//                    else
+//                    {
+//                        if (held.getTagCompound().hasKey("Filled") && !held.getTagCompound().getBoolean("Filled"))
+//                        {
+//                            NBTTagCompound tagCompound = new NBTTagCompound();
+//                            tEnt.writeToNBT(tagCompound);
+//                            held.setTagCompound(tagCompound);
+//                            held.getTagCompound().setBoolean("Filled",true);
+//                            world.removeTileEntity(x,y,z);
+//                            world.setBlockToAir(x,y,z);
+//                        }
+//                    }
+//                }
+//            }
             if (!player.isSneaking() && held != null) {
                 if (held.getItem() == Item.getItemFromBlock(Blocks.obsidian)) {
                     if (tEnt.makeReinforced()) {
@@ -90,7 +116,7 @@ public class BlockCobbleChest extends BlockContainer {
             }
             return false;
         }
-        //world.markBlockForUpdate(x,y,z);
+        //the following code only runs on the client side
         return true;
     }
 
