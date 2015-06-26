@@ -131,8 +131,10 @@ public class TileCobbleChest extends TileEntity implements IInventory {
     @Override
     public void readFromNBT(NBTTagCompound tagCompound)
     {
+        LogHelper.info("I am attempting to read from NBT");
         super.readFromNBT(tagCompound);
         cobble = tagCompound.getInteger("Cobble");
+        LogHelper.info("I have " + tagCompound.getInteger("Cobble") + "cobble to place");
         if (tagCompound.hasKey("Output"))
         {
             inv[0] = new ItemStack(Blocks.cobblestone,tagCompound.getInteger("Output"));
@@ -160,7 +162,10 @@ public class TileCobbleChest extends TileEntity implements IInventory {
     @Override
     public void writeToNBT(NBTTagCompound tagCompound)
     {
+        LogHelper.info("TileCobbleChest wrote to NBT.");
+
         super.writeToNBT(tagCompound);
+
 
         tagCompound.setInteger("Cobble",cobble);
         if (inv[0]!= null)

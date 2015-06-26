@@ -1,5 +1,6 @@
 package com.M4thG33k.m4ththings.creativetabs;
 
+import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -14,7 +15,7 @@ public class CreativeTabM4thThings {
         @Override
         public Item getTabIconItem()
         {
-            return Items.skull;
+            return Item.getItemFromBlock(ModBlocks.blockQuantumTank);
         }
     };
 }

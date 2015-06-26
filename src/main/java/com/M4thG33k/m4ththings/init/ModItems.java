@@ -8,11 +8,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
  */
 public class ModItems {
 
-    public static final ItemCobbleChestGrabber cobbleChestGrabber = new ItemCobbleChestGrabber();
+//    public static final ItemCobbleChestGrabber cobbleChestGrabber = new ItemCobbleChestGrabber();
 
     public static void init()
     {
-        GameRegistry.registerItem(cobbleChestGrabber,cobbleChestGrabber.getUnlocalizedName());
+//        GameRegistry.registerItem(cobbleChestGrabber,cobbleChestGrabber.getUnlocalizedName());
     }
 
 }

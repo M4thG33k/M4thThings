@@ -11,7 +11,7 @@ anaglyph3d:false
 advancedOpengl:false
 maxFps:120
 fboEnable:true
-difficulty:0
+difficulty:1
 fancyGraphics:true
 ao:2
 clouds:false
@@ -90,6 +90,8 @@ key_waila.keybind.wailadisplay:79
 key_waila.keybind.liquid:80
 key_waila.keybind.recipe:81
 key_waila.keybind.usage:75
+key_key.cofh.empower:47
+key_key.cofh.multimode:46
 soundCategory_master:0.29139072
 soundCategory_music:0.0
 soundCategory_record:1.0

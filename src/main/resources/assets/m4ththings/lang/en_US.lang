@@ -3,3 +3,14 @@ item.m4ththings_cobbleChestGrabber.name=Cobble Chest Grabber
 block.m4ththings_blockCobbleChest.name=Cobble Chest
 
 tile.m4ththings_blockCobbleChest.name=Cobble Chest
+tile.m4ththings_blockBaseChest.name=Base Chest
+tile.m4ththings_blockBaseTank.name=Base Tank
+
+tile.m4ththings_blockQTValve.name=Quantum Tank Valve
+tile.m4ththings_blockMedQTController_0.name=Medium Quantum Tank Controller
+tile.m4ththings_blockMedQTController_1.name=Large Quantum Tank Controller
+tile.m4ththings_blockQTComponent.name=Quantum Tank
+tile.m4ththings_blockQTComponent_0.name=Quantum Tank
+tile.m4ththings_blockQTComponent_1.name=Quantum Tank Valve
+
+entity.BoomerHAHA.name=Creepster

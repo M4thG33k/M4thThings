@@ -1,8 +1,11 @@
 package com.M4thG33k.m4ththings;
 
+import com.M4thG33k.m4ththings.Explosions.ExplosionHandler;
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.init.ModItems;
+import com.M4thG33k.m4ththings.init.ModMobs;
 import com.M4thG33k.m4ththings.init.ModTiles;
+import com.M4thG33k.m4ththings.managers.GuiHandler;
 import com.M4thG33k.m4ththings.managers.VanillaCraftingManager;
 import com.M4thG33k.m4ththings.proxy.CommonProxy;
 import com.M4thG33k.m4ththings.reference.Configurations;
@@ -11,8 +14,10 @@ import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 public class M4thThings {
 
     public static VanillaCraftingManager vanillaCraftingManager = new VanillaCraftingManager();
+    public static ExplosionHandler explosionHandler;
 
     @Mod.Instance(Reference.MOD_ID)
     public static M4thThings m4ththings;
@@ -34,18 +40,20 @@ public class M4thThings {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        FMLInterModComms.sendMessage("Waila","register","com.M4thG33k.m4ththings.reference.WailaInteraction.load");
         Configurations.preInit(event);
         ModBlocks.init();
         ModTiles.init();
         ModItems.init();
+        ModMobs.init();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
-        LogHelper.info("Staring the init phase");
-
         vanillaCraftingManager.init();
+        NetworkRegistry.INSTANCE.registerGuiHandler(m4ththings,new GuiHandler());
+        proxy.registerRenderers();
     }
 
     @Mod.EventHandler

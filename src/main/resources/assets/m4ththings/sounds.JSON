@@ -1,0 +1,50 @@
+{
+	"boomerdeath": 
+	{
+		"category": "master",
+		"sounds": 
+		[
+			"boomerdeath"
+		]
+	},
+	"boomerlaugh":
+	{
+		"category": "master",
+		"sounds": 
+		[
+			"boomerlaugh"
+		]
+	},
+	"boomerboom":
+	{
+		"category": "master",
+		"sounds":
+		[
+			"boomerboom"
+		]
+	},
+	"pacmanwarble":
+	{
+		"category": "master",
+		"sounds":
+		[
+			"pacmanwarble"
+		]
+	},
+	"pacmandeath":
+	{
+		"category": "master",
+		"sounds":
+		[
+			"pacmandeath"
+		]
+	},
+	"mexicanhatdance":
+	{
+		"category": "master",
+		"sounds":
+		[
+			"mexicanhatdance"
+		]
+	}
+}
