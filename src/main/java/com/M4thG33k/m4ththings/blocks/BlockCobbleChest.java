@@ -1,7 +1,6 @@
 package com.M4thG33k.m4ththings.blocks;
 
 import com.M4thG33k.m4ththings.creativetabs.CreativeTabM4thThings;
-import com.M4thG33k.m4ththings.init.ModItems;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileCobbleChest;
@@ -18,7 +17,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;

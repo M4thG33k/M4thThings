@@ -10,7 +10,6 @@ import com.M4thG33k.m4ththings.managers.VanillaCraftingManager;
 import com.M4thG33k.m4ththings.proxy.CommonProxy;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -18,8 +17,6 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by M4thG33k on 5/28/2015.

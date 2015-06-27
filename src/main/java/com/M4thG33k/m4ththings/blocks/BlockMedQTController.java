@@ -76,20 +76,24 @@ public class BlockMedQTController extends Block implements ITileEntityProvider {
 
         if (tileEntity instanceof TileLargeQT)
         {
-            if (((TileLargeQT)tileEntity).isStructureBuilt())
-            {
-                return true;
-            }
-            return false;
+            return ((TileLargeQT)tileEntity).isStructureBuilt();
+//            if (((TileLargeQT)tileEntity).isStructureBuilt())
+//            {
+//                return true;
+//            }
+//            return false;
         }
+
+
 
         if (tileEntity instanceof TileMedQT)
         {
-            if (((TileMedQT) tileEntity).isStructureBuilt())
-            {
-                return true;
-            }
-            return false;
+            return ((TileMedQT)tileEntity).isStructureBuilt();
+//            if (((TileMedQT) tileEntity).isStructureBuilt())
+//            {
+//                return true;
+//            }
+//            return false;
         }
         return false;
     }

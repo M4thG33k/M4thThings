@@ -2,9 +2,7 @@ package com.M4thG33k.m4ththings.managers;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.init.ModItems;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

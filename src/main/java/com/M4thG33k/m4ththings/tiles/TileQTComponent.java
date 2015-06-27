@@ -1,14 +1,10 @@
 package com.M4thG33k.m4ththings.tiles;
 
-import com.M4thG33k.m4ththings.utility.LogHelper;
-import com.M4thG33k.m4ththings.utility.StringHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.IFluidHandler;
-import net.minecraftforge.fluids.IFluidTank;
 
 /**
  * Created by M4thG33k on 6/23/2015.

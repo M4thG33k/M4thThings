@@ -1,6 +1,5 @@
 package com.M4thG33k.m4ththings.init;
 
-import com.M4thG33k.m4ththings.items.ItemCobbleChestGrabber;
 import com.M4thG33k.m4ththings.items.ItemModIngot;
 import cpw.mods.fml.common.registry.GameRegistry;
 

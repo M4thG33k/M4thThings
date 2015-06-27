@@ -2,7 +2,6 @@ package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;

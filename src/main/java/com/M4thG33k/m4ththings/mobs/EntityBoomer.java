@@ -1,17 +1,12 @@
 package com.M4thG33k.m4ththings.mobs;
 
-import com.M4thG33k.m4ththings.Explosions.M4thCustomExplosion;
 import com.M4thG33k.m4ththings.M4thThings;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-
-import java.sql.Ref;
 
 /**
  * Created by M4thG33k on 6/9/2015.

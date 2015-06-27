@@ -22,7 +22,7 @@ public class QuantumTankRenderer extends TileEntitySpecialRenderer {
 
     public QuantumTankRenderer()
     {
-        fluidPorts = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/fluidTank3.obj"));
+        fluidPorts = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/quantumTank.obj"));
         fluidPortTexture = new ResourceLocation("m4ththings","models/fluidTank3.png");
         fluidTexture = TextureMap.locationBlocksTexture;
     }

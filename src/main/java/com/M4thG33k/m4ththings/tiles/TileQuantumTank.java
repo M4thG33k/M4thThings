@@ -1,7 +1,6 @@
 package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.reference.Configurations;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -9,7 +8,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
-import sun.rmi.runtime.Log;
 
 /**
  * Created by M4thG33k on 6/22/2015.

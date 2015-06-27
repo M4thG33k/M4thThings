@@ -1,8 +1,6 @@
 package com.M4thG33k.m4ththings.Explosions;
 
 import com.M4thG33k.m4ththings.reference.Reference;
-import com.M4thG33k.m4ththings.utility.ChatHelper;
-import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;

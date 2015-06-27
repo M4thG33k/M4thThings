@@ -27,7 +27,7 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
 
     public MediumQuantumTankRenderer()
     {
-        modelBlock = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/fluidTank3.obj"));
+        modelBlock = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/quantumTank.obj"));
         modelTexture = new ResourceLocation("m4ththings","models/fluidTank3.png");
         fluidTexture = TextureMap.locationBlocksTexture;
         modelCube = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/cube.obj"));

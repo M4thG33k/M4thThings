@@ -3,7 +3,6 @@ package com.M4thG33k.m4ththings.creativetabs;
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 /**

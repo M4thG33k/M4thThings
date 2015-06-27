@@ -1,10 +1,9 @@
 package com.M4thG33k.m4ththings.init;
 
 import com.M4thG33k.m4ththings.blocks.*;
-import com.M4thG33k.m4ththings.items.ItemBaseTank;
+import com.M4thG33k.m4ththings.items.ItemM4thBlock;
 import com.M4thG33k.m4ththings.items.ItemQTControllerMeta;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 /**
@@ -40,6 +39,6 @@ public class ModBlocks {
         GameRegistry.registerBlock(blockQTValve,"blockQTValve");
         GameRegistry.registerBlock(blockMedQTController,ItemQTControllerMeta.class,"blockMedQTController");
         GameRegistry.registerBlock(blockQTComponent,"blockQTComponent");
-        GameRegistry.registerBlock(blockM4thBlock,"blockM4thBlock");
+        GameRegistry.registerBlock(blockM4thBlock, ItemM4thBlock.class,"blockM4thBlock");
     }
 }

@@ -3,14 +3,8 @@ package com.M4thG33k.m4ththings.tiles;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.utility.LogHelper;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,8 +13,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 
 /**
  * Created by M4thG33k on 5/28/2015.
