@@ -15,7 +15,7 @@ public class CreativeTabM4thThings {
         @Override
         public Item getTabIconItem()
         {
-            return Item.getItemFromBlock(ModBlocks.blockQuantumTank);
+            return Item.getItemFromBlock(ModBlocks.blockQTValve);
         }
     };
 }

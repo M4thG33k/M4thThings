@@ -2,7 +2,9 @@ package com.M4thG33k.m4ththings.mobs;
 
 import com.M4thG33k.m4ththings.Explosions.M4thCustomExplosion;
 import com.M4thG33k.m4ththings.M4thThings;
+import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
+import com.M4thG33k.m4ththings.utility.LogHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.monster.EntityCreeper;
@@ -20,12 +22,44 @@ public class EntityBoomer extends EntityCreeper {
     protected int passedTime;
     protected int fuseLength = 30;
     protected int radius = 3;
-    protected int soundChoice = 3;
+    protected int soundChoice;
+    protected int allowedSounds;
 
     public EntityBoomer(World world)
     {
         super(world);
-        soundChoice = this.rand.nextInt(3)+1;
+        allowedSounds = Configurations.ALLOWED_CREEPSTER_SOUNDS;
+        soundChoice = randomizeSound();
+//        LogHelper.info("allowedSounds = " + allowedSounds);
+    }
+
+    public int randomizeSound()
+    {
+        int temp;
+        switch (allowedSounds)
+        {
+            case 1:
+                return 1;
+            case 2:
+                return 2;
+            case 3:
+                return this.rand.nextInt(2)+1;
+            case 4:
+                return 3;
+            case 5:
+                temp = this.rand.nextInt(2)+1;
+                if (temp==1)
+                {
+                    return 1;
+                }
+                return 3;
+            case 6:
+                return this.rand.nextInt(2)+2;
+            case 7:
+                return this.rand.nextInt(3)+1;
+            default:
+                return 0;
+        }
     }
 
     @Override
@@ -102,11 +136,9 @@ public class EntityBoomer extends EntityCreeper {
 
     public void playFuseSound()
     {
+//        LogHelper.info("Playing Fuse Sound: " + soundChoice);
         switch (soundChoice)
         {
-            case 0:
-                this.playSound("creeper.primed", 1.0F, 0.5F);
-                break;
             case 1:
                 this.playSound(Reference.MOD_ID + ":" + "boomerlaugh", 1.0F, 1.0F);
                 break;
@@ -115,6 +147,7 @@ public class EntityBoomer extends EntityCreeper {
                 break;
             case 3:
                 this.playSound(Reference.MOD_ID + ":" + "mexicanhatdance",0.8F,1.0F);
+                break;
             default:
                 this.playSound("creeper.primed", 1.0F, 0.5F);
                 break;

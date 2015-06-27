@@ -13,17 +13,18 @@ import net.minecraft.block.material.Material;
 public class ModBlocks {
 
     public static final BlockCobbleChest blockCobbleChest = new BlockCobbleChest();
-    public static final BlockBaseChest blockBaseChest = new BlockBaseChest(Material.rock);
-    public static final BlockFrozenDiamond blockFrozenDiamond = new BlockFrozenDiamond(Material.ice);
-    public static final BlockBaseTank blockBaseTank = new BlockBaseTank(Material.rock);
+//    public static final BlockBaseChest blockBaseChest = new BlockBaseChest(Material.rock);
+//    public static final BlockFrozenDiamond blockFrozenDiamond = new BlockFrozenDiamond(Material.ice);
+//    public static final BlockBaseTank blockBaseTank = new BlockBaseTank(Material.rock);
     public static final BlockQuantumTank blockQuantumTank = new BlockQuantumTank(Material.glass);
-    public static final BlockQuantumTankValve blockQuantumTankValve = new BlockQuantumTankValve(Material.iron);
-    public static final BlockMediumQTController blockMediumQTController = new BlockMediumQTController(Material.glass);
-    public static final BlockTankAir blockTankAir = new BlockTankAir(Material.glass);
-    public static final BlockTankTop blockTankTop = new BlockTankTop(Material.glass);
+//    public static final BlockQuantumTankValve blockQuantumTankValve = new BlockQuantumTankValve(Material.iron);
+//    public static final BlockMediumQTController blockMediumQTController = new BlockMediumQTController(Material.glass);
+//    public static final BlockTankAir blockTankAir = new BlockTankAir(Material.glass);
+//    public static final BlockTankTop blockTankTop = new BlockTankTop(Material.glass);
     public static final BlockQTValve blockQTValve = new BlockQTValve(Material.iron);
     public static final BlockMedQTController blockMedQTController = new BlockMedQTController(Material.glass);
     public static final BlockQTComponent blockQTComponent = new BlockQTComponent(Material.glass);
+    public static final BlockM4thBlock blockM4thBlock = new BlockM4thBlock(Material.iron);
 
     public static void init()
     {
@@ -39,5 +40,6 @@ public class ModBlocks {
         GameRegistry.registerBlock(blockQTValve,"blockQTValve");
         GameRegistry.registerBlock(blockMedQTController,ItemQTControllerMeta.class,"blockMedQTController");
         GameRegistry.registerBlock(blockQTComponent,"blockQTComponent");
+        GameRegistry.registerBlock(blockM4thBlock,"blockM4thBlock");
     }
 }

@@ -26,6 +26,7 @@ public class WailaInteraction implements IWailaDataProvider {
     public static void load(IWailaRegistrar registrar)
     {
         registrar.registerBodyProvider(INSTANCE,TileQTComponent.class);
+        registrar.registerBodyProvider(INSTANCE,TileQuantumTank.class);
         registrar.registerNBTProvider(INSTANCE, TileQTComponent.class);
 
 
@@ -61,7 +62,35 @@ public class WailaInteraction implements IWailaDataProvider {
             {
                 capacity = ((TileMedQT)quantumTank).getCapacity();
             }
-            currenttip.add((((TileMedQT)quantumTank).getFluid() != null )?((TileMedQT) quantumTank).getFluid().getLocalizedName()+": "  + ((TileMedQT)quantumTank).getFluidAmount() + " / " + capacity : "EMPTY");
+
+            if (((TileMedQT)quantumTank).getFluidAmount()==0)
+            {
+                currenttip.add("EMPTY");
+            }
+            else
+            {
+                currenttip.add(((TileMedQT) quantumTank).getFluid().getLocalizedName()+": "  + ((TileMedQT)quantumTank).getFluidAmount() + " / " + capacity);
+                currenttip.add(((TileMedQT)quantumTank).getRoundedPercentFilled() + "%");
+            }
+//            currenttip.add((((TileMedQT)quantumTank).getFluid() != null )?((TileMedQT) quantumTank).getFluid().getLocalizedName()+": "  + ((TileMedQT)quantumTank).getFluidAmount() + " / " + capacity : "EMPTY");
+        }
+
+        //do small QT tips
+        if (te instanceof TileQuantumTank && config.getConfig("option.m4ththings.showTankStorage"))
+        {
+            TileQuantumTank quantumTank = ((TileQuantumTank)te);
+
+            if (quantumTank.getFluidAmount()==0)
+            {
+                currenttip.add("EMPTY");
+            }
+            else
+            {
+                currenttip.add(quantumTank.getFluid().getLocalizedName() + ": " + quantumTank.getFluidAmount() + "/" + quantumTank.getCapacity());
+                currenttip.add(quantumTank.getRoundedPercentFilled() + "%");
+            }
+
+
         }
 
         return currenttip;

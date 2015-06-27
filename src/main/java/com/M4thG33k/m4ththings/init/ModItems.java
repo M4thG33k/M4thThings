@@ -1,6 +1,7 @@
 package com.M4thG33k.m4ththings.init;
 
 import com.M4thG33k.m4ththings.items.ItemCobbleChestGrabber;
+import com.M4thG33k.m4ththings.items.ItemModIngot;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /**
@@ -9,10 +10,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class ModItems {
 
 //    public static final ItemCobbleChestGrabber cobbleChestGrabber = new ItemCobbleChestGrabber();
+    public static final ItemModIngot itemModIngot = new ItemModIngot();
 
     public static void init()
     {
 //        GameRegistry.registerItem(cobbleChestGrabber,cobbleChestGrabber.getUnlocalizedName());
+        GameRegistry.registerItem(itemModIngot, "itemModIngot");
     }
 
 }

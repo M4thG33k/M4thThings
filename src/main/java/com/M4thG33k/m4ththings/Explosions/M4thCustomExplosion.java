@@ -81,7 +81,7 @@ public class M4thCustomExplosion extends Explosion {
         this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, soundString, soundVolume, soundPitch);
 
         if (this.explosionSize >= 2.0F && this.isSmoking) {
-            LogHelper.info("I'm spawning a HUGE explosion particle at " + this.explosionX + ", " + this.explosionY + ", " + this.explosionZ);
+//            LogHelper.info("I'm spawning a HUGE explosion particle at " + this.explosionX + ", " + this.explosionY + ", " + this.explosionZ);
             //try something new
             EntityFX partExpl = new EntityHugeExplodeFX(this.worldObj,this.explosionX,this.explosionY,this.explosionZ,1.0D,1.0D,1.0D);
             Minecraft.getMinecraft().effectRenderer.addEffect(partExpl);
@@ -89,7 +89,7 @@ public class M4thCustomExplosion extends Explosion {
             //this.worldObj.spawnParticle("hugeexplosion", this.explosionX, this.explosionY, this.explosionZ, 1.0D, 0.0D, 0.0D);
 
         } else {
-            LogHelper.info("I'm spawning a large explosion particle at " + this.explosionX + ", " + this.explosionY + ", " + this.explosionZ);
+//            LogHelper.info("I'm spawning a large explosion particle at " + this.explosionX + ", " + this.explosionY + ", " + this.explosionZ);
             this.worldObj.spawnParticle("largeexplode", this.explosionX, this.explosionY, this.explosionZ, 1.0D, 0.0D, 0.0D);
         }
 

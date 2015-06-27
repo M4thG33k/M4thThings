@@ -1,4 +1,5 @@
 item.m4ththings_cobbleChestGrabber.name=Cobble Chest Grabber
+item.m4ththings_itemModIngot_0.name=Gold Plated Iron
 
 block.m4ththings_blockCobbleChest.name=Cobble Chest
 
@@ -12,5 +13,9 @@ tile.m4ththings_blockMedQTController_1.name=Large Quantum Tank Controller
 tile.m4ththings_blockQTComponent.name=Quantum Tank
 tile.m4ththings_blockQTComponent_0.name=Quantum Tank
 tile.m4ththings_blockQTComponent_1.name=Quantum Tank Valve
+tile.m4ththings_blockQuantumTank.name=Quantum Tank
+tile.m4ththings_blockM4thBlock_0.name=Gold Plated Iron Block
 
 entity.BoomerHAHA.name=Creepster
+
+itemGroup.m4ththings=M4th Things

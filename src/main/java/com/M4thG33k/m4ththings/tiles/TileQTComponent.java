@@ -96,20 +96,20 @@ public class TileQTComponent extends TileEntity{
     {
         if (parentLoc==null)
         {
-            LogHelper.info("HELP! I can't find my parent!");
+//            LogHelper.info("HELP! I can't find my parent!");
             return null;
         }
         if (parentLoc[0]==0 && parentLoc[1]==0 && parentLoc[2]==0)
         {
-            LogHelper.info("Ru-ro! My parent is a loser. (Zeros)");
+//            LogHelper.info("Ru-ro! My parent is a loser. (Zeros)");
             return null;
         }
 //        LogHelper.info("Looking for TE at: " + StringHelper.makeCoords(parentLoc[0],parentLoc[1],parentLoc[2]));
         TileEntity tileEntity = worldObj.getTileEntity(parentLoc[0],parentLoc[1],parentLoc[2]);
-        if (tileEntity==null)
-        {
-            LogHelper.info("getParentTile() is returning null!");
-        }
+//        if (tileEntity==null)
+//        {
+//            LogHelper.info("getParentTile() is returning null!");
+//        }
         return tileEntity;
     }
 
@@ -120,15 +120,15 @@ public class TileQTComponent extends TileEntity{
         {
             return (TileMedQT)tileEntity;
         }
-        LogHelper.info("ERROR (TileQTComponent): the parent of this block is not a controller!!");
-        if (tileEntity==null)
-        {
-            LogHelper.info("The tile is, indeed, null...");
-        }
-        else
-        {
-            LogHelper.info("Instead, we have: " + tileEntity.getClass().toString());
-        }
+//        LogHelper.info("ERROR (TileQTComponent): the parent of this block is not a controller!!");
+//        if (tileEntity==null)
+//        {
+//            LogHelper.info("The tile is, indeed, null...");
+//        }
+//        else
+//        {
+//            LogHelper.info("Instead, we have: " + tileEntity.getClass().toString());
+//        }
         return null;
     }
 

@@ -30,7 +30,7 @@ public class ClientProxy extends CommonProxy{
         ClientRegistry.bindTileEntitySpecialRenderer(TileMedQT.class, new MediumQuantumTankRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileLargeQT.class, new LargeQTRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockQuantumTank),new QuantumTankItemRenderer(new QuantumTankRenderer(),new TileQuantumTank()));
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockBaseTank),new BaseTankItemRenderer(new BaseTankRenderer(),new TileBaseTank()));
+//        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockBaseTank),new BaseTankItemRenderer(new BaseTankRenderer(),new TileBaseTank()));
         RenderingRegistry.registerBlockHandler(new RenderBaseTankBlock());
     }
 

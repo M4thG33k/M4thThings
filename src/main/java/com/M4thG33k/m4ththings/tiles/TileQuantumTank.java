@@ -316,6 +316,17 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         return true;
     }
 
+    public double getPercentFilled()
+    {
+        return ((double)getFluidAmount())/((double)getCapacity());
+    }
+
+    public double getRoundedPercentFilled()
+    {
+        int percent = (int)(getPercentFilled()*10000);
+        return ((double)percent)/100.0;
+    }
+
 }
 
 
