@@ -45,6 +45,23 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
 
     }
 
+    public void setFluid(FluidStack fluidStack)
+    {
+        if (fluidStack!=null && fluidStack.amount!=0)
+        {
+            fluid = fluidStack;
+            if (fluid.amount>cap)
+            {
+                fluid.amount = cap;
+            }
+        }
+    }
+
+    public void setEmpty()
+    {
+        fluid = null;
+    }
+
     //attempts to drain from this tank into a tank 'y' blocks below
     public void attemptDrain(int y)
     {
@@ -252,7 +269,10 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     @Override
     public void readFromNBT(NBTTagCompound tagCompound)
     {
-        super.readFromNBT(tagCompound);
+        if (tagCompound.hasKey("x"))
+        {
+            super.readFromNBT(tagCompound);
+        }
 
         if (tagCompound.hasKey("fluid") && tagCompound.hasKey("amount"))
         {

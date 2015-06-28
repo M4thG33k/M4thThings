@@ -3,20 +3,25 @@ package com.M4thG33k.m4ththings.blocks;
 import com.M4thG33k.m4ththings.creativetabs.CreativeTabM4thThings;
 import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
+import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
 
 /**
  * Created by M4thG33k on 6/22/2015.
@@ -124,17 +129,85 @@ public class BlockQuantumTank extends Block implements ITileEntityProvider {
         return false;
     }
 
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        if (world.getTileEntity(x,y,z)!=null)
-        {
-            world.removeTileEntity(x,y,z);
-        }
-        super.breakBlock(world, x, y, z, block, meta);
-    }
+//    @Override
+//    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+//        TileEntity tileEntity = world.getTileEntity(x,y,z);
+//
+//        if (tileEntity!=null && tileEntity instanceof TileQuantumTank)
+//        {
+//            TileQuantumTank tank = (TileQuantumTank)tileEntity;
+//            world.removeTileEntity(x,y,z);
+//        }
+//        super.breakBlock(world, x, y, z, block, meta);
+//    }
 
     @Override
     public IIcon getIcon(int side, int meta) {
         return Blocks.glass.getIcon(0,0);
+    }
+
+    @Override
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        TileEntity tileEntity = world.getTileEntity(x,y,z);
+
+        if (tileEntity!=null && tileEntity instanceof TileQuantumTank)
+        {
+            //do stuff and return
+            TileQuantumTank tank = (TileQuantumTank)tileEntity;
+
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            tank.writeToNBT(tagCompound);
+
+            ItemStack toReturn = new ItemStack(world.getBlock(x,y,z),1,metadata);
+
+            if (tagCompound!=null && tagCompound.hasKey("fluid"))
+            {
+                LogHelper.info("Setting the item's tag compound!");
+                if (!toReturn.hasTagCompound())
+                {
+                    toReturn.setTagCompound(new NBTTagCompound());
+                }
+                toReturn.getTagCompound().setString("fluid",tagCompound.getString("fluid"));
+                toReturn.getTagCompound().setInteger("amount",tagCompound.getInteger("amount"));
+//                toReturn.setTagCompound(tagCompound);
+            }
+
+            ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();
+            stacks.add(toReturn);
+            return stacks;
+        }
+        else
+        {
+            return super.getDrops(world,x,y,z,metadata,fortune);
+        }
+    }
+
+    @Override
+    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest)
+    {
+        if (willHarvest) return true; //If it will harvest, delay deletion of the block until after getDrops
+        return super.removedByPlayer(world, player, x, y, z, willHarvest);
+    }
+
+    @Override
+    public void harvestBlock(World world, EntityPlayer player, int x, int y, int z, int meta)
+    {
+        super.harvestBlock(world, player, x, y, z, meta);
+        world.setBlockToAir(x, y, z);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+        TileEntity tileEntity = world.getTileEntity(x,y,z);
+
+        if (tileEntity==null)
+        {
+            LogHelper.info("The tile hasn't been created yet. :-/");
+        }
+
+        if (tileEntity!=null && tileEntity instanceof TileQuantumTank && stack.hasTagCompound())
+        {
+            tileEntity.readFromNBT(stack.getTagCompound());
+        }
     }
 }

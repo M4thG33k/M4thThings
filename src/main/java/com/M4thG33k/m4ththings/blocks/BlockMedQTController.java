@@ -185,4 +185,6 @@ public class BlockMedQTController extends Block implements ITileEntityProvider {
         this.icons[0] = reg.registerIcon(Reference.MOD_ID + ":" + "medQT");
         this.icons[1] = reg.registerIcon(Reference.MOD_ID + ":" + "largeQT");
     }
+
+
 }

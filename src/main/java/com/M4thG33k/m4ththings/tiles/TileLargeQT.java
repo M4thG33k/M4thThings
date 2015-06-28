@@ -112,13 +112,13 @@ public class TileLargeQT extends TileMedQT{
         for (int i = -4; i <= 4; i++) {
             for (int j = -4; j <= 4; j++) {
                 for (int k = -4; k <= 4; k++) {
-                    if (!(i==0 && j==0 && k==0))//avoid replacing the center
+                    if (i!=0 || j!=0 || k!=0)//avoid replacing the center
                     {
                         world.setBlockToAir(X+i,Y+k,Z+j);
                         world.removeTileEntity(X+i,Y+k,Z+j);
 
                         //testing something here
-                        if (!(X+i==x && Y+k==y && Z+j==z))
+                        if (X+i!=x || Y+k!=y || Z+j!=z)
                         {
                             if (Math.abs(i)<=1 && Math.abs(j)<=1 && Math.abs(k)==4) //these locations refer to the top/bottom valve blocks
                             {

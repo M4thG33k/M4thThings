@@ -39,4 +39,6 @@ public class ItemModIngot extends Item {
     public String getUnlocalizedName(ItemStack itemStack) {
         return this.getUnlocalizedName() + "_" + itemStack.getItemDamage();
     }
+
+
 }

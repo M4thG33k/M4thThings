@@ -55,7 +55,7 @@ public class Configurations {
         //tank configs
         //config.getCategory("tanks");
         QT_CAP = config.get("tanks", "quantumTankCap", 8000, "The maximum number of millibuckets the small (1x1) Quantum Tank can hold.",0, 32000).getInt();
-        MED_QT_CAP = config.getInt("mediumQuantumTankCap","tanks",800000,0,320000,"The maximum number of millibuckets the medium (3x3) Quantum Tank can hold.");
+        MED_QT_CAP = config.getInt("mediumQuantumTankCap","tanks",80000,0,2000000,"The maximum number of millibuckets the medium (3x3) Quantum Tank can hold.");
         LARGE_QT_CAP = config.getInt("largeQuantumTankCap","tanks",80000000,0,2000000000,"The maximum number of millibuckets the large (9x9) Quantum Tank can hold.");
 
         RENDER_PLATES = config.get("tanks","renderPlates",true,"Setting this to false will turn off the rendering of the floating plates in the medium and large tanks").getBoolean();

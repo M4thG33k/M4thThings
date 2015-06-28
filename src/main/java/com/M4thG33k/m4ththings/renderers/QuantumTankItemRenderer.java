@@ -1,10 +1,13 @@
 package com.M4thG33k.m4ththings.renderers;
 
+import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -35,10 +38,21 @@ public class QuantumTankItemRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
+        FluidStack fluidStack;
+        if(item.hasTagCompound() && item.getTagCompound().hasKey("fluid"))
+        {
+            fluidStack = new FluidStack(FluidRegistry.getFluid(item.getTagCompound().getString("fluid")),item.getTagCompound().getInteger("amount"));
+            ((TileQuantumTank)tileEntity).setFluid(fluidStack);
+        }
+        else{
+            ((TileQuantumTank)tileEntity).setEmpty();
+        }
+
         if (type==ItemRenderType.ENTITY)
         {
             GL11.glTranslated(-0.5,-0.25,-0.5);
             GL11.glPushMatrix();
+
             TileEntityRendererDispatcher.instance.renderTileEntityAt(tileEntity,0.0,0.0,0.0,0.0f);
             GL11.glPopMatrix();
         }
