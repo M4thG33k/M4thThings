@@ -25,6 +25,19 @@ public class TileLargeQT extends TileMedQT{
         int y = this.yCoord;
         int z = this.zCoord;
 
+        //check to make sure we don't have another controller "too close", if there is one that's too close, we return false
+        if (y+8 < world.getActualHeight() && world.getBlock(x,y+8,z)==ModBlocks.blockMedQTController)
+        {
+            return false;
+        }
+        for (int i=6;i<9;i++)
+        {
+            if(world.getBlock(x+i,y,z)==ModBlocks.blockMedQTController || world.getBlock(x,y,z+i)==ModBlocks.blockMedQTController)
+            {
+                return false;
+            }
+        }
+
         for (int i=-4;i<=4;i++)
         {
             for (int j=-4;j<=4;j++)

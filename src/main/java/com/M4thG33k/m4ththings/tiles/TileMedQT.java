@@ -56,6 +56,11 @@ public class TileMedQT extends TileQuantumTank {
         int y = this.yCoord;
         int z = this.zCoord;
 
+        //check to make sure we don't have another controller "too close", if there is one that's too close, we return false
+        if (world.getBlock(x+2,y,z)==ModBlocks.blockMedQTController || world.getBlock(x,y,z+2)==ModBlocks.blockMedQTController || (y+2<world.getActualHeight() && world.getBlock(x,y+2,z)==ModBlocks.blockMedQTController)) {
+            return false;
+        }
+
         if (!(world.getBlock(x,y+1,z)== ModBlocks.blockQTValve))
         {
             return false;
