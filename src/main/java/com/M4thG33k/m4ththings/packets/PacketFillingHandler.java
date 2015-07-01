@@ -19,7 +19,6 @@ public class PacketFillingHandler implements IMessageHandler<PacketFilling,IMess
         LogHelper.info("Received message from the server! " + message.getDirection() + ":" + message.getIsFilling());
         LogHelper.info("I should be spawning a particle at: " + message.getDimensionID()+ "::" + StringHelper.makeCoords(message.getX() + 1.0, message.getY() + 1.0, message.getZ() + 1.0));
         (DimensionManager.getWorld(message.getDimensionID())).spawnParticle("happyVillager", message.getX() + 1.0, message.getY() + 2.0, message.getZ() + 1.0, 0.0, 0.0, 0.0);
-        (DimensionManager.getWorld(message.getDimensionID())).setBlock(message.getX(),message.getY()+6,message.getZ(), Blocks.cobblestone);
         return null;
     }
 }
