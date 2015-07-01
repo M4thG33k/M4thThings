@@ -1,75 +1,86 @@
 package com.M4thG33k.m4ththings.renderers;
 
-import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
+import com.M4thG33k.m4ththings.init.ModBlocks;
+import com.M4thG33k.m4ththings.init.ModFluids;
+import com.M4thG33k.m4ththings.tiles.TileSolarCollector;
 import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.fluids.FluidRegistry;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Created by M4thG33k on 6/22/2015.
+ * Created by M4thG33k on 6/30/2015.
  */
-public class QuantumTankRenderer extends TileEntitySpecialRenderer {
+public class SolarCollectorRenderer extends TileEntitySpecialRenderer{
 
-    private IModelCustom fluidPorts;
-    private ResourceLocation fluidPortTexture;
-    private ResourceLocation fluidTexture;
+    private IModelCustom model;
+    private ResourceLocation modelTexture;
+    private ResourceLocation textureMap;
 
-    public QuantumTankRenderer()
+
+    public SolarCollectorRenderer()
     {
-        fluidPorts = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/quantumTank.obj"));
-        fluidPortTexture = new ResourceLocation("m4ththings","models/fluidTank3.png");
-        fluidTexture = TextureMap.locationBlocksTexture;
+        model = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/solarCollection.obj"));
+        modelTexture = new ResourceLocation("m4ththings","models/defaultTexture.png");
+        textureMap = TextureMap.locationBlocksTexture;
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f)
-    {
-        TileQuantumTank tank = (TileQuantumTank)tileEntity;
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f) {
 
-        int orient = tank.getOrientation();
-        //Render the frame
+        TileSolarCollector tile = (TileSolarCollector)tileEntity;
+
+        double waterPercentage = tile.getWaterPercentage();
+        double solarPercentage = tile.getSolarPercentage();
+
+        //render main model
         GL11.glPushMatrix();
         GL11.glTranslated(x+0.5,y+0.5,z+0.5);
-        if (orient ==1)
-        {
-            GL11.glRotated(90.0,1.0,0.0,0.0);
-        }
-        else if(orient==2)
-        {
-            GL11.glRotated(90.0,0.0,0.0,1.0);
-        }
-        bindTexture(fluidPortTexture);
-        fluidPorts.renderAll();
+        bindTexture(modelTexture);
+        model.renderAll();
         GL11.glPopMatrix();
 
-
-        //render the sphere inside if there is any fluid contained
-        double percentage = ((double)tank.getFluidAmount())/((double)tank.getCapacity());
-        if (percentage>0)
-        {
-            renderSphere(x+0.5,y+0.5+0.05*percentage*Math.sin(((double)tank.getTimer()*3.14519/180)),z+0.5,(double)tank.getTimer(),0.75*percentage,tank.getFluid().getFluid().getIcon());
+        //render fluid panels if there is any water
+        if (waterPercentage>0) {
+//            LogHelper.info("Water percentage: " + waterPercentage);
+            renderFluidMeters(x + 0.5, y + 0.5, z + 0.5, waterPercentage, Blocks.water.getIcon(0, 0));
+//        renderSingleFluidMeter(x + 0.5, y + 0.5, z + 0.5, .3, Blocks.water.getIcon(0, 0));
         }
+
+        //render solar water
+        if (solarPercentage>0) {
+            renderSphere(x + 0.5, y + 0.5 + 0.25, z + 0.5, 0.0, 0.4*solarPercentage, ModFluids.fluidSolarWaterBlock.getIcon(0, 0), false);
+        }
+
+        //render glass tank
+        renderSphere(x + 0.5, y + 0.5 + 0.25, z + 0.5, 0.0, 0.45, ModBlocks.blockTextureDummy.getIcon(0, 0), true);
+
     }
 
     //renders the floating sphere. Note that x,y,z must already be adjusted before being used as inputs.
     //the rotation is always about the y-axis and the scale affects all 3 directions.
-    protected void renderSphere(double x, double y, double z, double rotation, double scale, IIcon icon)
+    protected void renderSphere(double x, double y, double z, double rotation, double scale, IIcon icon, boolean renderAlpha)
     {
         GL11.glPushMatrix();
         GL11.glTranslated(x,y,z);
         GL11.glRotated(rotation, 0.0, 1.0, 0.0);
         GL11.glScaled(scale,scale,scale);
+        if (renderAlpha)
+        {
+            GL11.glEnable(GL11.GL_BLEND);
+        }
         Tessellator t = Tessellator.instance;
 
         //bind the fluid's icon for the texture
-        bindTexture(fluidTexture);
+        bindTexture(textureMap);
 
         if (icon==null)
         {
@@ -1616,7 +1627,52 @@ public class QuantumTankRenderer extends TileEntitySpecialRenderer {
 
         t.draw();
 
+        if(renderAlpha)
+        {
+            GL11.glDisable(GL11.GL_BLEND);
+        }
 
         GL11.glPopMatrix();
     }
+
+    protected void renderSingleFluidMeter(double x, double y, double z, double percentage, IIcon icon,double rotation)
+    {
+        GL11.glPushMatrix();
+        GL11.glTranslated(x,y,z);
+        GL11.glRotated(rotation,0.0,1.0,0.0);
+        bindTexture(textureMap);
+        Tessellator t = Tessellator.instance;
+        t.startDrawingQuads();
+
+        //one face
+        t.addVertexWithUV(-0.28750, -0.30386, -0.10765, icon.getMaxU(), icon.getMaxV());
+        t.addVertexWithUV(-0.41250, -0.30386, -0.10765, icon.getMinU(), icon.getMaxV());
+        t.addVertexWithUV(-0.41250, -0.30386*(1.0-percentage) + 0.25864*percentage, -0.10765, icon.getMinU(), icon.getMinV());
+        t.addVertexWithUV(-0.28750, -0.30386*(1.0-percentage)+0.25864*percentage, -0.10765, icon.getMaxU(), icon.getMinV());
+
+        //opposite face
+        t.addVertexWithUV(-0.41250,-0.30386,0.10765,icon.getMaxU(),icon.getMaxV());
+        t.addVertexWithUV(-0.28750,-0.30386,0.10765,icon.getMinU(),icon.getMaxV());
+        t.addVertexWithUV(-0.28750,-0.30386*(1.0-percentage) + 0.25864*percentage,0.10765,icon.getMinU(),icon.getMinV());
+        t.addVertexWithUV(-0.41250,-0.30386*(1.0-percentage) + 0.25864*percentage,0.10765,icon.getMaxU(),icon.getMinV());
+
+        //top face
+        t.addVertexWithUV(-0.41250, -0.30386*(1.0-percentage) + 0.25864*percentage, -0.10765, icon.getMaxU(),icon.getMaxV());
+        t.addVertexWithUV(-0.41250,-0.30386*(1.0-percentage) + 0.25864*percentage,0.10765,icon.getMaxU(),icon.getMinV());
+        t.addVertexWithUV(-0.28750,-0.30386*(1.0-percentage) + 0.25864*percentage,0.10765,icon.getMinU(),icon.getMinV());
+        t.addVertexWithUV(-0.28750, -0.30386*(1.0-percentage)+0.25864*percentage, -0.10765, icon.getMinU(),icon.getMaxV());
+
+        t.draw();
+
+        GL11.glPopMatrix();
+    }
+
+    protected void renderFluidMeters(double x, double y, double z, double percentage, IIcon icon)
+    {
+        for (double theta=0.0;theta<300;theta+=90.0)
+        {
+            renderSingleFluidMeter(x,y,z,percentage,icon,theta);
+        }
+    }
+
 }

@@ -34,6 +34,7 @@ public class NEIM4thThingsConfig implements IConfigureNEI{
     {
         LogHelper.info("Adding NEI integration");
         API.hideItem(new ItemStack(Item.getItemFromBlock(ModBlocks.blockQTComponent)));
+        API.hideItem(new ItemStack(Item.getItemFromBlock(ModBlocks.blockTextureDummy)));
     }
 
 }

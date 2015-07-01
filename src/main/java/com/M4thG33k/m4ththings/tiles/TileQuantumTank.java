@@ -1,6 +1,11 @@
 package com.M4thG33k.m4ththings.tiles;
 
+import com.M4thG33k.m4ththings.M4thThings;
+import com.M4thG33k.m4ththings.packets.ModPackets;
+import com.M4thG33k.m4ththings.packets.PacketFilling;
 import com.M4thG33k.m4ththings.reference.Configurations;
+import com.M4thG33k.m4ththings.utility.LogHelper;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -18,6 +23,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     protected FluidStack fluid;
     protected int cap = Configurations.QT_CAP;
     protected int verticalDistance;
+    protected int orientation;
 
     public TileQuantumTank()
     {
@@ -40,6 +46,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     {
         super.updateEntity();
         advanceTimer();
+
 
         attemptDrain(1);
 
@@ -68,7 +75,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         if (fluid!=null && getFluidAmount()>0)
         {
             TileEntity tile = worldObj.getTileEntity(xCoord,yCoord-y,zCoord);
-            if (tile!=null && tile instanceof TileQuantumTank) {
+            if (tile!=null && tile instanceof TileQuantumTank && ((TileQuantumTank)tile).getOrientation()==0) {
                 TileQuantumTank tank = (TileQuantumTank) tile;
 
                 if (tank.getFluidAmount() < tank.getCapacity()) {
@@ -216,9 +223,17 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
     {
-        if (from==ForgeDirection.DOWN || from==ForgeDirection.UP)
+        if (isValveDirection(from))
         {
-            return this.fill(resource,doFill);
+//            LogHelper.info("Hello! Client?: " + worldObj.isRemote);
+            int toReturn = this.fill(resource,doFill);
+
+            if (doFill && toReturn>0) {
+                LogHelper.info("Sending QT packet to client (hopefully).");
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord,worldObj.provider.dimensionId,0,1),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
+                fillParticles(0,1);
+            }
+            return toReturn;
         }
 
         return 0;
@@ -227,8 +242,9 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     @Override
     public  FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
     {
-        if (from==ForgeDirection.DOWN || from==ForgeDirection.UP)
+        if (isValveDirection(from))
         {
+
             return this.drain(resource.amount,doDrain);
         }
 
@@ -238,7 +254,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
     {
-        if (from==ForgeDirection.DOWN || from==ForgeDirection.UP)
+        if (isValveDirection(from))
         {
             return this.drain(maxDrain, doDrain);
         }
@@ -249,13 +265,13 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     @Override
     public boolean canFill(ForgeDirection from, Fluid fluid)
     {
-        return (from==ForgeDirection.DOWN || from==ForgeDirection.UP);
+        return isValveDirection(from);
     }
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid)
     {
-        return (from==ForgeDirection.DOWN || from==ForgeDirection.UP);
+        return isValveDirection(from);
     }
 
     @Override
@@ -292,6 +308,11 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
             timer = 0;
         }
 
+        if (tagCompound.hasKey("orientation"))
+        {
+            orientation = tagCompound.getInteger("orientation");
+        }
+
     }
 
     @Override
@@ -304,6 +325,8 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
             tagCompound.setString("fluid",fluid.getFluid().getName());
             tagCompound.setInteger("amount",fluid.amount);
         }
+
+        tagCompound.setInteger("orientation",orientation);
 
         tagCompound.setInteger("timer",timer);
     }
@@ -343,6 +366,27 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     {
         int percent = (int)(getPercentFilled()*10000);
         return ((double)percent)/100.0;
+    }
+
+    public int getOrientation()
+    {
+        return orientation;
+    }
+
+    public boolean isValveDirection(ForgeDirection from)
+    {
+        return ((orientation==0&&(from==ForgeDirection.DOWN || from==ForgeDirection.UP)) || (orientation==1&&(from==ForgeDirection.NORTH||from==ForgeDirection.SOUTH)) || (orientation==2&&(from==ForgeDirection.EAST||from==ForgeDirection.WEST)));
+    }
+
+    public void setOrientation(int orient)
+    {
+        this.orientation = orient;
+    }
+
+    public void fillParticles(int direction, int isFilling)
+    {
+        LogHelper.info("Spawning QT particles! " + direction + ":" + isFilling);
+        worldObj.spawnParticle("happyVillager",xCoord+1.5,yCoord+1.5+0.0,zCoord+1.5,0.0,0.0,0.0);
     }
 
 }

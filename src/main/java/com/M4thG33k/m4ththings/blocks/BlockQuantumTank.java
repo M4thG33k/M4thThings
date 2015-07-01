@@ -169,7 +169,6 @@ public class BlockQuantumTank extends Block implements ITileEntityProvider {
                 }
                 toReturn.getTagCompound().setString("fluid",tagCompound.getString("fluid"));
                 toReturn.getTagCompound().setInteger("amount",tagCompound.getInteger("amount"));
-//                toReturn.setTagCompound(tagCompound);
             }
 
             ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();

@@ -1,6 +1,7 @@
 package com.M4thG33k.m4ththings.proxy;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
+import com.M4thG33k.m4ththings.init.ModRenderers;
 import com.M4thG33k.m4ththings.renderers.LargeQTRenderer;
 import com.M4thG33k.m4ththings.renderers.MediumQuantumTankRenderer;
 import com.M4thG33k.m4ththings.renderers.QuantumTankItemRenderer;
@@ -24,24 +25,16 @@ public class ClientProxy extends CommonProxy{
     public void registerRenderers()
     {
         super.registerRenderers();
+
+        ModRenderers.init();
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileCobbleChest.class, new CobbleChestRenderer());
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileBaseTank.class, new BaseTankRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new QuantumTankRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileMedQT.class, new MediumQuantumTankRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileLargeQT.class, new LargeQTRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockQuantumTank),new QuantumTankItemRenderer(new QuantumTankRenderer(),new TileQuantumTank()));
+//        ClientRegistry.bindTileEntitySpecialRenderer(TileQuantumTank.class, new QuantumTankRenderer());
+//        ClientRegistry.bindTileEntitySpecialRenderer(TileMedQT.class, new MediumQuantumTankRenderer());
+//        ClientRegistry.bindTileEntitySpecialRenderer(TileLargeQT.class, new LargeQTRenderer());
+//        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockQuantumTank),new QuantumTankItemRenderer(new QuantumTankRenderer(),new TileQuantumTank()));
 //        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockBaseTank),new BaseTankItemRenderer(new BaseTankRenderer(),new TileBaseTank()));
     }
 
-    public static void setCustomRenderers()
-    {
-//        frozenDiamondRenderType = RenderingRegistry.getNextAvailableRenderId();
-//        RenderingRegistry.registerBlockHandler(new FrozenDiamondRenderer());
-//        RenderingRegistry.registerEntityRenderingHandler(Boomer.class,new RenderCreeper());
-
-
-
-
-    }
 
 }

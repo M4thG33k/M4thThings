@@ -9,4 +9,9 @@ public class StringHelper {
     {
         return "(" + x + ", " + y + ", " + z + ")";
     }
+
+    public static String makeCoords(double x, double y, double z)
+    {
+        return "(" + x + ", " + y + ", " + z + ")";
+    }
 }

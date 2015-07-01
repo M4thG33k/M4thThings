@@ -1,12 +1,10 @@
 package com.M4thG33k.m4ththings;
 
 import com.M4thG33k.m4ththings.Explosions.ExplosionHandler;
-import com.M4thG33k.m4ththings.init.ModBlocks;
-import com.M4thG33k.m4ththings.init.ModItems;
-import com.M4thG33k.m4ththings.init.ModMobs;
-import com.M4thG33k.m4ththings.init.ModTiles;
+import com.M4thG33k.m4ththings.init.*;
 import com.M4thG33k.m4ththings.managers.GuiHandler;
 import com.M4thG33k.m4ththings.managers.VanillaCraftingManager;
+import com.M4thG33k.m4ththings.packets.ModPackets;
 import com.M4thG33k.m4ththings.proxy.CommonProxy;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.reference.Reference;
@@ -17,6 +15,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 /**
  * Created by M4thG33k on 5/28/2015.
@@ -39,7 +38,9 @@ public class M4thThings {
     {
         FMLInterModComms.sendMessage("Waila","register","com.M4thG33k.m4ththings.reference.WailaInteraction.load");
         Configurations.preInit(event);
+        ModPackets.init();
         ModBlocks.init();
+        ModFluids.init();
         ModTiles.init();
         ModItems.init();
         ModMobs.init();

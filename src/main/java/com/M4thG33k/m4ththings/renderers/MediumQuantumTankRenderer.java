@@ -6,6 +6,7 @@ import com.M4thG33k.m4ththings.tiles.TileMedQT;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -39,8 +40,10 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f)
     {
         TileMedQT tank = (TileMedQT)tileEntity;
+        int orientation = tank.getOrientation();
         double timer;
         double theta;
+        double scaled;
         if (Configurations.ENABLE_ROTATION)
         {
             timer = (double)(tank.getTimer());
@@ -58,6 +61,20 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
             //Render the frame
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
+            if (orientation==1)
+            {
+                GL11.glRotated(90.0,1.0,0.0,0.0);
+                scaled = 2.5;
+            }
+            else if(orientation==2)
+            {
+                GL11.glRotated(90.0,0.0,0.0,1.0);
+                scaled = 2.5;
+            }
+            else
+            {
+                scaled = 2.5;
+            }
             GL11.glScaled(3, 3, 3);
             bindTexture(modelTexture);
             modelBlock.renderAll();
@@ -67,16 +84,17 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
             //render the sphere inside if there is any fluid contained
             double percentage = ((double) tank.getFluidAmount()) / ((double) tank.getCapacity());
             if (percentage > 0) {
-                renderSphere(x + 0.5, y + 0.5 + 0.15 * percentage * Math.sin(theta), z + 0.5, timer, 3.0 * 0.75 * percentage, tank.getFluid().getFluid().getIcon());
+//                renderSphere(x + 0.5, y + 0.5 + (scaled/20.0) * percentage * Math.sin(theta), z + 0.5, timer, scaled * 0.75 * percentage, Blocks.glass.getIcon(0,0)); //render test
+                renderSphere(x + 0.5, y + 0.5 + (scaled/20.0) * percentage * Math.sin(theta), z + 0.5, timer, scaled * 0.75 * percentage, tank.getFluid().getFluid().getIcon());
 
             }
 
             if (Configurations.RENDER_PLATES) {
                 //render the hex plates
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer, 30 * Math.sin(theta), 1.5);
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 90, 30 * Math.sin(theta + 90), 1.5);
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 180, 30 * Math.sin(theta + 180), 1.5);
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 270, 30 * Math.sin(theta + 270), 1.5);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer, 30 * Math.sin(theta), scaled/2.0,0);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 90, 30 * Math.sin(theta + 90), scaled/2.0,0);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 180, 30 * Math.sin(theta + 180), scaled/2.0,0);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 270, 30 * Math.sin(theta + 270), scaled/2.0,0);
             }
 
 
@@ -84,14 +102,22 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
         else
         {
             //render a cube with the block texture
-            renderCube(x+0.5,y+0.5,z+0.5,0.0,0.0,0.0,0.5,ModBlocks.blockMedQTController.getIcon(0,0));
+            renderCube(x + 0.5, y + 0.5, z + 0.5, 0.0, 0.0, 0.0, 0.5, ModBlocks.blockMedQTController.getIcon(0, 0));
         }
     }
 
-    protected void renderHexPlate(double x, double y, double z, double rotationY, double rotationZ, double scale)
+    protected void renderHexPlate(double x, double y, double z, double rotationY, double rotationZ, double scale,int orient)
     {
         GL11.glPushMatrix();
         GL11.glTranslated(x,y,z);
+        if (orient==1)
+        {
+            GL11.glRotated(90.0,1.0,0.0,0.0);
+        }
+        else if(orient==2)
+        {
+            GL11.glRotated(90.0,0.0,0.0,1.0);
+        }
         GL11.glScaled(scale,scale,scale);
         GL11.glRotated(rotationY,0.0,1.0,0.0);
         GL11.glRotated(rotationZ,0.0,0.0,1.0);

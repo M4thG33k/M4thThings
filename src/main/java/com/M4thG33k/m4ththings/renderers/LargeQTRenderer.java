@@ -55,10 +55,10 @@ public class LargeQTRenderer extends MediumQuantumTankRenderer {
             if (Configurations.RENDER_PLATES) {
                 //render the hex plates
 
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer, 30 * Math.sin(theta), 4);
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 90, 30 * Math.sin(theta + 90), 4);
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 180, 30 * Math.sin(theta + 180), 4);
-                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 270, 30 * Math.sin(theta + 270), 4);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer, 30 * Math.sin(theta), 4,0);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 90, 30 * Math.sin(theta + 90), 4,0);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 180, 30 * Math.sin(theta + 180), 4,0);
+                renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 270, 30 * Math.sin(theta + 270), 4,0);
             }
 
             //render the sphere if the tank has fluid

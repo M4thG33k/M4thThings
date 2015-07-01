@@ -25,6 +25,7 @@ public class VanillaCraftingManager {
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockMedQTController,1,0)," i ","iti"," i ",'i',new ItemStack(ModItems.itemModIngot,1,0),'t',new ItemStack(ModBlocks.blockQuantumTank,1));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockMedQTController,1,1)," m ","mvm"," m ",'m',new ItemStack(ModBlocks.blockMedQTController,1,0),'v',new ItemStack(ModBlocks.blockQTValve,1));
 
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockQuantumTank,1),new ItemStack(ModBlocks.blockQuantumTank,1));
     }
 
 }

@@ -2,6 +2,8 @@ package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
+import com.M4thG33k.m4ththings.utility.LogHelper;
+import com.M4thG33k.m4ththings.utility.StringHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -26,6 +28,7 @@ public class TileMedQT extends TileQuantumTank {
     @Override
     public void updateEntity() {
         advanceTimer();
+
 
         if(timer==0)//testing this to see if it will keep the light level synced better
         {
@@ -61,35 +64,133 @@ public class TileMedQT extends TileQuantumTank {
             return false;
         }
 
-        if (!(world.getBlock(x,y+1,z)== ModBlocks.blockQTValve))
+        //now we check if the blocks exist in the world to make the structure
+        if (world.getBlock(x,y+1,z)==ModBlocks.blockQTValve) //if this is true, we must be attempting to create a vertical tank
         {
-            return false;
-        }
-        if (!(world.getBlock(x,y-1,z)== ModBlocks.blockQTValve))
-        {
-            return false;
-        }
-
-
-        for (int i=-1;i<=1;i++)
-        {
-            for (int j=-1;j<=1;j++)
+            if (!(world.getBlock(x,y-1,z)==ModBlocks.blockQTValve))
             {
-                for (int k=-1;k<=1;k++)
+                return false; //missing the bottom valve
+            }
+
+            for (int i=-1;i<2;i++)
+            {
+                for (int j=-1;j<2;j++)
                 {
-                    if (i != 0 || j != 0)
+                    for (int k=-1;k<2;k++)
                     {
-                        if (!(world.getBlock(x+i,y+k,z+j) == Blocks.glass) )
+                        if (i!=0||j!=0)
                         {
-                            return false;
+                            if (!(world.getBlock(x+i,y+k,z+j)==Blocks.glass))
+                            {
+                                return false; //missing a piece of glass
+                            }
                         }
                     }
                 }
             }
+
+            //if we get here, then we are able to construct a vertical tank
+            setOrientation(0);
+            return true;
+        }
+        else{ //check the horizontal tank structures
+            if (world.getBlock(x,y,z+1)==ModBlocks.blockQTValve) //we must be attempting a North/South tank
+            {
+//                LogHelper.info("Attempting N-S tank");
+                if(!(world.getBlock(x,y,z-1)==ModBlocks.blockQTValve))
+                {
+//                    LogHelper.info("Missing second valve.");
+                    return false; //missing the other valve
+                }
+
+                for (int i=-1;i<2;i++)
+                {
+                    for (int j=-1;j<2;j++)
+                    {
+                        for (int k=-1;k<2;k++)
+                        {
+                            if (i!=0||k!=0)
+                            {
+                                if (!(world.getBlock(x+i,y+k,z+j)==Blocks.glass))
+                                {
+//                                    LogHelper.info("Missing glass at " + StringHelper.makeCoords(x+i,y+k,z+j));
+                                    return false; //missing a piece of glass
+                                }
+                            }
+                        }
+                    }
+                }
+                //if we get here, the North/South tank is complete
+                setOrientation(1);
+                return true;
+            }
+
+            else{
+//                LogHelper.info("Attempting E-W tank");
+                if (!(world.getBlock(x-1,y,z)==ModBlocks.blockQTValve))
+                {
+//                    LogHelper.info("Missing first valve");
+                    return false;//missing a valve
+                }
+                if (!(world.getBlock(x+1,y,z)==ModBlocks.blockQTValve))
+                {
+//                    LogHelper.info("Missing second valve");
+                    return false; //missing the other valve
+                }
+
+                for (int i=-1;i<2;i++)
+                {
+                    for (int j=-1;j<2;j++)
+                    {
+                        for (int k=-1;k<2;k++)
+                        {
+                            if (k!=0||j!=0)
+                            {
+                                if (!(world.getBlock(x+i,y+k,z+j)==Blocks.glass))
+                                {
+                                    LogHelper.info("Missing glass at " + StringHelper.makeCoords(x+i,y+k,z+j));
+                                    return false; //missing a piece of glass
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //if we get to this point, we must create the East/West tank
+                setOrientation(2);
+                return true;
+            }
         }
 
+//        if (!(world.getBlock(x,y+1,z)== ModBlocks.blockQTValve))
+//        {
+//            return false;
+//        }
+//        if (!(world.getBlock(x,y-1,z)== ModBlocks.blockQTValve))
+//        {
+//            return false;
+//        }
+//
+//
+//        for (int i=-1;i<=1;i++)
+//        {
+//            for (int j=-1;j<=1;j++)
+//            {
+//                for (int k=-1;k<=1;k++)
+//                {
+//                    if (i != 0 || j != 0)
+//                    {
+//                        if (!(world.getBlock(x+i,y+k,z+j) == Blocks.glass) )
+//                        {
+//                            return false;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
         //if we get here, then everything is in place to construct the multiblock
-        return true;
+//        return true;
     }
 
     public boolean constructStructure() {
@@ -98,17 +199,24 @@ public class TileMedQT extends TileQuantumTank {
         int y = this.yCoord;
         int z = this.zCoord;
 
-        world.setBlock(x, y + 1, z, ModBlocks.blockQTComponent,1,3);
-        ((TileQTComponent)world.getTileEntity(x,y+1,z)).setParentCoordinates(x,y,z);
-        world.setBlock(x, y - 1, z, ModBlocks.blockQTComponent,1,3);
-        ((TileQTComponent)world.getTileEntity(x,y-1,z)).setParentCoordinates(x,y,z);
+//        world.setBlock(x, y + 1, z, ModBlocks.blockQTComponent,1,3);
+//        ((TileQTComponent)world.getTileEntity(x,y+1,z)).setParentCoordinates(x,y,z);
+//        world.setBlock(x, y - 1, z, ModBlocks.blockQTComponent,1,3);
+//        ((TileQTComponent)world.getTileEntity(x,y-1,z)).setParentCoordinates(x,y,z);
 
 
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 for (int k = -1; k <= 1; k++) {
-                    if (i != 0 || j != 0) {
-                        world.setBlock(x + i, y + k, z + j, ModBlocks.blockQTComponent,0,3);
+                    if (i != 0 || j != 0 || k!=0) {
+                        if (world.getBlock(x+i,y+k,z+j)==ModBlocks.blockQTValve)
+                        {
+                            world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,1,3);
+                        }
+                        else
+                        {
+                            world.setBlock(x + i, y + k, z + j, ModBlocks.blockQTComponent,0,3);
+                        }
                         ((TileQTComponent)world.getTileEntity(x+i,y+k,z+j)).setParentCoordinates(x,y,z);
                     }
                 }
@@ -154,50 +262,82 @@ public class TileMedQT extends TileQuantumTank {
     //breaks the structure, replacing all blocks except for the one whose coordinates are input here
     public void breakStructure(int x, int y, int z)
     {
-        //first clear all blocks
-        worldObj.setBlockToAir(xCoord,yCoord+1,zCoord);
-        worldObj.removeTileEntity(xCoord,yCoord+1,zCoord);
-        worldObj.setBlockToAir(xCoord,yCoord-1,zCoord);
-        worldObj.removeTileEntity(xCoord,yCoord-1,zCoord);
 
-        for (int i=-1;i<=1;i++)
-        {
-            for (int j=-1;j<=1;j++)
-            {
-                for (int k=-1;k<=1;k++)
-                {
-                    if (!(i==0 && j==0 && k==0))
-                    {
-                        worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
-                        worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
-                    }
-                }
-            }
-        }
+     int block;
 
-        //replace all blocks
-        if(!(x==xCoord && y==yCoord+1 && z==zCoord))
-        {
-            worldObj.setBlock(xCoord,yCoord+1,zCoord,ModBlocks.blockQTValve);
-        }
-        if(!(x==xCoord && y==yCoord-1 && z==zCoord))
-        {
-            worldObj.setBlock(xCoord,yCoord-1,zCoord,ModBlocks.blockQTValve);
-        }
+     for (int i=-1;i<2;i++)
+     {
+         for (int j=-1;j<2;j++)
+         {
+             for (int k=-1;k<2;k++)
+             {
+                 if(i!=0 || j!=0 || k!=0)
+                 {
+                     block = worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j);
+                     LogHelper.info("Block: " + block);
+                     worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
+                     worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
+                     if (xCoord+i!=x || yCoord+k!=y || zCoord+j!=z)
+                     {
+                         if (block==0)
+                         {
+                             worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+                         }
+                         else
+                         {
+                             worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve);
+                         }
+                     }
+                 }
+             }
+         }
+     }
 
-        for (int i=-1;i<=1;i++)
-        {
-            for (int j=-1;j<=1;j++)
-            {
-                for (int k=-1;k<=1;k++)
-                {
-                    if (!(i==0 && j==0) && !(xCoord+i==x && yCoord+k==y && zCoord+j==z))
-                    {
-                        worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
-                    }
-                }
-            }
-        }
+
+//        //first clear all blocks
+//        worldObj.setBlockToAir(xCoord,yCoord+1,zCoord);
+//        worldObj.removeTileEntity(xCoord,yCoord+1,zCoord);
+//        worldObj.setBlockToAir(xCoord,yCoord-1,zCoord);
+//        worldObj.removeTileEntity(xCoord,yCoord-1,zCoord);
+//
+//        for (int i=-1;i<=1;i++)
+//        {
+//            for (int j=-1;j<=1;j++)
+//            {
+//                for (int k=-1;k<=1;k++)
+//                {
+//                    if (!(i==0 && j==0 && k==0))
+//                    {
+//                        worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
+//                        worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
+//                    }
+//                }
+//            }
+//        }
+//
+//        //replace all blocks
+//        if(!(x==xCoord && y==yCoord+1 && z==zCoord))
+//        {
+//            worldObj.setBlock(xCoord,yCoord+1,zCoord,ModBlocks.blockQTValve);
+//        }
+//        if(!(x==xCoord && y==yCoord-1 && z==zCoord))
+//        {
+//            worldObj.setBlock(xCoord,yCoord-1,zCoord,ModBlocks.blockQTValve);
+//        }
+//
+//        for (int i=-1;i<=1;i++)
+//        {
+//            for (int j=-1;j<=1;j++)
+//            {
+//                for (int k=-1;k<=1;k++)
+//                {
+//                    if (!(i==0 && j==0) && !(xCoord+i==x && yCoord+k==y && zCoord+j==z))
+//                    {
+//                        worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+//                    }
+//                }
+//            }
+//        }
         isComplete = false;
         isBuilt = false;
         prepareSync();

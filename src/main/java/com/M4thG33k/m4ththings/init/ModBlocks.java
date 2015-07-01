@@ -26,6 +26,8 @@ public class ModBlocks {
     public static final BlockQTComponent blockQTComponent = new BlockQTComponent(Material.glass);
     public static final BlockM4thBlock blockM4thBlock = new BlockM4thBlock(Material.iron);
     public static final BlockEnergyCage blockEnergyCage = new BlockEnergyCage(Material.piston);
+    public static final BlockSolarCollector blockSolarCollector = new BlockSolarCollector(Material.iron);
+    public static final BlockTextureDummy blockTextureDummy = new BlockTextureDummy(Material.rock);
 
     public static void init()
     {
@@ -43,5 +45,7 @@ public class ModBlocks {
         GameRegistry.registerBlock(blockQTComponent,"blockQTComponent");
         GameRegistry.registerBlock(blockM4thBlock, ItemM4thBlock.class,"blockM4thBlock");
 //        GameRegistry.registerBlock(blockEnergyCage, "blockEnergyCage");
+        GameRegistry.registerBlock(blockSolarCollector,"blockSolarCollector");
+        GameRegistry.registerBlock(blockTextureDummy,"blockTextureDummy");
     }
 }
