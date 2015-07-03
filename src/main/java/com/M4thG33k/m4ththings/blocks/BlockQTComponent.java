@@ -6,11 +6,14 @@ import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileMedQT;
 import com.M4thG33k.m4ththings.tiles.TileQTComponent;
 import com.M4thG33k.m4ththings.tiles.TileQTComponentValve;
+import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -130,7 +133,9 @@ public class BlockQTComponent extends Block implements ITileEntityProvider {
             TileMedQT parent = ((TileQTComponent)tileEntity).getParentTank();
             if (parent!=null)
             {
-                return parent.getLightValue();
+                int toReturn = parent.getLightValue();
+                LogHelper.info("Light Level: " + toReturn);
+                return toReturn;
             }
         }
         return 0;
@@ -152,5 +157,8 @@ public class BlockQTComponent extends Block implements ITileEntityProvider {
         return false;
     }
 
-
+    @Override
+    public void onEntityCollidedWithBlock(World p_149670_1_, int p_149670_2_, int p_149670_3_, int p_149670_4_, Entity p_149670_5_) {
+        super.onEntityCollidedWithBlock(p_149670_1_, p_149670_2_, p_149670_3_, p_149670_4_, p_149670_5_);
+    }
 }

@@ -14,4 +14,9 @@ public class StringHelper {
     {
         return "(" + x + ", " + y + ", " + z + ")";
     }
+
+    public static String makeCoords(float x, float y, float z)
+    {
+        return "(" + x + ", " + y + ", " + z + ")";
+    }
 }

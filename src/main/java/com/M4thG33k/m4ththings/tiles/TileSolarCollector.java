@@ -143,6 +143,11 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
         return waterTank.getFluidAmount();
     }
 
+    public int getSolar()
+    {
+        return solarTank.getFluidAmount();
+    }
+
     public double getWaterPercentage()
     {
         return ((double)getWater())/((double)waterTank.getCapacity());

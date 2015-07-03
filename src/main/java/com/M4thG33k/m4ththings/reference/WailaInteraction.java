@@ -1,9 +1,6 @@
 package com.M4thG33k.m4ththings.reference;
 
-import com.M4thG33k.m4ththings.tiles.TileLargeQT;
-import com.M4thG33k.m4ththings.tiles.TileMedQT;
-import com.M4thG33k.m4ththings.tiles.TileQTComponent;
-import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
+import com.M4thG33k.m4ththings.tiles.*;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -28,6 +25,7 @@ public class WailaInteraction implements IWailaDataProvider {
         registrar.registerBodyProvider(INSTANCE,TileQTComponent.class);
         registrar.registerBodyProvider(INSTANCE,TileQuantumTank.class);
         registrar.registerNBTProvider(INSTANCE, TileQTComponent.class);
+        registrar.registerBodyProvider(INSTANCE, TileSolarCollector.class);
 
 
         registrar.addConfig("M4thThings","option.m4ththings.showTankStorage");
@@ -49,6 +47,7 @@ public class WailaInteraction implements IWailaDataProvider {
 
         TileEntity te = accessor.getTileEntity();
 
+        //if it is part of a quantum tank
         if (te instanceof TileQTComponent && config.getConfig("option.m4ththings.showTankStorage"))
         {
             TileEntity quantumTank = ((TileQTComponent)te).getParentTile();
@@ -91,6 +90,30 @@ public class WailaInteraction implements IWailaDataProvider {
             }
 
 
+        }
+
+        //if it is a solar collector
+        if (te instanceof TileSolarCollector && config.getConfig("option.m4ththings.showTankStorage"))
+        {
+            TileSolarCollector tileSolarCollector = ((TileSolarCollector)te);
+
+            if (tileSolarCollector.getWater()==0)
+            {
+                currenttip.add("Water: EMPTY");
+            }
+            else
+            {
+                currenttip.add("Water: " + tileSolarCollector.getWater());
+            }
+
+            if (tileSolarCollector.getSolar()==0)
+            {
+                currenttip.add("Solar Water: EMPTY");
+            }
+            else
+            {
+                currenttip.add("Solar Water: " + tileSolarCollector.getSolar());
+            }
         }
 
         return currenttip;

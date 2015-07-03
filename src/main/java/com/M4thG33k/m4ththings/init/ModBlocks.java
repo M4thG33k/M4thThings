@@ -45,7 +45,7 @@ public class ModBlocks {
         GameRegistry.registerBlock(blockQTComponent,"blockQTComponent");
         GameRegistry.registerBlock(blockM4thBlock, ItemM4thBlock.class,"blockM4thBlock");
 //        GameRegistry.registerBlock(blockEnergyCage, "blockEnergyCage");
-        GameRegistry.registerBlock(blockSolarCollector,"blockSolarCollector");
+//        GameRegistry.registerBlock(blockSolarCollector,"blockSolarCollector");
         GameRegistry.registerBlock(blockTextureDummy,"blockTextureDummy");
     }
 }

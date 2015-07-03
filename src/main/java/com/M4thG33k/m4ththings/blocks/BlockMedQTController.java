@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class BlockMedQTController extends Block implements ITileEntityProvider {
 
-    private IIcon[] icons = new IIcon[2];
+    private IIcon[] icons = new IIcon[4];
 
     public BlockMedQTController(Material material)
     {
@@ -175,6 +175,10 @@ public class BlockMedQTController extends Block implements ITileEntityProvider {
         {
             case 1:
                 return icons[1];
+            case 2:
+                return icons[2];
+            case 3:
+                return icons[3];
             default:
                 return icons[0];
         }
@@ -184,6 +188,8 @@ public class BlockMedQTController extends Block implements ITileEntityProvider {
     public void registerBlockIcons(IIconRegister reg) {
         this.icons[0] = reg.registerIcon(Reference.MOD_ID + ":" + "medQT");
         this.icons[1] = reg.registerIcon(Reference.MOD_ID + ":" + "largeQT");
+        this.icons[2] = reg.registerIcon(Reference.MOD_ID + ":" + "medQT_error");
+        this.icons[3] = reg.registerIcon(Reference.MOD_ID + ":" + "largeQT_error");
     }
 
 

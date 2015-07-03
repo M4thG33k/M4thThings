@@ -3,9 +3,15 @@ package com.M4thG33k.m4ththings.tiles;
 import com.M4thG33k.m4ththings.M4thThings;
 import com.M4thG33k.m4ththings.packets.ModPackets;
 import com.M4thG33k.m4ththings.packets.PacketFilling;
+import com.M4thG33k.m4ththings.particles.ParticleFluidOrb;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.utility.LogHelper;
+import com.M4thG33k.m4ththings.utility.MathHelper;
+import com.M4thG33k.m4ththings.utility.MiscHelper;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -24,12 +30,14 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     protected int cap = Configurations.QT_CAP;
     protected int verticalDistance;
     protected int orientation;
+    protected int tankSize; //this variable controls different visual elements. 0=small, 1=medium, 2=large
 
     public TileQuantumTank()
     {
         timer = 0;
         fluid = null;
         verticalDistance = 1;
+        tankSize = 0;
     }
 
     public void advanceTimer()
@@ -47,6 +55,11 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         super.updateEntity();
         advanceTimer();
 
+        if (getFluidAmount()>getCapacity())
+        {
+            fluid.amount = cap;
+            prepareSync();
+        }
 
         attemptDrain(1);
 
@@ -228,10 +241,10 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
 //            LogHelper.info("Hello! Client?: " + worldObj.isRemote);
             int toReturn = this.fill(resource,doFill);
 
-            if (doFill && toReturn>0) {
-                LogHelper.info("Sending QT packet to client (hopefully).");
-                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord,worldObj.provider.dimensionId,0,1),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
-                fillParticles(0,1);
+            if (Configurations.ENABLE_TANK_PARTICLES && doFill && toReturn>0) {
+//                LogHelper.info("Sending QT packet to client (hopefully).");
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(from),1,FluidRegistry.getFluidName(resource),toReturn,tankSize),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
+//                fillParticles(0,1);
             }
             return toReturn;
         }
@@ -244,8 +257,14 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     {
         if (isValveDirection(from))
         {
+            FluidStack toReturn = this.drain(resource.amount,doDrain);
 
-            return this.drain(resource.amount,doDrain);
+            if (Configurations.ENABLE_TANK_PARTICLES && doDrain && toReturn.amount>0)
+            {
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord,MiscHelper.getDirectionInteger(from),0,FluidRegistry.getFluidName(resource),toReturn.amount,tankSize),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
+            }
+
+            return toReturn;
         }
 
         return null;
@@ -256,7 +275,14 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     {
         if (isValveDirection(from))
         {
-            return this.drain(maxDrain, doDrain);
+            FluidStack toReturn = this.drain(maxDrain,doDrain);
+
+            if (Configurations.ENABLE_TANK_PARTICLES && doDrain && toReturn.amount>0)
+            {
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord,MiscHelper.getDirectionInteger(from),0,FluidRegistry.getFluidName(toReturn),toReturn.amount,tankSize),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
+            }
+
+            return toReturn;
         }
 
         return null;
@@ -383,10 +409,218 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         this.orientation = orient;
     }
 
-    public void fillParticles(int direction, int isFilling)
+    public void fillParticles(int direction, int isFilling,Fluid fluid,int amount,int tankSize)
     {
-        LogHelper.info("Spawning QT particles! " + direction + ":" + isFilling);
-        worldObj.spawnParticle("happyVillager",xCoord+1.5,yCoord+1.5+0.0,zCoord+1.5,0.0,0.0,0.0);
+
+        EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
+
+
+        double centerSpeed = 0.04; //this corresponds to the speed to/from the center (most of the velocity should come from this)
+        double centerDistance; //the distance from the center to the valve
+        double radius = 0.375*getPercentFilled();
+        double rad;
+        double d1; //d1 and d2 are the planar directions
+        double d2;
+        EntityFX fluidOrb;
+        double radiusMultiplier;
+        double verticalOffset = getPercentFilled()*Math.sin(((double)timer)*MathHelper.pi/(180.0));
+        double randomHelper;
+        double baseLifeLength = 10.0;
+
+        switch (tankSize)
+        {
+            case 1: //3x3
+                centerSpeed = 0.14;
+                centerDistance = 1.4;
+                radius = 0.09375*getPercentFilled();
+                radiusMultiplier = 10.0;
+                verticalOffset *= 0.125;
+                break;
+            case 2: //9x9
+                centerSpeed = 0.44;
+                centerDistance = 4.4;
+                radius = 0.3*getPercentFilled();
+                radiusMultiplier = 10.0;
+                verticalOffset *= 0.45;
+                break;
+            default: //1x1
+                centerSpeed = 0.04;
+                centerDistance = 0.4;
+                radius = 0.0375*getPercentFilled();
+                radiusMultiplier = 10.0;
+                verticalOffset *= 0.05;
+                break;
+        }
+
+//        LogHelper.info("Radius: " + radius);
+//        String name = "happyVillager";
+
+//        LogHelper.info("Spawning QT particles! " + direction + ":" + isFilling);
+        switch (direction)
+        {
+            case 1: //from DOWN
+                if (isFilling==1) //do filling particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5, yCoord + 0.5 - centerDistance, zCoord + 0.5, d1 * radius, centerSpeed*randomHelper, d2 * radius, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                else //do draining particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 + radiusMultiplier*d1*radius, yCoord + 0.5, zCoord + 0.5 + radiusMultiplier*d2*radius , -d1 * radius, -centerSpeed*randomHelper, -d2 * radius, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                break;
+            case 2: //from NORTH
+                if (isFilling==1) //do filling particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5 - centerDistance, d1 * radius, d2 * radius+verticalOffset/10.0, centerSpeed*randomHelper,  fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                else //do draining particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 + radiusMultiplier*d1*radius, yCoord + 0.5+ radiusMultiplier*d2*radius + verticalOffset, zCoord + 0.5  , -d1 * radius, -d2 * radius - verticalOffset/10.0, -centerSpeed*randomHelper, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                break;
+            case 3: //from SOUTH
+                if (isFilling==1) //do filling particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5 + centerDistance, d1 * radius, d2 * radius+verticalOffset/10.0, -centerSpeed*randomHelper,  fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                else //do draining particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 + radiusMultiplier*d1*radius, yCoord + 0.5+ radiusMultiplier*d2*radius+verticalOffset, zCoord + 0.5  , -d1 * radius, -d2 * radius-verticalOffset/10.0, centerSpeed*randomHelper, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                break;
+            case 4: //from WEST
+                if (isFilling==1) //do filling particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 - centerDistance, yCoord + 0.5, zCoord + 0.5, centerSpeed*randomHelper, d1 * radius+verticalOffset/10.0, d2 * radius,  fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                else //do draining particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 , yCoord + 0.5+ radiusMultiplier*d2*radius+verticalOffset, zCoord + 0.5 + radiusMultiplier*d1*radius , -centerSpeed*randomHelper, -d2 * radius-verticalOffset/10.0, -d1 * radius, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                break;
+            case 5: //from EAST
+                if (isFilling==1) //do filling particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 + centerDistance, yCoord + 0.5, zCoord + 0.5, -centerSpeed*randomHelper, d1 * radius+verticalOffset/10.0, d2 * radius,  fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                else //do draining particles
+                {
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 , yCoord + 0.5+ radiusMultiplier*d2*radius+verticalOffset, zCoord + 0.5 + radiusMultiplier*d1*radius , centerSpeed*randomHelper, -d2 * radius-verticalOffset/10.0, -d1 * radius, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                break;
+            default: //from UP
+                if (isFilling==1) //do filling particles
+                {
+//                    LogHelper.info("I should be rendering filling particles upward");
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5, yCoord + 0.5 + centerDistance, zCoord + 0.5, d1 * radius, -centerSpeed*randomHelper, d2 * radius, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+//                    worldObj.spawnParticle(name,xCoord+0.5,yCoord+1,zCoord+0.5,0.0,-1.0,0.0);
+                }
+                else //do draining particles
+                {
+//                    LogHelper.info("I should be rendering draining particles upward");
+                    for (int i=0;i<amount;i+=100)
+                    {
+                        rad = MathHelper.randomRad();
+                        randomHelper = 1.0-Math.random()*0.1;
+                        d1 = Math.sin(rad);
+                        d2 = Math.cos(rad);
+                        fluidOrb = new ParticleFluidOrb(worldObj, xCoord + 0.5 + radiusMultiplier*d1*radius, yCoord + 0.5, zCoord + 0.5 + radiusMultiplier*d2*radius , -d1 * radius, centerSpeed*randomHelper, -d2 * radius, fluid,tankSize,(int)(baseLifeLength/randomHelper));
+                        renderer.addEffect(fluidOrb);
+                    }
+                }
+                break;
+        }
+//        worldObj.spawnParticle("happyVillager",xCoord+1.5,yCoord+1.5+0.0,zCoord+1.5,0.0,0.0,0.0);
+//        EntityFX fluidOrb = new ParticleFluidOrb(worldObj,xCoord+1.0,yCoord+1.0,zCoord+1.0,0.0,-0.1,0.0,fluid);
+//        Minecraft.getMinecraft().effectRenderer.addEffect(fluidOrb);
     }
 
 }

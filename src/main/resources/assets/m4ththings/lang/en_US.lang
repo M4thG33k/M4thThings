@@ -16,6 +16,7 @@ tile.m4ththings_blockQTComponent_1.name=Quantum Tank Valve
 tile.m4ththings_blockQuantumTank.name=Quantum Tank
 tile.m4ththings_blockM4thBlock_0.name=Gold Plated Iron Block
 tile.m4ththings_fluidSolarWater.name=Solar Water
+tile.m4ththings_blockSolarCollector.name=Solar Collector
 
 entity.BoomerHAHA.name=Creepster
 

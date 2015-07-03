@@ -14,29 +14,35 @@ public class PacketFilling implements IMessage {
     private int x;
     private int y;
     private int z;
-    private int dimensionID;
+    private String fluidName;
+    private int amount;
+    private int size;
 
     public PacketFilling(){}
 
-    public PacketFilling(int X, int Y, int Z, int ID, int direc, int filling)
+    public PacketFilling(int X, int Y, int Z, int direc, int filling,String fluidName,int amount,int size)
     {
         x = X;
         y = Y;
         z = Z;
-        dimensionID = ID;
         this.direction = direc;
         this.isFilling = filling;
+        this.fluidName = fluidName;
+        this.amount = amount;
+        this.size = size;
     }
 
     @Override
     public void fromBytes(ByteBuf buf)
     {
-        x = ByteBufUtils.readVarInt(buf,5);
+        x = ByteBufUtils.readVarInt(buf, 5);
         y = ByteBufUtils.readVarInt(buf,5);
         z = ByteBufUtils.readVarInt(buf,5);
-        dimensionID = ByteBufUtils.readVarInt(buf,5);
         direction = ByteBufUtils.readVarInt(buf,1);
         isFilling = ByteBufUtils.readVarInt(buf,1);
+        fluidName = ByteBufUtils.readUTF8String(buf);
+        amount = ByteBufUtils.readVarInt(buf,5);
+        size = ByteBufUtils.readVarInt(buf,1);
     }
 
     @Override
@@ -45,9 +51,11 @@ public class PacketFilling implements IMessage {
         ByteBufUtils.writeVarInt(buf,x,5);
         ByteBufUtils.writeVarInt(buf,y,5);
         ByteBufUtils.writeVarInt(buf,z,5);
-        ByteBufUtils.writeVarInt(buf,dimensionID,5);
         ByteBufUtils.writeVarInt(buf,direction,1);
         ByteBufUtils.writeVarInt(buf,isFilling,1);
+        ByteBufUtils.writeUTF8String(buf,fluidName);
+        ByteBufUtils.writeVarInt(buf,amount,5);
+        ByteBufUtils.writeVarInt(buf,size,1);
     }
 
     public int getDirection()
@@ -60,10 +68,6 @@ public class PacketFilling implements IMessage {
         return isFilling;
     }
 
-    public int getDimensionID()
-    {
-        return dimensionID;
-    }
 
     public int getX() {
         return x;
@@ -75,5 +79,19 @@ public class PacketFilling implements IMessage {
 
     public int getZ() {
         return z;
+    }
+
+    public String getFluidName()
+    {
+        return fluidName;
+    }
+
+    public int getAmount()
+    {
+        return amount;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

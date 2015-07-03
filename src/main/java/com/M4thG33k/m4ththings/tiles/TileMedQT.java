@@ -16,6 +16,7 @@ public class TileMedQT extends TileQuantumTank {
 
     protected boolean isComplete;
     protected boolean isBuilt;
+    protected boolean controllerRangeError;
 
     public TileMedQT()
     {
@@ -23,12 +24,18 @@ public class TileMedQT extends TileQuantumTank {
         cap = Configurations.MED_QT_CAP;
         isComplete = false;
         isBuilt = false;
+        tankSize = 1;
     }
 
     @Override
     public void updateEntity() {
         advanceTimer();
 
+        if (getFluidAmount()>getCapacity())
+        {
+            fluid.amount = cap;
+            prepareSync();
+        }
 
         if(timer==0)//testing this to see if it will keep the light level synced better
         {
@@ -60,7 +67,13 @@ public class TileMedQT extends TileQuantumTank {
         int z = this.zCoord;
 
         //check to make sure we don't have another controller "too close", if there is one that's too close, we return false
-        if (world.getBlock(x+2,y,z)==ModBlocks.blockMedQTController || world.getBlock(x,y,z+2)==ModBlocks.blockMedQTController || (y+2<world.getActualHeight() && world.getBlock(x,y+2,z)==ModBlocks.blockMedQTController)) {
+//        if (world.getBlock(x+2,y,z)==ModBlocks.blockMedQTController || world.getBlock(x,y,z+2)==ModBlocks.blockMedQTController || (y+2<world.getActualHeight() && world.getBlock(x,y+2,z)==ModBlocks.blockMedQTController)) {
+//            return false;
+//        }
+
+        controllerRangeError = areControllersNearby(2,0);
+        if (controllerRangeError)
+        {
             return false;
         }
 
@@ -274,7 +287,7 @@ public class TileMedQT extends TileQuantumTank {
                  if(i!=0 || j!=0 || k!=0)
                  {
                      block = worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j);
-                     LogHelper.info("Block: " + block);
+//                     LogHelper.info("Block: " + block);
                      worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
                      worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
                      if (xCoord+i!=x || yCoord+k!=y || zCoord+j!=z)
@@ -357,8 +370,32 @@ public class TileMedQT extends TileQuantumTank {
 
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
-        return AxisAlignedBB.getBoundingBox(xCoord-1,yCoord-1,zCoord-1,xCoord+1,yCoord+1,zCoord+1);
+        return AxisAlignedBB.getBoundingBox(xCoord-2,yCoord-2,zCoord-2,xCoord+2,yCoord+2,zCoord+2);
     }
 
+    //checks to see if we have any other medium/large controllers that are "too close" to us
+    public boolean areControllersNearby(int radius,int innerRadius) //input the search radius
+    {
+        for (int i=-radius;i<=radius;i++)
+        {
+            for (int j=-radius;j<=radius;j++)
+            {
+                for (int k=-radius;k<=radius;k++)
+                {
+                    if((Math.abs(i)>innerRadius || Math.abs(j)>innerRadius || Math.abs(k)>innerRadius) && worldObj.getBlock(xCoord+i,yCoord+k,zCoord+j)==ModBlocks.blockMedQTController)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean getControllerRangeError()
+    {
+        return controllerRangeError;
+    }
 
 }
