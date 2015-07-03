@@ -1,10 +1,10 @@
-[23:30:26] [main/INFO]: Logging in with username & password
-[23:30:30] [main/INFO]: Setting user: M4thG33k
-[23:30:32] [Client thread/INFO]: LWJGL Version: 2.9.1
-[23:30:33] [Twitch authenticator/ERROR]: [Broadcast controller] TTV_EC_INTEL_FAILED_SESSION_INIT
-[23:30:37] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:M4th Things, FMLFileResourcePack:Extra Utilities, FMLFileResourcePack:Waila, FMLFileResourcePack:CoFH Core, FMLFileResourcePack:Thermal Dynamics, FMLFileResourcePack:Thermal Expansion, FMLFileResourcePack:Thermal Foundation
-[23:30:40] [Sound Library Loader/INFO]: Sound engine started
-[23:30:41] [Client thread/ERROR]: Using missing texture, unable to load extrautils:textures/blocks/enderQuarryUpgrade.png
+[11:13:46] [main/INFO]: Logging in with username & password
+[11:13:50] [main/INFO]: Setting user: M4thG33k
+[11:13:52] [Client thread/INFO]: LWJGL Version: 2.9.1
+[11:13:53] [Twitch authenticator/ERROR]: [Broadcast controller] TTV_EC_INTEL_FAILED_SESSION_INIT
+[11:13:57] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:M4th Things, FMLFileResourcePack:Extra Utilities, FMLFileResourcePack:Waila, FMLFileResourcePack:CoFH Core, FMLFileResourcePack:Thermal Dynamics, FMLFileResourcePack:Thermal Expansion, FMLFileResourcePack:Thermal Foundation
+[11:13:59] [Sound Library Loader/INFO]: Sound engine started
+[11:14:00] [Client thread/ERROR]: Using missing texture, unable to load extrautils:textures/blocks/enderQuarryUpgrade.png
 java.io.FileNotFoundException: extrautils:textures/blocks/enderQuarryUpgrade.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -29,7 +29,7 @@ java.io.FileNotFoundException: extrautils:textures/blocks/enderQuarryUpgrade.png
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:41] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/MISSING_ICON_BLOCK_165_m4ththings_blockQuantumTank.png
+[11:14:00] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/MISSING_ICON_BLOCK_165_m4ththings_blockQuantumTank.png
 java.io.FileNotFoundException: minecraft:textures/blocks/MISSING_ICON_BLOCK_165_m4ththings_blockQuantumTank.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -54,7 +54,7 @@ java.io.FileNotFoundException: minecraft:textures/blocks/MISSING_ICON_BLOCK_165_
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:41] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/planks.png
+[11:14:00] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/planks.png
 java.io.FileNotFoundException: minecraft:textures/blocks/planks.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -79,8 +79,8 @@ java.io.FileNotFoundException: minecraft:textures/blocks/planks.png
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:41] [Client thread/INFO]: Created: 1024x512 textures/blocks-atlas
-[23:30:41] [Client thread/ERROR]: Using missing texture, unable to load missing_icon_item_4224_extrautils:textures/items/lawSword.png
+[11:14:01] [Client thread/INFO]: Created: 1024x512 textures/blocks-atlas
+[11:14:01] [Client thread/ERROR]: Using missing texture, unable to load missing_icon_item_4224_extrautils:textures/items/lawSword.png
 java.io.FileNotFoundException: missing_icon_item_4224_extrautils:textures/items/lawSword.png
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:71) ~[SimpleReloadableResourceManager.class:?]
 	at net.minecraft.client.renderer.texture.TextureMap.loadTextureAtlas(TextureMap.java:126) [TextureMap.class:?]
@@ -104,9 +104,9 @@ java.io.FileNotFoundException: missing_icon_item_4224_extrautils:textures/items/
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:41] [Client thread/INFO]: Created: 512x512 textures/items-atlas
-[23:30:43] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:M4th Things, FMLFileResourcePack:Extra Utilities, FMLFileResourcePack:Waila, FMLFileResourcePack:CoFH Core, FMLFileResourcePack:Thermal Dynamics, FMLFileResourcePack:Thermal Expansion, FMLFileResourcePack:Thermal Foundation
-[23:30:43] [Client thread/ERROR]: Using missing texture, unable to load extrautils:textures/blocks/enderQuarryUpgrade.png
+[11:14:01] [Client thread/INFO]: Created: 512x512 textures/items-atlas
+[11:14:03] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Not Enough Items, FMLFileResourcePack:M4th Things, FMLFileResourcePack:Extra Utilities, FMLFileResourcePack:Waila, FMLFileResourcePack:CoFH Core, FMLFileResourcePack:Thermal Dynamics, FMLFileResourcePack:Thermal Expansion, FMLFileResourcePack:Thermal Foundation
+[11:14:03] [Client thread/ERROR]: Using missing texture, unable to load extrautils:textures/blocks/enderQuarryUpgrade.png
 java.io.FileNotFoundException: extrautils:textures/blocks/enderQuarryUpgrade.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -134,7 +134,7 @@ java.io.FileNotFoundException: extrautils:textures/blocks/enderQuarryUpgrade.png
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:44] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/MISSING_ICON_BLOCK_165_m4ththings_blockQuantumTank.png
+[11:14:03] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/MISSING_ICON_BLOCK_165_m4ththings_blockQuantumTank.png
 java.io.FileNotFoundException: minecraft:textures/blocks/MISSING_ICON_BLOCK_165_m4ththings_blockQuantumTank.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -162,7 +162,7 @@ java.io.FileNotFoundException: minecraft:textures/blocks/MISSING_ICON_BLOCK_165_
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:44] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/planks.png
+[11:14:03] [Client thread/ERROR]: Using missing texture, unable to load minecraft:textures/blocks/planks.png
 java.io.FileNotFoundException: minecraft:textures/blocks/planks.png
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:65) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -190,8 +190,8 @@ java.io.FileNotFoundException: minecraft:textures/blocks/planks.png
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:44] [Client thread/INFO]: Created: 1024x512 textures/blocks-atlas
-[23:30:44] [Client thread/ERROR]: Using missing texture, unable to load missing_icon_item_4224_extrautils:textures/items/lawSword.png
+[11:14:04] [Client thread/INFO]: Created: 1024x512 textures/blocks-atlas
+[11:14:04] [Client thread/ERROR]: Using missing texture, unable to load missing_icon_item_4224_extrautils:textures/items/lawSword.png
 java.io.FileNotFoundException: missing_icon_item_4224_extrautils:textures/items/lawSword.png
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:71) ~[SimpleReloadableResourceManager.class:?]
 	at net.minecraft.client.renderer.texture.TextureMap.loadTextureAtlas(TextureMap.java:126) [TextureMap.class:?]
@@ -218,59 +218,26 @@ java.io.FileNotFoundException: missing_icon_item_4224_extrautils:textures/items/
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_40]
 	at java.lang.reflect.Method.invoke(Method.java:497) ~[?:1.8.0_40]
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:140) [idea_rt.jar:?]
-[23:30:44] [Client thread/INFO]: Created: 512x512 textures/items-atlas
-[23:30:45] [Sound Library Loader/INFO]: Sound engine started
-[23:30:53] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[23:30:53] [Server thread/INFO]: Generating keypair
-[23:30:53] [Server thread/INFO]: Converting map!
-[23:30:53] [Server thread/INFO]: Scanning folders...
-[23:30:53] [Server thread/INFO]: Total conversion count is 0
-[23:30:54] [Server thread/INFO]: Preparing start region for level 0
-[23:30:54] [Server thread/INFO]: Changing view distance to 12, from 10
-[23:30:55] [Server thread/INFO]: M4thG33k[local:E:d4e34732] logged in with entity id 2 at (155.5, 4.0, -1000.5)
-[23:30:55] [Server thread/INFO]: M4thG33k joined the game
-[23:30:59] [Server thread/INFO]: M4thG33k has just earned the achievement [Taking Inventory]
-[23:30:59] [Client thread/INFO]: [CHAT] M4thG33k has just earned the achievement [Taking Inventory]
-[23:31:01] [Client thread/INFO]: [CHAT] You are now playing creative+
-[23:31:04] [Server thread/INFO]: [M4thG33k: Given [Quantum Tank Valve] * ? to M4thG33k]
-[23:31:04] [Client thread/INFO]: [CHAT] Given [Quantum Tank Valve] * ? to M4thG33k
-[23:31:04] [Server thread/INFO]: [M4thG33k: Given [Medium Quantum Tank Controller] * ? to M4thG33k]
-[23:31:04] [Client thread/INFO]: [CHAT] Given [Medium Quantum Tank Controller] * ? to M4thG33k
-[23:31:10] [Server thread/INFO]: [M4thG33k: Given [Glass] * 64 to M4thG33k]
-[23:31:11] [Client thread/INFO]: [CHAT] Given [Glass] * 64 to M4thG33k
-[23:31:13] [Server thread/INFO]: [M4thG33k: Given [Energized Glowstone Drum] * 64 to M4thG33k]
-[23:31:13] [Client thread/INFO]: [CHAT] Given [Energized Glowstone Drum] * 64 to M4thG33k
-[23:31:18] [Server thread/INFO]: [M4thG33k: Given [Transfer Node (Liquids)] * 64 to M4thG33k]
-[23:31:18] [Client thread/INFO]: [CHAT] Given [Transfer Node (Liquids)] * 64 to M4thG33k
-[23:31:22] [Server thread/INFO]: [M4thG33k: Given [Speed Upgrade] * 64 to M4thG33k]
-[23:31:22] [Client thread/INFO]: [CHAT] Given [Speed Upgrade] * 64 to M4thG33k
-[23:31:23] [Server thread/INFO]: [M4thG33k: Given [Speed Upgrade] * 64 to M4thG33k]
-[23:31:23] [Client thread/INFO]: [CHAT] Given [Speed Upgrade] * 64 to M4thG33k
-[23:31:23] [Server thread/INFO]: [M4thG33k: Given [Speed Upgrade] * 64 to M4thG33k]
-[23:31:23] [Client thread/INFO]: [CHAT] Given [Speed Upgrade] * 64 to M4thG33k
-[23:31:23] [Server thread/INFO]: [M4thG33k: Given [Speed Upgrade] * 64 to M4thG33k]
-[23:31:23] [Client thread/INFO]: [CHAT] Given [Speed Upgrade] * 64 to M4thG33k
-[23:31:24] [Server thread/INFO]: [M4thG33k: Given [Speed Upgrade] * 64 to M4thG33k]
-[23:31:24] [Client thread/INFO]: [CHAT] Given [Speed Upgrade] * 64 to M4thG33k
-[23:31:25] [Server thread/INFO]: [M4thG33k: Given [Speed Upgrade] * 64 to M4thG33k]
-[23:31:25] [Client thread/INFO]: [CHAT] Given [Speed Upgrade] * 64 to M4thG33k
-[23:31:32] [Server thread/INFO]: [M4thG33k: Game rule has been updated]
-[23:31:32] [Client thread/INFO]: [CHAT] Game rule has been updated
-[23:31:40] [Server thread/INFO]: [M4thG33k: Game rule has been updated]
-[23:31:40] [Client thread/INFO]: [CHAT] Game rule has been updated
-[23:31:42] [Client thread/INFO]: [CHAT] Day 1. 18:00
-[23:32:42] [Server thread/INFO]: Saving and pausing game...
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Overworld
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Nether
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The End
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Underdark
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The Last Millenium
-[23:32:42] [Server thread/INFO]: Stopping server
-[23:32:42] [Server thread/INFO]: Saving players
-[23:32:42] [Server thread/INFO]: Saving worlds
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Overworld
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Nether
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The End
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Underdark
-[23:32:42] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The Last Millenium
-[23:35:45] [Client thread/INFO]: Stopping!
+[11:14:04] [Client thread/INFO]: Created: 512x512 textures/items-atlas
+[11:14:05] [Sound Library Loader/INFO]: Sound engine started
+[11:14:40] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[11:14:40] [Server thread/INFO]: Generating keypair
+[11:14:40] [Server thread/INFO]: Preparing start region for level 0
+[11:14:40] [Server thread/INFO]: Changing view distance to 12, from 10
+[11:14:41] [Server thread/INFO]: M4thG33k[local:E:8f165903] logged in with entity id 89 at (164.21517117455818, 4.0, -998.9300831209863)
+[11:14:41] [Server thread/INFO]: M4thG33k joined the game
+[11:15:08] [Server thread/INFO]: Saving and pausing game...
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Overworld
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Nether
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The End
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Underdark
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The Last Millenium
+[11:15:08] [Server thread/INFO]: Stopping server
+[11:15:08] [Server thread/INFO]: Saving players
+[11:15:08] [Server thread/INFO]: Saving worlds
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Overworld
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Nether
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The End
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/Underdark
+[11:15:08] [Server thread/INFO]: Saving chunks for level 'Copy of Copy of New World'/The Last Millenium
+[11:15:16] [Client thread/INFO]: Stopping!

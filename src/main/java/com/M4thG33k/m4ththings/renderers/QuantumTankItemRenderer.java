@@ -39,9 +39,9 @@ public class QuantumTankItemRenderer implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
         FluidStack fluidStack;
-        if(item.hasTagCompound() && item.getTagCompound().hasKey("fluid"))
+        if(item.hasTagCompound() && item.getTagCompound().hasKey("FluidName"))
         {
-            fluidStack = new FluidStack(FluidRegistry.getFluid(item.getTagCompound().getString("fluid")),item.getTagCompound().getInteger("amount"));
+            fluidStack = new FluidStack(FluidRegistry.getFluid(item.getTagCompound().getString("FluidName")),item.getTagCompound().getInteger("Amount"));
             ((TileQuantumTank)tileEntity).setFluid(fluidStack);
         }
         else{

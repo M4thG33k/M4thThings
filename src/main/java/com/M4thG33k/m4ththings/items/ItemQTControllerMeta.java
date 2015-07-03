@@ -24,6 +24,6 @@ public class ItemQTControllerMeta extends ItemBlockWithMetadata {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add("Not intended for decoration!");
+        list.add("§cNot intended for decoration!§r");
     }
 }

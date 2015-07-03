@@ -160,15 +160,15 @@ public class BlockQuantumTank extends Block implements ITileEntityProvider {
 
             ItemStack toReturn = new ItemStack(world.getBlock(x,y,z),1,metadata);
 
-            if (tagCompound!=null && tagCompound.hasKey("fluid"))
+            if (tagCompound!=null && !tagCompound.hasKey("Empty"))
             {
-                LogHelper.info("Setting the item's tag compound!");
+//                LogHelper.info("Setting the item's tag compound!");
                 if (!toReturn.hasTagCompound())
                 {
                     toReturn.setTagCompound(new NBTTagCompound());
                 }
-                toReturn.getTagCompound().setString("fluid",tagCompound.getString("fluid"));
-                toReturn.getTagCompound().setInteger("amount",tagCompound.getInteger("amount"));
+                toReturn.getTagCompound().setString("FluidName",tagCompound.getString("FluidName"));
+                toReturn.getTagCompound().setInteger("Amount",tagCompound.getInteger("Amount"));
             }
 
             ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();

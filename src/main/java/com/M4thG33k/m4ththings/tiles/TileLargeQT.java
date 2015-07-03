@@ -5,6 +5,7 @@ import com.M4thG33k.m4ththings.reference.Configurations;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidTank;
 
 /**
  * Created by M4thG33k on 6/25/2015.
@@ -15,6 +16,7 @@ public class TileLargeQT extends TileMedQT{
     {
         super();
         cap = Configurations.LARGE_QT_CAP;
+        tank = new FluidTank(cap);
         tankSize = 2;
     }
 
@@ -27,7 +29,7 @@ public class TileLargeQT extends TileMedQT{
         int z = this.zCoord;
 
         //check to make sure we don't have another controller "too close", if there is one that's too close, we return false
-        controllerRangeError = areControllersNearby(8,3);
+        controllerRangeError = areControllersNearby(8,3,5);
         if (controllerRangeError)
         {
             return false;
@@ -314,5 +316,34 @@ public class TileLargeQT extends TileMedQT{
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
         return AxisAlignedBB.getBoundingBox(xCoord-4,yCoord-4,zCoord-4,xCoord+4,yCoord+4,zCoord+4);
+    }
+
+    //checks to see if we have any other medium/large controllers that are "too close" to us
+    public boolean areControllersNearby(int radius,int innerRadius,int medContRadius) //input the search radius
+    {
+        for (int i=-radius;i<=radius;i++)
+        {
+            for (int j=-radius;j<=radius;j++)
+            {
+                for (int k=-radius;k<=radius;k++)
+                {
+                    if((Math.abs(i)>innerRadius || Math.abs(j)>innerRadius || Math.abs(k)>innerRadius) && worldObj.getBlock(xCoord+i,yCoord+k,zCoord+j)==ModBlocks.blockMedQTController)
+                    {
+                        if ((Math.abs(i)>medContRadius || Math.abs(j)>medContRadius || Math.abs(k)>medContRadius))
+                        {
+                            if (worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j)==1)
+                            {
+                                return true;
+                            }
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

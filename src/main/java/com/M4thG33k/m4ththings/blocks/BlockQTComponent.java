@@ -134,7 +134,7 @@ public class BlockQTComponent extends Block implements ITileEntityProvider {
             if (parent!=null)
             {
                 int toReturn = parent.getLightValue();
-                LogHelper.info("Light Level: " + toReturn);
+//                LogHelper.info("Light Level: " + toReturn);
                 return toReturn;
             }
         }

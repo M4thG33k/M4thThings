@@ -135,13 +135,13 @@ public class EntityBoomer extends EntityCreeper {
         switch (soundChoice)
         {
             case 1:
-                this.playSound(Reference.MOD_ID + ":" + "boomerlaugh", 1.0F, 1.0F);
+                this.playSound(Reference.MOD_ID + ":" + "boomerlaugh", 0.9F, 1.0F);
                 break;
             case 2:
-                this.playSound(Reference.MOD_ID + ":" + "pacmanwarble",1.0F,1.0F);
+                this.playSound(Reference.MOD_ID + ":" + "pacmanwarble",0.8F,1.0F);
                 break;
             case 3:
-                this.playSound(Reference.MOD_ID + ":" + "mexicanhatdance",0.8F,1.0F);
+                this.playSound(Reference.MOD_ID + ":" + "mexicanhatdance",0.6F,1.0F);
                 break;
             default:
                 this.playSound("creeper.primed", 1.0F, 0.5F);

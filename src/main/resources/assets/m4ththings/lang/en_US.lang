@@ -1,5 +1,6 @@
 item.m4ththings_cobbleChestGrabber.name=Cobble Chest Grabber
 item.m4ththings_itemModIngot_0.name=Gold Plated Iron
+item.m4ththings_itemM4thBucket.name=§cSolar Water Bucket (WIP)§r
 
 block.m4ththings_blockCobbleChest.name=Cobble Chest
 
@@ -15,8 +16,8 @@ tile.m4ththings_blockQTComponent_0.name=Quantum Tank
 tile.m4ththings_blockQTComponent_1.name=Quantum Tank Valve
 tile.m4ththings_blockQuantumTank.name=Quantum Tank
 tile.m4ththings_blockM4thBlock_0.name=Gold Plated Iron Block
-tile.m4ththings_fluidSolarWater.name=Solar Water
-tile.m4ththings_blockSolarCollector.name=Solar Collector
+tile.m4ththings_fluidSolarWater.name=§cSolar Water (WIP)§r
+tile.m4ththings_blockSolarCollector.name=§cSolar Collector (WIP)§r
 
 entity.BoomerHAHA.name=Creepster
 

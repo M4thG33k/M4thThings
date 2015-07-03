@@ -33,12 +33,12 @@ public class ItemQuantumTank extends ItemBlock {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("fluid"))
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("FluidName"))
         {
-            FluidStack fluid = new FluidStack(FluidRegistry.getFluid(stack.getTagCompound().getString("fluid")),1);
+            FluidStack fluid = new FluidStack(FluidRegistry.getFluid(stack.getTagCompound().getString("FluidName")),1);
 
             list.add(fluid.getLocalizedName());
-            list.add(stack.getTagCompound().getInteger("amount") + "/" + Configurations.QT_CAP);
+            list.add(stack.getTagCompound().getInteger("Amount") + "/" + Configurations.QT_CAP);
         }
     }
 

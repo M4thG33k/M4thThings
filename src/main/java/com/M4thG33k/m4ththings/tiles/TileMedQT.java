@@ -2,17 +2,17 @@ package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
-import com.M4thG33k.m4ththings.utility.LogHelper;
-import com.M4thG33k.m4ththings.utility.StringHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 /**
- * Created by M4thG33k on 6/23/2015.
+ * Created by M4thG33k on 7/3/2015.
  */
-public class TileMedQT extends TileQuantumTank {
+public class TileMedQT extends TileQuantumTank{
 
     protected boolean isComplete;
     protected boolean isBuilt;
@@ -22,39 +22,33 @@ public class TileMedQT extends TileQuantumTank {
     {
         super();
         cap = Configurations.MED_QT_CAP;
+        tank = new FluidTank(cap);
         isComplete = false;
         isBuilt = false;
         tankSize = 1;
     }
 
     @Override
-    public void updateEntity() {
+    public void updateEntity()
+    {
         advanceTimer();
 
-        if (getFluidAmount()>getCapacity())
+        if (tank.getFluidAmount()>cap)
         {
-            fluid.amount = cap;
+            tank.setFluid(new FluidStack(tank.getFluid().getFluid(),cap));
             prepareSync();
         }
 
-        if(timer==0)//testing this to see if it will keep the light level synced better
-        {
-            prepareSync();
-        }
-
-        //If the multiblock is not complete, check to see if we can form the multiblock structure. If we can, do it.
         if (!isComplete)
         {
             isComplete = isReadyToConstruct();
         }
         else
         {
-            //construct the multiblock, replacing the construction blocks
             if (!isBuilt)
             {
                 isBuilt = constructStructure();
                 prepareSync();
-//                LogHelper.info("Multiblock formed!");
             }
         }
     }
@@ -78,7 +72,7 @@ public class TileMedQT extends TileQuantumTank {
         }
 
         //now we check if the blocks exist in the world to make the structure
-        if (world.getBlock(x,y+1,z)==ModBlocks.blockQTValve) //if this is true, we must be attempting to create a vertical tank
+        if (world.getBlock(x,y+1,z)== ModBlocks.blockQTValve) //if this is true, we must be attempting to create a vertical tank
         {
             if (!(world.getBlock(x,y-1,z)==ModBlocks.blockQTValve))
             {
@@ -93,7 +87,7 @@ public class TileMedQT extends TileQuantumTank {
                     {
                         if (i!=0||j!=0)
                         {
-                            if (!(world.getBlock(x+i,y+k,z+j)==Blocks.glass))
+                            if (!(world.getBlock(x+i,y+k,z+j)== Blocks.glass))
                             {
                                 return false; //missing a piece of glass
                             }
@@ -161,7 +155,7 @@ public class TileMedQT extends TileQuantumTank {
                             {
                                 if (!(world.getBlock(x+i,y+k,z+j)==Blocks.glass))
                                 {
-                                    LogHelper.info("Missing glass at " + StringHelper.makeCoords(x+i,y+k,z+j));
+//                                    LogHelper.info("Missing glass at " + StringHelper.makeCoords(x+i,y+k,z+j));
                                     return false; //missing a piece of glass
                                 }
                             }
@@ -276,35 +270,35 @@ public class TileMedQT extends TileQuantumTank {
     public void breakStructure(int x, int y, int z)
     {
 
-     int block;
+        int block;
 
-     for (int i=-1;i<2;i++)
-     {
-         for (int j=-1;j<2;j++)
-         {
-             for (int k=-1;k<2;k++)
-             {
-                 if(i!=0 || j!=0 || k!=0)
-                 {
-                     block = worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j);
+        for (int i=-1;i<2;i++)
+        {
+            for (int j=-1;j<2;j++)
+            {
+                for (int k=-1;k<2;k++)
+                {
+                    if(i!=0 || j!=0 || k!=0)
+                    {
+                        block = worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j);
 //                     LogHelper.info("Block: " + block);
-                     worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
-                     worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
-                     if (xCoord+i!=x || yCoord+k!=y || zCoord+j!=z)
-                     {
-                         if (block==0)
-                         {
-                             worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
-                         }
-                         else
-                         {
-                             worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve);
-                         }
-                     }
-                 }
-             }
-         }
-     }
+                        worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
+                        worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
+                        if (xCoord+i!=x || yCoord+k!=y || zCoord+j!=z)
+                        {
+                            if (block==0)
+                            {
+                                worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+                            }
+                            else
+                            {
+                                worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
 //        //first clear all blocks
@@ -358,13 +352,23 @@ public class TileMedQT extends TileQuantumTank {
 
     public int getLightValue()
     {
-        if (getFluidAmount()==0)
+        for (int i=-1;i<=1;i++)
+        {
+            for (int j=-1;j<=1;j++)
+            {
+                for (int k=-1;k<=1;k++)
+                {
+                    this.worldObj.markBlockForUpdate(xCoord+i,yCoord+k,zCoord+j);
+                }
+            }
+        }
+        if (tank.getFluidAmount()==0)
         {
             return 0;
         }
 
-        int fluidLight = fluid.getFluid().getLuminosity();
-        double percentage = ((double)getFluidAmount())/((double)getCapacity());
+        int fluidLight = tank.getFluid().getFluid().getLuminosity();
+        double percentage = ((double)tank.getFluidAmount())/((double)tank.getCapacity());
         return ((int)(fluidLight*percentage));
     }
 
@@ -397,5 +401,4 @@ public class TileMedQT extends TileQuantumTank {
     {
         return controllerRangeError;
     }
-
 }

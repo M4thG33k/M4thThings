@@ -1,6 +1,5 @@
 package com.M4thG33k.m4ththings.tiles;
 
-import com.M4thG33k.m4ththings.M4thThings;
 import com.M4thG33k.m4ththings.packets.ModPackets;
 import com.M4thG33k.m4ththings.packets.PacketFilling;
 import com.M4thG33k.m4ththings.particles.ParticleFluidOrb;
@@ -21,23 +20,21 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 /**
- * Created by M4thG33k on 6/22/2015.
+ * Created by M4thG33k on 7/3/2015.
  */
-public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHandler {
-
+public class TileQuantumTank extends TileFluidHandler {
     protected int timer;
-    protected FluidStack fluid;
-    protected int cap = Configurations.QT_CAP;
-    protected int verticalDistance;
+    protected int cap;
     protected int orientation;
     protected int tankSize; //this variable controls different visual elements. 0=small, 1=medium, 2=large
 
     public TileQuantumTank()
     {
-        timer = 0;
-        fluid = null;
-        verticalDistance = 1;
+        super();
+        cap = Configurations.QT_CAP;
         tankSize = 0;
+        timer = 0;
+        tank = new FluidTank(cap);
     }
 
     public void advanceTimer()
@@ -55,73 +52,36 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         super.updateEntity();
         advanceTimer();
 
-        if (getFluidAmount()>getCapacity())
+        if (tank.getFluidAmount()>cap)
         {
-            fluid.amount = cap;
+            tank.setFluid(new FluidStack(tank.getFluid().getFluid(),cap));
             prepareSync();
         }
 
-        attemptDrain(1);
-
+        attemptDrain();
     }
 
-    public void setFluid(FluidStack fluidStack)
+    //attempts to drain fluid into another TileFluidHandler directly beneath it at a rate of 8000mb/t
+    public void attemptDrain()
     {
-        if (fluidStack!=null && fluidStack.amount!=0)
+        if (tank.getFluidAmount()==0)
         {
-            fluid = fluidStack;
-            if (fluid.amount>cap)
-            {
-                fluid.amount = cap;
-            }
+            return;
+        }
+        TileEntity tileEntity = worldObj.getTileEntity(xCoord,yCoord-1,zCoord);
+
+        if (tileEntity!=null && tileEntity instanceof TileFluidHandler)
+        {
+            int transferred = ((TileFluidHandler)tileEntity).fill(ForgeDirection.UP,new FluidStack(tank.getFluid().getFluid(),Math.min(8000,tank.getFluidAmount())),true);
+            this.drain(ForgeDirection.DOWN,transferred,true);
         }
     }
+
+
 
     public void setEmpty()
     {
-        fluid = null;
-    }
-
-    //attempts to drain from this tank into a tank 'y' blocks below
-    public void attemptDrain(int y)
-    {
-        if (fluid!=null && getFluidAmount()>0)
-        {
-            TileEntity tile = worldObj.getTileEntity(xCoord,yCoord-y,zCoord);
-            if (tile!=null && tile instanceof TileQuantumTank && ((TileQuantumTank)tile).getOrientation()==0) {
-                TileQuantumTank tank = (TileQuantumTank) tile;
-
-                if (tank.getFluidAmount() < tank.getCapacity()) {
-                    int transferred = tank.fill(fluid, true);
-                    if (transferred == fluid.amount) {
-                        fluid = null;
-                    } else {
-                        fluid.amount -= transferred;
-                        prepareSync();
-                    }
-                }
-            }
-//            else if (tile!=null && tile instanceof IFluidHandler)
-//            {
-//                IFluidHandler tank = (IFluidHandler)tile;
-//
-//                if (tank.fill(ForgeDirection.UP,fluid,false) > 0)
-//                {
-////                    LogHelper.info("Able to transfer " + tank.fill(ForgeDirection.UP,fluid,false) + "mB from (" + xCoord + ", " + yCoord + ", " + zCoord + ")");
-//                    int transferred = tank.fill(ForgeDirection.UP,fluid,true);
-////                    LogHelper.info("Actual filled: " + transferred);
-//                    FluidStack drained = this.drain(ForgeDirection.DOWN,transferred,true);
-////                    LogHelper.info("Actual drained: " + drained.amount);
-////                    drain(ForgeDirection.DOWN,tank.fill(ForgeDirection.UP,fluid,true),true);
-////                    drain(tank.fill(ForgeDirection.UP,fluid,true),true);
-//                }
-//            }
-        }
-    }
-
-    public int getTimer()
-    {
-        return timer;
+        tank.setFluid(null);
     }
 
     public void prepareSync()
@@ -130,122 +90,50 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         markDirty();
     }
 
-    //IFluidTank
-    @Override
-    public FluidStack getFluid()
-    {
-        return fluid;
-    }
-
-    @Override
-    public int getFluidAmount()
-    {
-        return fluid==null ? 0 : fluid.amount;
-    }
-
-    @Override
-    public int getCapacity()
-    {
-        return cap;
-    }
-
-    @Override
-    public FluidTankInfo getInfo()
-    {
-        return new FluidTankInfo(fluid,cap);
-    }
-
-    @Override
-    public int fill(FluidStack resource, boolean doFill)
-    {
-//        LogHelper.info("Filling at " + myCoords());
-        if (resource==null || resource.amount==0)
-        {
-            return 0;
-        }
-
-        if (fluid == null)
-        {
-            if (doFill)
-            {
-                fluid = new FluidStack(resource.getFluid(), Math.min(cap,resource.amount));
-                prepareSync();
-            }
-            return Math.min(cap,resource.amount);
-        }
-
-        if (!fluid.isFluidEqual(resource))
-        {
-            return 0;
-        }
-
-        if (fluid.amount!=cap)
-        {
-            int toTransfer = Math.min(cap - fluid.amount, resource.amount);
-            if (doFill) {
-                fluid.amount += toTransfer;
-                prepareSync();
-            }
-            return toTransfer;
-        }
-        else{
-            TileEntity tEnt = worldObj.getTileEntity(xCoord,yCoord+verticalDistance,zCoord);
-            if (tEnt!=null && tEnt instanceof TileQuantumTank)
-            {
-                return ((TileQuantumTank)tEnt).fill(ForgeDirection.DOWN,resource,doFill);
-            }
-            else{
-                return 0;
-            }
-        }
-
-    }
-
-    @Override
-    public FluidStack drain(int maxDrain, boolean doDrain)
-    {
-//        LogHelper.info("Draining at " + myCoords());
-        if (fluid == null || fluid.amount==0)
-        {
-            TileEntity tEnt = worldObj.getTileEntity(xCoord,yCoord-verticalDistance,zCoord);
-            if (tEnt!=null && tEnt instanceof TileQuantumTank)
-            {
-                return ((TileQuantumTank)tEnt).drain(maxDrain,doDrain);
-            }
-            return null;
-        }
-
-        FluidStack toReturn = new FluidStack(fluid.getFluid(), Math.min(fluid.amount,maxDrain));
-
-        if (doDrain)
-        {
-            if (toReturn.amount==fluid.amount)
-            {
-                fluid = null;
-            }
-            else
-            {
-                fluid.amount -= toReturn.amount;
-            }
-            prepareSync();
-        }
-        return toReturn;
-    }
-
-    //IFluidHandler
+    /* begin IFluidHandler */
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
     {
         if (isValveDirection(from))
         {
-//            LogHelper.info("Hello! Client?: " + worldObj.isRemote);
-            int toReturn = this.fill(resource,doFill);
+            if (from==ForgeDirection.DOWN && tank.getFluidAmount()==cap)
+            {
+                TileEntity tileEntity = worldObj.getTileEntity(xCoord,yCoord+1,zCoord);
 
-            if (Configurations.ENABLE_TANK_PARTICLES && doFill && toReturn>0) {
-//                LogHelper.info("Sending QT packet to client (hopefully).");
-                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(from),1,FluidRegistry.getFluidName(resource),toReturn,tankSize),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
-//                fillParticles(0,1);
+                if (tileEntity != null && tileEntity instanceof TileQuantumTank)
+                {
+                    int toReturn = ((TileQuantumTank)tileEntity).fill(from,resource,doFill);
+
+                    if (doFill && Configurations.ENABLE_TANK_PARTICLES && toReturn>0)
+                    {
+                        ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(from),1, FluidRegistry.getFluidName(resource),toReturn,tankSize), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+                        ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(ForgeDirection.UP),0, FluidRegistry.getFluidName(resource),toReturn,tankSize), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+                    }
+
+                    if (doFill)
+                    {
+                        prepareSync();
+                    }
+
+                    return toReturn;
+
+                }
+
             }
+
+            //if we get here, the current tank is not full yet or we aren't filling from the bottom
+            int toReturn = tank.fill(resource,doFill);
+
+            if (doFill && Configurations.ENABLE_TANK_PARTICLES && toReturn>0)
+            {
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(from),1, FluidRegistry.getFluidName(resource),toReturn,tankSize), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+            }
+
+            if (doFill)
+            {
+                prepareSync();
+            }
+
             return toReturn;
         }
 
@@ -253,17 +141,21 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     }
 
     @Override
-    public  FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
     {
         if (isValveDirection(from))
         {
-            FluidStack toReturn = this.drain(resource.amount,doDrain);
+            FluidStack toReturn = tank.drain(resource.amount,doDrain);
 
-            if (Configurations.ENABLE_TANK_PARTICLES && doDrain && toReturn.amount>0)
+            if (doDrain && Configurations.ENABLE_TANK_PARTICLES && toReturn.amount>0)
             {
-                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord,MiscHelper.getDirectionInteger(from),0,FluidRegistry.getFluidName(resource),toReturn.amount,tankSize),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(from),0, FluidRegistry.getFluidName(resource),toReturn.amount,tankSize), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
             }
 
+            if (doDrain)
+            {
+                prepareSync();
+            }
             return toReturn;
         }
 
@@ -275,11 +167,16 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     {
         if (isValveDirection(from))
         {
-            FluidStack toReturn = this.drain(maxDrain,doDrain);
+            FluidStack toReturn = tank.drain(maxDrain,doDrain);
 
-            if (Configurations.ENABLE_TANK_PARTICLES && doDrain && toReturn.amount>0)
+            if (doDrain && Configurations.ENABLE_TANK_PARTICLES && toReturn.amount > 0)
             {
-                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord,MiscHelper.getDirectionInteger(from),0,FluidRegistry.getFluidName(toReturn),toReturn.amount,tankSize),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,16));
+                ModPackets.INSTANCE.sendToAllAround(new PacketFilling(xCoord,yCoord,zCoord, MiscHelper.getDirectionInteger(from),0, FluidRegistry.getFluidName(toReturn),toReturn.amount,tankSize), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+            }
+
+            if (doDrain)
+            {
+                prepareSync();
             }
 
             return toReturn;
@@ -289,7 +186,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     }
 
     @Override
-    public boolean canFill(ForgeDirection from, Fluid fluid)
+    public boolean canFill(ForgeDirection from,Fluid fluid)
     {
         return isValveDirection(from);
     }
@@ -300,45 +197,36 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         return isValveDirection(from);
     }
 
-    @Override
-    public FluidTankInfo[] getTankInfo(ForgeDirection from)
-    {
-        FluidTankInfo[] toReturn = new FluidTankInfo[1];
-        toReturn[0] = getInfo();
-        return toReturn;
-    }
+    /* end IFluidHandler */
 
     @Override
     public void readFromNBT(NBTTagCompound tagCompound)
     {
         if (tagCompound.hasKey("x"))
         {
-            super.readFromNBT(tagCompound);
+            this.xCoord = tagCompound.getInteger("x");
+            this.yCoord = tagCompound.getInteger("y");
+            this.zCoord = tagCompound.getInteger("z");
         }
 
-        if (tagCompound.hasKey("fluid") && tagCompound.hasKey("amount"))
+        if (!tagCompound.hasKey("Empty"))
         {
-            fluid = new FluidStack(FluidRegistry.getFluid(tagCompound.getString("fluid")),tagCompound.getInteger("amount"));
+            tank.setFluid(FluidStack.loadFluidStackFromNBT(tagCompound));
         }
         else
         {
-            fluid = null;
+            tank.setFluid(null);
         }
 
         if (tagCompound.hasKey("timer"))
         {
             timer = tagCompound.getInteger("timer");
         }
-        else
-        {
-            timer = 0;
-        }
 
         if (tagCompound.hasKey("orientation"))
         {
             orientation = tagCompound.getInteger("orientation");
         }
-
     }
 
     @Override
@@ -346,15 +234,8 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     {
         super.writeToNBT(tagCompound);
 
-        if (fluid!=null && fluid.amount!=0)
-        {
-            tagCompound.setString("fluid",fluid.getFluid().getName());
-            tagCompound.setInteger("amount",fluid.amount);
-        }
-
-        tagCompound.setInteger("orientation",orientation);
-
         tagCompound.setInteger("timer",timer);
+        tagCompound.setInteger("orientation",orientation);
     }
 
     @Override
@@ -370,12 +251,12 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)
     {
         this.readFromNBT(pkt.func_148857_g());
-        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+        prepareSync();
     }
 
     public String myCoords()
     {
-        return "(" + xCoord + ", " + yCoord + ", " + zCoord + ")";
+        return  "(" + xCoord + ", " + yCoord + ", " + zCoord + ")";
     }
 
     public boolean isStructureBuilt()
@@ -385,7 +266,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
 
     public double getPercentFilled()
     {
-        return ((double)getFluidAmount())/((double)getCapacity());
+        return ((double)tank.getFluidAmount())/((double)cap);
     }
 
     public double getRoundedPercentFilled()
@@ -397,6 +278,16 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
     public int getOrientation()
     {
         return orientation;
+    }
+
+    public int getTimer()
+    {
+        return timer;
+    }
+
+    public int getTankSize()
+    {
+        return tankSize;
     }
 
     public boolean isValveDirection(ForgeDirection from)
@@ -423,7 +314,7 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
         double d2;
         EntityFX fluidOrb;
         double radiusMultiplier;
-        double verticalOffset = getPercentFilled()*Math.sin(((double)timer)*MathHelper.pi/(180.0));
+        double verticalOffset = getPercentFilled()*Math.sin(((double)timer)* MathHelper.pi/(180.0));
         double randomHelper;
         double baseLifeLength = 10.0;
 
@@ -623,22 +514,53 @@ public class TileQuantumTank extends TileEntity implements IFluidTank, IFluidHan
 //        Minecraft.getMinecraft().effectRenderer.addEffect(fluidOrb);
     }
 
+    public int getFluidAmount()
+    {
+        return tank.getFluidAmount();
+    }
+
+    public int getCapacity()
+    {
+        return cap;
+    }
+
+    public FluidStack getFluid()
+    {
+        return tank.getFluid();
+    }
+
+    public void setFluid(FluidStack fluid)
+    {
+        tank.setFluid(fluid);
+    }
+
+    public int fill(FluidStack resource,boolean doFill)
+    {
+        int toReturn = tank.fill(resource,doFill);
+        if (doFill)
+        {
+            prepareSync();
+        }
+        return toReturn;
+    }
+
+    public FluidStack drain(int maxDrain,boolean doDrain)
+    {
+        FluidStack toReturn = tank.drain(maxDrain, doDrain);
+        if (doDrain)
+        {
+            prepareSync();
+        }
+        return toReturn;
+    }
+
+    public  FluidTankInfo getInfo()
+    {
+        return tank.getInfo();
+    }
+
+    public void writeFluidDataToNBT(NBTTagCompound tagCompound)
+    {
+        tank.writeToNBT(tagCompound);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

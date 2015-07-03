@@ -8880,3 +8880,256 @@
 [23:30:27] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
 [23:30:27] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
 [23:30:27] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[00:20:49] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[00:20:49] [main/INFO] [GradleStart]: Extra: []
+[00:20:49] [main/INFO] [GradleStart]: Password found, attempting login
+[00:20:51] [main/INFO] [GradleStart]: Login Succesful!
+[00:20:51] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[00:20:51] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[00:20:51] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[00:20:51] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[00:20:51] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[00:20:51] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[00:20:51] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[00:22:18] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[00:22:18] [main/INFO] [GradleStart]: Extra: []
+[00:22:18] [main/INFO] [GradleStart]: Password found, attempting login
+[00:22:19] [main/INFO] [GradleStart]: Login Succesful!
+[00:22:19] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[00:22:19] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[00:22:19] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[00:22:19] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[00:22:19] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[00:22:19] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[00:22:19] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[00:33:47] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[00:33:47] [main/INFO] [GradleStart]: Extra: []
+[00:33:47] [main/INFO] [GradleStart]: Password found, attempting login
+[00:33:47] [main/INFO] [GradleStart]: Login Succesful!
+[00:33:47] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[00:33:47] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[00:33:47] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[00:33:47] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[00:33:47] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[00:33:47] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[00:33:48] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[09:42:36] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[09:42:36] [main/INFO] [GradleStart]: Extra: []
+[09:42:36] [main/INFO] [GradleStart]: Password found, attempting login
+[09:42:37] [main/INFO] [GradleStart]: Login Succesful!
+[09:42:37] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[09:42:37] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[09:42:37] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[09:42:37] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[09:42:37] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[09:42:37] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[09:42:37] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[09:51:37] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[09:51:37] [main/INFO] [GradleStart]: Extra: []
+[09:51:37] [main/INFO] [GradleStart]: Password found, attempting login
+[09:51:38] [main/INFO] [GradleStart]: Login Succesful!
+[09:51:38] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[09:51:38] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[09:51:38] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[09:51:38] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[09:51:38] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[09:51:38] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[09:51:38] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[09:54:32] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[09:54:32] [main/INFO] [GradleStart]: Extra: []
+[09:54:32] [main/INFO] [GradleStart]: Password found, attempting login
+[09:54:33] [main/INFO] [GradleStart]: Login Succesful!
+[09:54:33] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[09:54:33] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[09:54:33] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[09:54:33] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[09:54:33] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[09:54:33] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[09:54:33] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:06:42] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:06:42] [main/INFO] [GradleStart]: Extra: []
+[10:06:42] [main/INFO] [GradleStart]: Password found, attempting login
+[10:06:43] [main/INFO] [GradleStart]: Login Succesful!
+[10:06:43] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:06:43] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:06:43] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:06:43] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:06:43] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:06:43] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:06:43] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:08:04] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:08:04] [main/INFO] [GradleStart]: Extra: []
+[10:08:04] [main/INFO] [GradleStart]: Password found, attempting login
+[10:08:05] [main/INFO] [GradleStart]: Login Succesful!
+[10:08:05] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:08:05] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:08:05] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:08:05] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:08:05] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:08:05] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:08:05] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:08:33] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:08:33] [main/INFO] [GradleStart]: Extra: []
+[10:08:33] [main/INFO] [GradleStart]: Password found, attempting login
+[10:08:33] [main/INFO] [GradleStart]: Login Succesful!
+[10:08:33] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:08:33] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:08:33] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:08:33] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:08:33] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:08:33] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:08:33] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:19:54] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:19:54] [main/INFO] [GradleStart]: Extra: []
+[10:19:54] [main/INFO] [GradleStart]: Password found, attempting login
+[10:19:55] [main/INFO] [GradleStart]: Login Succesful!
+[10:19:55] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:19:55] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:19:55] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:19:55] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:19:55] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:19:55] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:19:55] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:22:05] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:22:05] [main/INFO] [GradleStart]: Extra: []
+[10:22:05] [main/INFO] [GradleStart]: Password found, attempting login
+[10:22:06] [main/INFO] [GradleStart]: Login Succesful!
+[10:22:06] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:22:06] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:22:06] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:22:06] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:22:06] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:22:06] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:22:06] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:25:14] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:25:14] [main/INFO] [GradleStart]: Extra: []
+[10:25:14] [main/INFO] [GradleStart]: Password found, attempting login
+[10:25:15] [main/INFO] [GradleStart]: Login Succesful!
+[10:25:15] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:25:15] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:25:15] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:25:15] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:25:15] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:25:15] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:25:15] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:27:40] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:27:40] [main/INFO] [GradleStart]: Extra: []
+[10:27:40] [main/INFO] [GradleStart]: Password found, attempting login
+[10:27:41] [main/INFO] [GradleStart]: Login Succesful!
+[10:27:41] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:27:41] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:27:41] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:27:41] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:27:41] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:27:41] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:27:41] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:31:18] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:31:18] [main/INFO] [GradleStart]: Extra: []
+[10:31:18] [main/INFO] [GradleStart]: Password found, attempting login
+[10:31:19] [main/INFO] [GradleStart]: Login Succesful!
+[10:31:19] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:31:19] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:31:19] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:31:19] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:31:19] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:31:19] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:31:19] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:34:09] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:34:09] [main/INFO] [GradleStart]: Extra: []
+[10:34:09] [main/INFO] [GradleStart]: Password found, attempting login
+[10:34:10] [main/INFO] [GradleStart]: Login Succesful!
+[10:34:10] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:34:10] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:34:10] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:34:10] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:34:10] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:34:10] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:34:10] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:34:25] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:34:25] [main/INFO] [GradleStart]: Extra: []
+[10:34:25] [main/INFO] [GradleStart]: Password found, attempting login
+[10:34:26] [main/INFO] [GradleStart]: Login Succesful!
+[10:34:26] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:34:26] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:34:26] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:34:26] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:34:26] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:34:26] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:34:26] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[10:42:43] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[10:42:43] [main/INFO] [GradleStart]: Extra: []
+[10:42:43] [main/INFO] [GradleStart]: Password found, attempting login
+[10:42:44] [main/INFO] [GradleStart]: Login Succesful!
+[10:42:44] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[10:42:44] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[10:42:44] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[10:42:44] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:42:44] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[10:42:44] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[10:42:44] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[11:00:35] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[11:00:35] [main/INFO] [GradleStart]: Extra: []
+[11:00:35] [main/INFO] [GradleStart]: Password found, attempting login
+[11:00:36] [main/INFO] [GradleStart]: Login Succesful!
+[11:00:36] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[11:00:36] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[11:00:36] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[11:00:36] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:00:36] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:00:36] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[11:00:36] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[11:02:35] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[11:02:35] [main/INFO] [GradleStart]: Extra: []
+[11:02:35] [main/INFO] [GradleStart]: Password found, attempting login
+[11:02:36] [main/INFO] [GradleStart]: Login Succesful!
+[11:02:36] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[11:02:36] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[11:02:36] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[11:02:36] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:02:36] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:02:36] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[11:02:36] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[11:07:45] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[11:07:45] [main/INFO] [GradleStart]: Extra: []
+[11:07:45] [main/INFO] [GradleStart]: Password found, attempting login
+[11:07:46] [main/INFO] [GradleStart]: Login Succesful!
+[11:07:46] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[11:07:46] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[11:07:46] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[11:07:46] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:07:46] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:07:46] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[11:07:46] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[11:11:32] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[11:11:32] [main/INFO] [GradleStart]: Extra: []
+[11:11:32] [main/INFO] [GradleStart]: Password found, attempting login
+[11:11:33] [main/INFO] [GradleStart]: Login Succesful!
+[11:11:33] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[11:11:33] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[11:11:33] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[11:11:33] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:11:33] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:11:33] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[11:11:33] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[11:13:00] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[11:13:00] [main/INFO] [GradleStart]: Extra: []
+[11:13:00] [main/INFO] [GradleStart]: Password found, attempting login
+[11:13:01] [main/INFO] [GradleStart]: Login Succesful!
+[11:13:01] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[11:13:01] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[11:13:01] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[11:13:01] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:13:01] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:13:01] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[11:13:01] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
+[11:13:46] [main/INFO] [GradleStart]: username: smal3169@bears.unco.edu
+[11:13:46] [main/INFO] [GradleStart]: Extra: []
+[11:13:46] [main/INFO] [GradleStart]: Password found, attempting login
+[11:13:47] [main/INFO] [GradleStart]: Login Succesful!
+[11:13:47] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[11:13:47] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[11:13:47] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {"twitch_access_token":["3pawr03twbw4jqqlco3mtbog5bw881"]}, --assetsDir, C:/Users/Josiah/.gradle/caches/minecraft/assets, --assetIndex, 1.7.10, --userType, mojang, --accessToken, {REDACTED}, --version, 1.7.10, --uuid, 905379e2068f44c9965b6b9fbe1a6140, --username, M4thG33k, --tweakClass, cpw.mods.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[11:13:47] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:13:47] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLTweaker
+[11:13:47] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[11:13:47] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLTweaker
