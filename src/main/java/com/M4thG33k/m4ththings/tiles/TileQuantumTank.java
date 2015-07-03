@@ -61,7 +61,7 @@ public class TileQuantumTank extends TileFluidHandler {
         attemptDrain();
     }
 
-    //attempts to drain fluid into another TileFluidHandler directly beneath it at a rate of 8000mb/t
+    //attempts to drain fluid into another TileFluidHandler directly beneath it at a rate of 500mb/t
     public void attemptDrain()
     {
         if (tank.getFluidAmount()==0)
@@ -70,9 +70,9 @@ public class TileQuantumTank extends TileFluidHandler {
         }
         TileEntity tileEntity = worldObj.getTileEntity(xCoord,yCoord-1,zCoord);
 
-        if (tileEntity!=null && tileEntity instanceof TileFluidHandler)
+        if (tileEntity!=null && tileEntity instanceof IFluidHandler)
         {
-            int transferred = ((TileFluidHandler)tileEntity).fill(ForgeDirection.UP,new FluidStack(tank.getFluid().getFluid(),Math.min(8000,tank.getFluidAmount())),true);
+            int transferred = ((IFluidHandler)tileEntity).fill(ForgeDirection.UP,new FluidStack(tank.getFluid().getFluid(),Math.min(500,tank.getFluidAmount())),true);
             this.drain(ForgeDirection.DOWN,transferred,true);
         }
     }
