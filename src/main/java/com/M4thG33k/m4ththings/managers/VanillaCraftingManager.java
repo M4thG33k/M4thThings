@@ -18,12 +18,16 @@ public class VanillaCraftingManager {
 //        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockCobbleChest),"ccc","c c","ccc",'c',new ItemStack(GameRegistry.findBlock("ExtraUtilities","cobblestone_compressed"),1,0));
         GameRegistry.addRecipe(new ItemStack(ModItems.itemModIngot,1,0)," g ","gig"," g ",'g',new ItemStack(Items.gold_nugget,1),'i',new ItemStack(Items.iron_ingot,1));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockQuantumTank,1),"ggg","gig","ggg",'g',new ItemStack(Blocks.glass,1),'i',new ItemStack(ModItems.itemModIngot,1,0));
-        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockQTValve,2),"ii","ii",'i',new ItemStack(ModItems.itemModIngot,1,0));
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.blockQTValve,2,0),"ii","ii",'i',new ItemStack(ModItems.itemModIngot,1,0));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockM4thBlock,1,0),"iii","iii","iii",'i',new ItemStack(ModItems.itemModIngot,1,0));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockM4thBlock,1,0)," g ","gig"," g ",'g',new ItemStack(Items.gold_ingot,1),'i',new ItemStack(Blocks.iron_block,1));
         GameRegistry.addShapelessRecipe(new ItemStack(ModItems.itemModIngot,9,0),new ItemStack(ModBlocks.blockM4thBlock,1,0));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockMedQTController,1,0)," i ","iti"," i ",'i',new ItemStack(ModItems.itemModIngot,1,0),'t',new ItemStack(ModBlocks.blockQuantumTank,1));
         GameRegistry.addRecipe(new ItemStack(ModBlocks.blockMedQTController,1,1)," m ","mvm"," m ",'m',new ItemStack(ModBlocks.blockMedQTController,1,0),'v',new ItemStack(ModBlocks.blockQTValve,1));
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockQTValve,1,1),new ItemStack(ModBlocks.blockQTValve,1,0),new ItemStack(Blocks.stone,1)); //import valve
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockQTValve,1,0),new ItemStack(ModBlocks.blockQTValve,1,1)); //import->normal valve
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockQTValve,1,2),new ItemStack(ModBlocks.blockQTValve,1,0),new ItemStack(Items.redstone,1),new ItemStack(Items.redstone,1)); //export valve
+        GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockQTValve,1,0),new ItemStack(ModBlocks.blockQTValve,1,2)); //import->normal valve
 
         GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockQuantumTank,1),new ItemStack(ModBlocks.blockQuantumTank,1));
     }

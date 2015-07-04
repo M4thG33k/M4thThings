@@ -3,6 +3,7 @@ package com.M4thG33k.m4ththings.renderers;
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.tiles.TileLargeQT;
+import com.M4thG33k.m4ththings.utility.Location;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -28,6 +29,10 @@ public class LargeQTRenderer extends MediumQuantumTankRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f) {
         TileLargeQT tank = (TileLargeQT)tileEntity;
+        Location[] importValves = tank.getImportValves();
+        Location[] exportValves = tank.getExportValves();
+        int numImportValves = tank.getImportValveIndex();
+        int numExportValves = tank.getExportValveIndex();
         double timer;
         double theta;
         int orientation = tank.getOrientation();
@@ -78,6 +83,17 @@ public class LargeQTRenderer extends MediumQuantumTankRenderer {
                 renderSphere(x+0.5,y+0.5+0.45*percentage*Math.sin(theta),z+0.5,timer,9.0*0.75*percentage,tank.getFluid().getFluid().getIcon(),false);
             }
 
+            //render the import valve overlays
+            for (int i=0;i<numImportValves;i++)
+            {
+                renderSpecialValve(x, y, z, importValves[i].getLocation(), orientation, 0);
+            }
+            //render the export valve overlays
+            for (int i =0;i<numExportValves;i++)
+            {
+                renderSpecialValve(x,y,z,exportValves[i].getLocation(),orientation,1);
+            }
+
 //            if (Configurations.RENDER_TORI) {
 //                //render the tori
 //                GL11.glEnable(GL11.GL_BLEND);
@@ -106,51 +122,8 @@ public class LargeQTRenderer extends MediumQuantumTankRenderer {
             renderCube(x + 0.5, y + 0.5, z + 0.5, 0.0, 0.0, 0.0, 0.5,icon);
 
             //render ghost blocks
-            for (int i = -4; i <= 4; i++) {
-                for (int j = -4; j <= 4; j++) {
-                    for (int k = -4; k <= 4; k++) {
-                        if (!(i==0 && j==0 && k==0))//avoid replacing the center
-                        {
+            renderGhostBlocks(x,y,z,theta,timer);
 
-                            if (Math.abs(i)<=1 && Math.abs(j)<=1 && Math.abs(k)==4) //these locations refer to the top/bottom valve blocks
-                            {
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
-                                renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,ModBlocks.blockQTComponent.getIcon(0,1));
-                            }
-                            else if (i==0 && j==0 && Math.abs(k)==3) //these locations refer to the 2 interior valve blocks
-                            {
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
-                                renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,ModBlocks.blockQTComponent.getIcon(0,1));
-                            }
-                            else if (Math.abs(i)<=1 && Math.abs(k)<=1 && Math.abs(j)==4) //these locations refer to the top/bottom valve blocks for N-S
-                            {
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
-                                renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,ModBlocks.blockQTComponent.getIcon(0,1));
-                            }
-                            else if (i==0 && k==0 && Math.abs(j)==3) //these locations refer to the 2 interior valve blocks for N-S
-                            {
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
-                                renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,ModBlocks.blockQTComponent.getIcon(0,1));
-                            }
-                            else if (Math.abs(k)<=1 && Math.abs(j)<=1 && Math.abs(i)==4) //these locations refer to the top/bottom valve blocks for E-W
-                            {
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
-                                renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,ModBlocks.blockQTComponent.getIcon(0,1));
-                            }
-                            else if (k==0 && j==0 && Math.abs(i)==3) //these locations refer to the 2 interior valve blocks for E-W
-                            {
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
-                                renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,ModBlocks.blockQTComponent.getIcon(0,1));
-                            }
-//                            else //everything else should be glass
-//                            {
-////                                renderCube(x + 0.5 + i, y + 0.5 + k, z + 0.5 + j, 0.0625, glassIcon);
-//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,Blocks.glass.getIcon(0,0));
-//                            }
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -174,6 +147,57 @@ public class LargeQTRenderer extends MediumQuantumTankRenderer {
 
         GL11.glPopMatrix();
         
+    }
+    
+    protected void renderGhostBlocks(double x, double y, double z, double theta, double timer)
+    {
+        IIcon blockIcon = ModBlocks.blockQTComponent.getIcon(0,1);
+        //render ghost blocks
+        for (int i = -4; i <= 4; i++) {
+            for (int j = -4; j <= 4; j++) {
+                for (int k = -4; k <= 4; k++) {
+                    if (!(i==0 && j==0 && k==0))//avoid replacing the center
+                    {
+
+                        if (Math.abs(i)<=1 && Math.abs(j)<=1 && Math.abs(k)==4) //these locations refer to the top/bottom valve blocks
+                        {
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
+                            renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,blockIcon);
+                        }
+                        else if (i==0 && j==0 && Math.abs(k)==3) //these locations refer to the 2 interior valve blocks
+                        {
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
+                            renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,blockIcon);
+                        }
+                        else if (Math.abs(i)<=1 && Math.abs(k)<=1 && Math.abs(j)==4) //these locations refer to the top/bottom valve blocks for N-S
+                        {
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
+                            renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,blockIcon);
+                        }
+                        else if (i==0 && k==0 && Math.abs(j)==3) //these locations refer to the 2 interior valve blocks for N-S
+                        {
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
+                            renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,blockIcon);
+                        }
+                        else if (Math.abs(k)<=1 && Math.abs(j)<=1 && Math.abs(i)==4) //these locations refer to the top/bottom valve blocks for E-W
+                        {
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
+                            renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,blockIcon);
+                        }
+                        else if (k==0 && j==0 && Math.abs(i)==3) //these locations refer to the 2 interior valve blocks for E-W
+                        {
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,valveIcon);
+                            renderCube(x+0.5+i,y+0.5+k+0.1*Math.sin(theta),z+0.5+j,timer,timer,timer,0.0625,blockIcon);
+                        }
+//                            else //everything else should be glass
+//                            {
+////                                renderCube(x + 0.5 + i, y + 0.5 + k, z + 0.5 + j, 0.0625, glassIcon);
+//                                renderCube(x+0.5+i,y+0.5+k,z+0.5+j,0.0625,Blocks.glass.getIcon(0,0));
+//                            }
+                    }
+                }
+            }
+        }
     }
 
 }

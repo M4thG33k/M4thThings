@@ -53,29 +53,25 @@ public class WailaInteraction implements IWailaDataProvider {
             TileEntity quantumTank = ((TileQTComponent)te).getParentTile();
             int capacity;
 
-            if (quantumTank instanceof TileLargeQT)
-            {
-                capacity = ((TileLargeQT)quantumTank).getCapacity();
-            }
-            else
-            {
-                capacity = ((TileMedQT)quantumTank).getCapacity();
-            }
+            if (((TileMedQT)quantumTank).isStructureBuilt()) {
+                if (quantumTank instanceof TileLargeQT) {
+                    capacity = ((TileLargeQT) quantumTank).getCapacity();
+                } else {
+                    capacity = ((TileMedQT) quantumTank).getCapacity();
+                }
 
-            if (((TileMedQT)quantumTank).getFluidAmount()==0)
-            {
-                currenttip.add("EMPTY");
-            }
-            else
-            {
-                currenttip.add(((TileMedQT) quantumTank).getFluid().getLocalizedName()+": "  + ((TileMedQT)quantumTank).getFluidAmount() + " / " + capacity);
-                currenttip.add(((TileMedQT)quantumTank).getRoundedPercentFilled() + "%");
+                if (((TileMedQT) quantumTank).getFluidAmount() == 0) {
+                    currenttip.add("EMPTY");
+                } else {
+                    currenttip.add(((TileMedQT) quantumTank).getFluid().getLocalizedName() + ": " + ((TileMedQT) quantumTank).getFluidAmount() + " / " + capacity);
+                    currenttip.add(((TileMedQT) quantumTank).getRoundedPercentFilled() + "%");
+                }
             }
 //            currenttip.add((((TileMedQT)quantumTank).getFluid() != null )?((TileMedQT) quantumTank).getFluid().getLocalizedName()+": "  + ((TileMedQT)quantumTank).getFluidAmount() + " / " + capacity : "EMPTY");
         }
 
         //do small QT tips
-        if (te instanceof TileQuantumTank && config.getConfig("option.m4ththings.showTankStorage"))
+        if (te instanceof TileQuantumTank && !(te instanceof TileMedQT) && config.getConfig("option.m4ththings.showTankStorage"))
         {
             TileQuantumTank quantumTank = ((TileQuantumTank)te);
 

@@ -2,7 +2,9 @@ package com.M4thG33k.m4ththings.renderers;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
+import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileMedQT;
+import com.M4thG33k.m4ththings.utility.Location;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -13,6 +15,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
 
 /**
  * Created by M4thG33k on 6/22/2015.
@@ -25,6 +29,7 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
     protected IModelCustom modelCube;
     protected IModelCustom modelHexPlate;
     protected ResourceLocation hexTexture;
+    protected ResourceLocation[] valveIcons;
 
     public MediumQuantumTankRenderer()
     {
@@ -34,12 +39,24 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
         modelCube = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/cube.obj"));
         modelHexPlate = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/sphereHexPlate.obj"));
         hexTexture = new ResourceLocation("m4ththings","models/sphereHexPlate.png");
+        getValveIcons();
+    }
+
+    public void getValveIcons()
+    {
+        valveIcons = new ResourceLocation[2];
+        valveIcons[0] = new ResourceLocation(Reference.MOD_ID + ":" + "textures/overlays/qtValveImport.png");
+        valveIcons[1] = new ResourceLocation(Reference.MOD_ID + ":" + "textures/overlays/qtValveExport.png");
     }
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f)
     {
         TileMedQT tank = (TileMedQT)tileEntity;
+        Location[] importValves = tank.getImportValves();
+        Location[] exportValves = tank.getExportValves();
+        int numImportValves = tank.getImportValveIndex();
+        int numExportValves = tank.getExportValveIndex();
         int orientation = tank.getOrientation();
         double timer;
         double theta;
@@ -97,6 +114,17 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
                 renderHexPlate(x + 0.5, y + 0.5, z + 0.5, -timer - 270, 30 * Math.sin(theta + 270), scaled/2.0,0);
             }
 
+            //render the import valve overlays
+            for (int i=0;i<numImportValves;i++)
+            {
+                renderSpecialValve(x, y, z, importValves[i].getLocation(), orientation, 0);
+            }
+
+            //render the export valve overlays
+            for (int i=0;i<numExportValves;i++)
+            {
+                renderSpecialValve(x, y, z, exportValves[i].getLocation(), orientation, 1);
+            }
 
         }
         else
@@ -113,6 +141,8 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
             }
             renderCube(x + 0.5, y + 0.5, z + 0.5, 0.0, 0.0, 0.0, 0.5,icon);
         }
+
+
     }
 
     protected void renderHexPlate(double x, double y, double z, double rotationY, double rotationZ, double scale,int orient)
@@ -1747,5 +1777,64 @@ public class MediumQuantumTankRenderer extends TileEntitySpecialRenderer{
 
     }
 
+    //the x,y,z inputs are the controller's location
+    protected void renderSpecialValve(double x, double y, double z, int[] location, int orientation, int valveIcon)
+    {
+        int i = location[0];
+        int k = location[1];
+        int j = location[2];
+
+        bindTexture(valveIcons[valveIcon]);
+        GL11.glPushMatrix();
+
+        GL11.glTranslated(x+i+0.5,y+k+0.5,z+j+0.5); // translates us to the center of the valve's block
+
+        //rotate the image to the correct location
+        switch(orientation)
+        {
+            case 1: //N-S
+                GL11.glTranslated(0.0,0.0,Math.signum(j)*0.505);
+                if (j<0) //north side
+                {
+                    GL11.glRotated(270.0,1.0,0.0,0.0);
+                }
+                else{ //south side
+                    GL11.glRotated(90.0,1.0,0.0,0.0);
+                }
+                break;
+            case 2: //E-W
+                GL11.glTranslated(Math.signum(i)*0.505,0.0,0.0);
+                if (i<0) //west side
+                {
+                    GL11.glRotated(90.0,0.0,0.0,1.0);
+                }
+                else //east side
+                {
+                    GL11.glRotated(270.0,0.0,0.0,1.0);
+                }
+                break;
+            default: //U-D
+                GL11.glTranslated(0,Math.signum(k)*0.505,0.0);
+                if (k<0)
+                {
+                    GL11.glRotated(180.0,1.0,0.0,0.0);
+                }
+
+                break;
+        }
+
+
+
+        GL11.glScaled(0.167,0.167,0.167);
+
+        Tessellator t = Tessellator.instance;
+        t.startDrawingQuads();
+        t.addVertexWithUV(-1.0,0,-1.0,0.0,1.0);
+        t.addVertexWithUV(-1.0,0,1.0,0.0,0.0);
+        t.addVertexWithUV(1.0,0,1.0,1.0,0.0);
+        t.addVertexWithUV(1.0,0,-1.0,1.0,1.0);
+        t.draw();
+        GL11.glPopMatrix();
+    }
 
 }

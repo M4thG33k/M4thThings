@@ -70,7 +70,7 @@ public class TileQuantumTank extends TileFluidHandler {
         }
         TileEntity tileEntity = worldObj.getTileEntity(xCoord,yCoord-1,zCoord);
 
-        if (tileEntity!=null && tileEntity instanceof IFluidHandler)
+        if (tileEntity!=null && tileEntity instanceof TileQuantumTank)
         {
             int transferred = ((IFluidHandler)tileEntity).fill(ForgeDirection.UP,new FluidStack(tank.getFluid().getFluid(),Math.min(500,tank.getFluidAmount())),true);
             this.drain(ForgeDirection.DOWN,transferred,true);

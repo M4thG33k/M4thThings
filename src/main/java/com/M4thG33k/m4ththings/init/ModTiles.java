@@ -24,5 +24,8 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileLargeQT.class,"tileLargeQT");
         GameRegistry.registerTileEntity(TileEnergyCage.class,"tileEnergyCage");
         GameRegistry.registerTileEntity(TileSolarCollector.class,"tileSolarCollector");
+        GameRegistry.registerTileEntity(TileQTComponentValveImport.class,"tileQTComponentValveImport");
+        GameRegistry.registerTileEntity(TileQTComponentValveExport.class,"tileQTComponentValveExport");
+        GameRegistry.registerTileEntity(TileWaterGenerator.class,"tileWaterGenerator");
     }
 }

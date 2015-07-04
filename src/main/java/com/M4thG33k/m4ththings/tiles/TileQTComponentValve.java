@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.*;
 /**
  * Created by M4thG33k on 6/23/2015.
  */
-public class TileQTComponentValve extends TileQTComponent implements IFluidHandler, IFluidTank {
+public class TileQTComponentValve extends TileQTComponent implements IFluidHandler{//}, IFluidTank {
 
     public TileQTComponentValve()
     {
@@ -42,34 +42,34 @@ public class TileQTComponentValve extends TileQTComponent implements IFluidHandl
     public FluidTankInfo[] getTankInfo(ForgeDirection from) {
         return getParentTank().getTankInfo(from);
     }
-
-    @Override
-    public FluidStack getFluid() {
-        return getParentTank().getFluid();
-    }
-
-    @Override
-    public int getFluidAmount() {
-        return getParentTank().getFluidAmount();
-    }
-
-    @Override
-    public int getCapacity() {
-        return getParentTank().getCapacity();
-    }
-
-    @Override
-    public FluidTankInfo getInfo() {
-        return getParentTank().getInfo();
-    }
-
-    @Override
-    public int fill(FluidStack resource, boolean doFill) {
-        return getParentTank().fill(resource, doFill);
-    }
-
-    @Override
-    public FluidStack drain(int maxDrain, boolean doDrain) {
-        return getParentTank().drain(maxDrain, doDrain);
-    }
+//
+//    @Override
+//    public FluidStack getFluid() {
+//        return getParentTank().getFluid();
+//    }
+//
+//    @Override
+//    public int getFluidAmount() {
+//        return getParentTank().getFluidAmount();
+//    }
+//
+//    @Override
+//    public int getCapacity() {
+//        return getParentTank().getCapacity();
+//    }
+//
+//    @Override
+//    public FluidTankInfo getInfo() {
+//        return getParentTank().getInfo();
+//    }
+//
+//    @Override
+//    public int fill(FluidStack resource, boolean doFill) {
+//        return getParentTank().fill(resource, doFill);
+//    }
+//
+//    @Override
+//    public FluidStack drain(int maxDrain, boolean doDrain) {
+//        return getParentTank().drain(maxDrain, doDrain);
+//    }
 }

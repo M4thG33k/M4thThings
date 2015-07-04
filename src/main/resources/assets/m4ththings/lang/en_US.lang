@@ -9,15 +9,21 @@ tile.m4ththings_blockBaseChest.name=Base Chest
 tile.m4ththings_blockBaseTank.name=Base Tank
 
 tile.m4ththings_blockQTValve.name=Quantum Tank Valve
+tile.m4ththings_blockQTValve_0.name=Quantum Tank Valve
+tile.m4ththings_blockQTValve_1.name=Quantum Tank Import Valve
+tile.m4ththings_blockQTValve_2.name=Quantum Tank Export Valve
 tile.m4ththings_blockMedQTController_0.name=Medium Quantum Tank Controller
 tile.m4ththings_blockMedQTController_1.name=Large Quantum Tank Controller
 tile.m4ththings_blockQTComponent.name=Quantum Tank
 tile.m4ththings_blockQTComponent_0.name=Quantum Tank
 tile.m4ththings_blockQTComponent_1.name=Quantum Tank Valve
+tile.m4ththings_blockQTComponent_2.name=Quantum Tank Import Valve
+tile.m4ththings_blockQTComponent_3.name=Quantum Tank Export Valve
 tile.m4ththings_blockQuantumTank.name=Quantum Tank
 tile.m4ththings_blockM4thBlock_0.name=Gold Plated Iron Block
 tile.m4ththings_fluidSolarWater.name=§cSolar Water (WIP)§r
 tile.m4ththings_blockSolarCollector.name=§cSolar Collector (WIP)§r
+tile.m4ththings_blockWaterGenerator.name=§cAquam Accio (WIP)§r
 
 entity.BoomerHAHA.name=Creepster
 

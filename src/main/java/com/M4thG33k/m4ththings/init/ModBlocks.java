@@ -3,6 +3,7 @@ package com.M4thG33k.m4ththings.init;
 import com.M4thG33k.m4ththings.blocks.*;
 import com.M4thG33k.m4ththings.items.ItemM4thBlock;
 import com.M4thG33k.m4ththings.items.ItemQTControllerMeta;
+import com.M4thG33k.m4ththings.items.ItemQTValveMeta;
 import com.M4thG33k.m4ththings.items.ItemQuantumTank;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
@@ -28,6 +29,7 @@ public class ModBlocks {
     public static final BlockEnergyCage blockEnergyCage = new BlockEnergyCage(Material.piston);
     public static final BlockSolarCollector blockSolarCollector = new BlockSolarCollector(Material.iron);
     public static final BlockTextureDummy blockTextureDummy = new BlockTextureDummy(Material.rock);
+    public static final BlockWaterGenerator blockWaterGenerator = new BlockWaterGenerator(Material.rock);
 
     public static void init()
     {
@@ -40,12 +42,13 @@ public class ModBlocks {
 //        GameRegistry.registerBlock(blockMediumQTController,"blockMediumQTController");
 //        GameRegistry.registerBlock(blockTankAir,"blockTankAir");
 //        GameRegistry.registerBlock(blockTankTop,"blockTankTop");
-        GameRegistry.registerBlock(blockQTValve,"blockQTValve");
+        GameRegistry.registerBlock(blockQTValve, ItemQTValveMeta.class,"blockQTValve");
         GameRegistry.registerBlock(blockMedQTController,ItemQTControllerMeta.class,"blockMedQTController");
         GameRegistry.registerBlock(blockQTComponent,"blockQTComponent");
         GameRegistry.registerBlock(blockM4thBlock, ItemM4thBlock.class,"blockM4thBlock");
 //        GameRegistry.registerBlock(blockEnergyCage, "blockEnergyCage");
 //        GameRegistry.registerBlock(blockSolarCollector,"blockSolarCollector");
         GameRegistry.registerBlock(blockTextureDummy,"blockTextureDummy");
+        GameRegistry.registerBlock(blockWaterGenerator,"blockWaterGenerator");
     }
 }

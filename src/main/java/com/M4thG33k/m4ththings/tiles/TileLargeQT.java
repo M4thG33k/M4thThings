@@ -2,6 +2,7 @@ package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
+import com.M4thG33k.m4ththings.utility.Location;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -18,6 +19,8 @@ public class TileLargeQT extends TileMedQT{
         cap = Configurations.LARGE_QT_CAP;
         tank = new FluidTank(cap);
         tankSize = 2;
+        importValves = new Location[18];
+        exportValves = new Location[18];
     }
 
     @Override
@@ -243,9 +246,31 @@ public class TileLargeQT extends TileMedQT{
                 {
                     if (i!=0 || j!=0 || k!=0)
                     {
+
                         //this should only be called if all the coordinates are within the world's dimension, so we won't check them again
                         if (world.getBlock(x + i, y + k, z + j) == ModBlocks.blockQTValve) {
-                            world.setBlock(x + i, y + k, z + j, ModBlocks.blockQTComponent, 1, 3); //replace valves with the valve components
+                            int meta = world.getBlockMetadata(x+i,y+k,z+j);
+                            switch (meta)
+                            {
+                                case 1:
+                                    world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,2,3);
+                                    if (Math.abs(i)==4 || Math.abs(j)==4 || Math.abs(k)==4) //we're along the outer wall (we don't want to include the interior valve)
+                                    {
+                                        importValves[importValveIndex++] = new Location(i,k,j);
+                                    }
+                                    break;
+                                case 2:
+                                    world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,3,3);
+                                    if (Math.abs(i)==4 || Math.abs(j)==4 || Math.abs(k)==4) //we're along the outer wall (we don't want to include the interior valve)
+                                    {
+                                        exportValves[exportValveIndex++] = new Location(i,k,j);
+                                    }
+                                    break;
+                                default:
+                                    world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,1,3);
+                                    break;
+                            }
+//                            world.setBlock(x + i, y + k, z + j, ModBlocks.blockQTComponent, 1, 3); //replace valves with the valve components
                         } else if (world.getBlock(x + i, y + k, z + j) == Blocks.glass) {
                             world.setBlock(x + i, y + k, z + j, ModBlocks.blockQTComponent, 0, 3); //replace glass with the air components
                             ((TileQTComponent) world.getTileEntity(x + i, y + k, z + j)).setParentCoordinates(x, y, z);
@@ -266,7 +291,7 @@ public class TileLargeQT extends TileMedQT{
         int Y = this.yCoord;
         int Z = this.zCoord;
 
-        int block; //temp storage for block metadata during replacement
+        int meta; //temp storage for block metadata during replacement
 
         //clear all non-controller blocks
         for (int i = -4; i <= 4; i++) {
@@ -274,21 +299,36 @@ public class TileLargeQT extends TileMedQT{
                 for (int k = -4; k <= 4; k++) {
                     if (i!=0 || j!=0 || k!=0)//avoid replacing the center
                     {
-                        block = world.getBlockMetadata(X+i,Y+k,Z+j);
+                        meta = world.getBlockMetadata(X+i,Y+k,Z+j);
 
                         world.removeTileEntity(X+i,Y+k,Z+j);
                         world.setBlockToAir(X+i,Y+k,Z+j);
 
                         if (X+i!=x || Y+k!=y || Z+j!=z)
                         {
-                            if (block == 0)
+                            switch(meta)
                             {
-                                worldObj.setBlock(X+i,Y+k,Z+j,Blocks.glass);
+                                case 1:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve,0,3);
+                                    break;
+                                case 2:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve,1,3);
+                                    break;
+                                case 3:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve,2,3);
+                                    break;
+                                default:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+                                    break;
                             }
-                            else
-                            {
-                                worldObj.setBlock(X+i,Y+k,Z+j,ModBlocks.blockQTValve);
-                            }
+//                            if (block == 0)
+//                            {
+//                                worldObj.setBlock(X+i,Y+k,Z+j,Blocks.glass);
+//                            }
+//                            else
+//                            {
+//                                worldObj.setBlock(X+i,Y+k,Z+j,ModBlocks.blockQTValve);
+//                            }
 
 //                            if (Math.abs(i)<=1 && Math.abs(j)<=1 && Math.abs(k)==4) //these locations refer to the top/bottom valve blocks
 //                            {
@@ -310,6 +350,10 @@ public class TileLargeQT extends TileMedQT{
 
         isComplete = false;
         isBuilt = false;
+        importValveIndex = 0;
+        importValves = new Location[18];
+        exportValveIndex = 0;
+        exportValves = new Location[18];
         prepareSync();
     }
 

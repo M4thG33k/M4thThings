@@ -21,6 +21,7 @@ public class Configurations {
     public static boolean RENDER_TORI;
     public static boolean ENABLE_ROTATION;
     public static boolean ENABLE_TANK_PARTICLES;
+    public static int MAX_VALVE_PUSH;
 
     //mob configs
     public static boolean SPAWN_CREEPSTERS;
@@ -63,7 +64,7 @@ public class Configurations {
 //        RENDER_TORI = config.get("tanks","renderTori",true,"Setting this to false will turn off the rendering of the tori (donuts) in the large tanks").getBoolean();
         ENABLE_ROTATION = config.get("tanks", "enableRotation", true, "Setting this to false will disable the rotation of the sphere in all tanks and building guide blocks").getBoolean();
         ENABLE_TANK_PARTICLES = config.get("tanks","enableParticles",true,"Setting this to false will disable the fill/drain particle effects of the tanks...and they look really cool.").getBoolean();
-
+        MAX_VALVE_PUSH = config.get("tanks","maximumValvePush",2000,"The maximum number of millibuckets each export valve should attempt to push into adjacent pipes/tanks per tick",0,2000000000).getInt();
 
         //mob configs
         SPAWN_CREEPSTERS = config.get("mobs", "enableCreepsters",true,"Setting this to false will disable Creepsters from spawning in the world. (Note: if any currently exist in the world, they will not be removed.)").getBoolean();
@@ -84,7 +85,7 @@ public class Configurations {
             ALLOWED_CREEPSTER_SOUNDS += 4;
         }
 
-        LogHelper.info("ALLOWED_CREEPSTER_SOUNDS = " + ALLOWED_CREEPSTER_SOUNDS);
+//        LogHelper.info("ALLOWED_CREEPSTER_SOUNDS = " + ALLOWED_CREEPSTER_SOUNDS);
 
         config.save();
     }

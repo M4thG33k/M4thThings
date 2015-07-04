@@ -2,12 +2,18 @@ package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.reference.Configurations;
+import com.M4thG33k.m4ththings.utility.Location;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import java.util.ArrayList;
 
 /**
  * Created by M4thG33k on 7/3/2015.
@@ -17,6 +23,10 @@ public class TileMedQT extends TileQuantumTank{
     protected boolean isComplete;
     protected boolean isBuilt;
     protected boolean controllerRangeError;
+    protected Location[] importValves;
+    protected int importValveIndex;
+    protected Location[] exportValves;
+    protected int exportValveIndex;
 
     public TileMedQT()
     {
@@ -26,6 +36,10 @@ public class TileMedQT extends TileQuantumTank{
         isComplete = false;
         isBuilt = false;
         tankSize = 1;
+        importValves = new Location[2];
+        importValveIndex = 0;
+        exportValves = new Location[2];
+        exportValveIndex = 0;
     }
 
     @Override
@@ -218,7 +232,22 @@ public class TileMedQT extends TileQuantumTank{
                     if (i != 0 || j != 0 || k!=0) {
                         if (world.getBlock(x+i,y+k,z+j)==ModBlocks.blockQTValve)
                         {
-                            world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,1,3);
+                            int meta = world.getBlockMetadata(x+i,y+k,z+j);
+                            switch (meta)
+                            {
+                                case 1:
+                                    world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,2,3);
+                                    importValves[importValveIndex++] = new Location(i,k,j);
+//                                    importValves.add(new Location(i,j,k));
+                                    break;
+                                case 2:
+                                    world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,3,3);
+                                    exportValves[exportValveIndex++] = new Location(i,k,j);
+                                    break;
+                                default:
+                                    world.setBlock(x+i,y+k,z+j,ModBlocks.blockQTComponent,1,3);
+                                    break;
+                            }
                         }
                         else
                         {
@@ -256,6 +285,35 @@ public class TileMedQT extends TileQuantumTank{
         {
             isBuilt = tagCompound.getBoolean("isBuilt");
         }
+
+        if (tagCompound.hasKey("ImportValves"))
+        {
+            NBTTagList tagList = tagCompound.getTagList("ImportValves",10);
+            importValveIndex = 0;
+
+            for (int i=0;i<tagList.tagCount();i++)
+            {
+                NBTTagCompound tag = tagList.getCompoundTagAt(i);
+                Location loc = new Location();
+                loc.readFromNBT(tag);
+                importValves[importValveIndex++] = loc;
+//                importValves.add(loc);
+            }
+        }
+
+        if (tagCompound.hasKey("ExportValves"))
+        {
+            NBTTagList tagList = tagCompound.getTagList("ExportValves",10);
+            exportValveIndex=0;
+
+            for (int i=0;i<tagList.tagCount();i++)
+            {
+                NBTTagCompound tag = tagList.getCompoundTagAt(i);
+                Location loc = new Location();
+                loc.readFromNBT(tag);
+                exportValves[exportValveIndex++] = loc;
+            }
+        }
     }
 
     @Override
@@ -264,13 +322,31 @@ public class TileMedQT extends TileQuantumTank{
 
         tagCompound.setBoolean("isComplete",isComplete);
         tagCompound.setBoolean("isBuilt",isBuilt);
+
+        NBTTagList tagList = new NBTTagList();
+        for (int i=0;i<importValveIndex;i++)
+        {
+            NBTTagCompound tag = new NBTTagCompound();
+            importValves[i].writeToNBT(tag);
+            tagList.appendTag(tag);
+        }
+        tagCompound.setTag("ImportValves",tagList);
+
+        NBTTagList tagList1 = new NBTTagList();
+        for (int i=0;i<exportValveIndex;i++)
+        {
+            NBTTagCompound tag = new NBTTagCompound();
+            exportValves[i].writeToNBT(tag);
+            tagList1.appendTag(tag);
+        }
+        tagCompound.setTag("ExportValves",tagList1);
     }
 
     //breaks the structure, replacing all blocks except for the one whose coordinates are input here
     public void breakStructure(int x, int y, int z)
     {
 
-        int block;
+        int meta;
 
         for (int i=-1;i<2;i++)
         {
@@ -280,20 +356,35 @@ public class TileMedQT extends TileQuantumTank{
                 {
                     if(i!=0 || j!=0 || k!=0)
                     {
-                        block = worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j);
+                        meta = worldObj.getBlockMetadata(xCoord+i,yCoord+k,zCoord+j);
 //                     LogHelper.info("Block: " + block);
                         worldObj.removeTileEntity(xCoord+i,yCoord+k,zCoord+j);
                         worldObj.setBlockToAir(xCoord+i,yCoord+k,zCoord+j);
                         if (xCoord+i!=x || yCoord+k!=y || zCoord+j!=z)
                         {
-                            if (block==0)
+                            switch(meta)
                             {
-                                worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+                                case 1:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve,0,3);
+                                    break;
+                                case 2:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve,1,3);
+                                    break;
+                                case 3:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve,2,3);
+                                    break;
+                                default:
+                                    worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+                                    break;
                             }
-                            else
-                            {
-                                worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve);
-                            }
+//                            if (meta==0)
+//                            {
+//                                worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,Blocks.glass);
+//                            }
+//                            else
+//                            {
+//                                worldObj.setBlock(xCoord+i,yCoord+k,zCoord+j,ModBlocks.blockQTValve);
+//                            }
                         }
                     }
                 }
@@ -347,6 +438,10 @@ public class TileMedQT extends TileQuantumTank{
 //        }
         isComplete = false;
         isBuilt = false;
+        importValves = new Location[2];
+        importValveIndex = 0;
+        exportValves = new Location[2];
+        exportValveIndex = 0;
         prepareSync();
     }
 
@@ -400,5 +495,88 @@ public class TileMedQT extends TileQuantumTank{
     public boolean getControllerRangeError()
     {
         return controllerRangeError;
+    }
+
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        if (isBuilt) {
+            return super.fill(from, resource, doFill);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+        if (isBuilt)
+        {
+            return super.drain(from, resource, doDrain);
+        }
+
+        return null;
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        if (isBuilt)
+        {
+            return super.drain(from, maxDrain, doDrain);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        if (isBuilt) {
+            return super.canFill(from, fluid);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        if (isBuilt)
+        {
+            return super.canDrain(from, fluid);
+        }
+        return false;
+    }
+
+    @Override
+    public int fill(FluidStack resource, boolean doFill) {
+        if (isBuilt)
+        {
+            return super.fill(resource, doFill);
+        }
+        return 0;
+    }
+
+    @Override
+    public FluidStack drain(int maxDrain, boolean doDrain) {
+        if (isBuilt)
+        {
+            return super.drain(maxDrain, doDrain);
+        }
+        return null;
+    }
+
+    public Location[] getImportValves()
+    {
+        return importValves;
+    }
+
+    public int getImportValveIndex()
+    {
+        return importValveIndex;
+    }
+
+    public Location[] getExportValves()
+    {
+        return exportValves;
+    }
+
+    public int getExportValveIndex()
+    {
+        return exportValveIndex;
     }
 }

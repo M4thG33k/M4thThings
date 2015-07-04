@@ -6,6 +6,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import java.util.Arrays;
+
 /**
  * Created by M4thG33k on 6/23/2015.
  */
@@ -72,7 +74,7 @@ public class TileQTComponent extends TileEntity{
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound tagCompound) //todo figure out why parent data isn't being saved...
+    public void writeToNBT(NBTTagCompound tagCompound)
     {
         super.writeToNBT(tagCompound);
 
@@ -147,6 +149,11 @@ public class TileQTComponent extends TileEntity{
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         this.readFromNBT(pkt.func_148857_g());
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
+    public boolean hasSameParent(TileQTComponent component)
+    {
+        return Arrays.equals(this.getParentCoordinates(),component.getParentCoordinates());
     }
 
 }
