@@ -209,4 +209,28 @@ public class BlockQuantumTank extends Block implements ITileEntityProvider {
             tileEntity.readFromNBT(stack.getTagCompound());
         }
     }
+
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        TileEntity tileEntity = world.getTileEntity(x,y,z);
+        if (tileEntity!=null && tileEntity instanceof TileQuantumTank)
+        {
+            int orientation = ((TileQuantumTank)tileEntity).getOrientation();
+            switch (orientation)
+            {
+                case 1:
+                    this.setBlockBounds(0.333f,0.333f,0,0.667f,0.667f,1);
+                    break;
+                case 2:
+                    this.setBlockBounds(0,0.333f,0.333f,1,0.667f,0.667f);
+                    break;
+                default:
+                    this.setBlockBounds(0.333f,0,0.333f,0.667f,1,0.667f);
+                    break;
+            }
+        }
+        else{
+            super.setBlockBoundsBasedOnState(world,x,y,z);
+        }
+    }
 }

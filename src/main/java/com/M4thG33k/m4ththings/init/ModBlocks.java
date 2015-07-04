@@ -1,10 +1,8 @@
 package com.M4thG33k.m4ththings.init;
 
 import com.M4thG33k.m4ththings.blocks.*;
-import com.M4thG33k.m4ththings.items.ItemM4thBlock;
-import com.M4thG33k.m4ththings.items.ItemQTControllerMeta;
-import com.M4thG33k.m4ththings.items.ItemQTValveMeta;
-import com.M4thG33k.m4ththings.items.ItemQuantumTank;
+import com.M4thG33k.m4ththings.items.*;
+import com.M4thG33k.m4ththings.reference.Configurations;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
 
@@ -47,8 +45,10 @@ public class ModBlocks {
         GameRegistry.registerBlock(blockQTComponent,"blockQTComponent");
         GameRegistry.registerBlock(blockM4thBlock, ItemM4thBlock.class,"blockM4thBlock");
 //        GameRegistry.registerBlock(blockEnergyCage, "blockEnergyCage");
-//        GameRegistry.registerBlock(blockSolarCollector,"blockSolarCollector");
+        GameRegistry.registerBlock(blockSolarCollector,"blockSolarCollector");
         GameRegistry.registerBlock(blockTextureDummy,"blockTextureDummy");
-        GameRegistry.registerBlock(blockWaterGenerator,"blockWaterGenerator");
+        if (Configurations.ENABLE_WATER_GEN) {
+            GameRegistry.registerBlock(blockWaterGenerator, ItemWaterGenerator.class, "blockWaterGenerator");
+        }
     }
 }

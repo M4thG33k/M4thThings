@@ -1,10 +1,7 @@
 package com.M4thG33k.m4ththings.init;
 
 import com.M4thG33k.m4ththings.renderers.*;
-import com.M4thG33k.m4ththings.tiles.TileLargeQT;
-import com.M4thG33k.m4ththings.tiles.TileMedQT;
-import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
-import com.M4thG33k.m4ththings.tiles.TileSolarCollector;
+import com.M4thG33k.m4ththings.tiles.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -21,5 +18,6 @@ public class ModRenderers {
         ClientRegistry.bindTileEntitySpecialRenderer(TileLargeQT.class, new LargeQTRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockQuantumTank), new QuantumTankItemRenderer(new QuantumTankRenderer(), new TileQuantumTank()));
         ClientRegistry.bindTileEntitySpecialRenderer(TileSolarCollector.class, new SolarCollectorRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileWaterGenerator.class, new WaterGeneratorRenderer());
     }
 }

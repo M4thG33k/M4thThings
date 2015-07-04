@@ -1,5 +1,6 @@
 package com.M4thG33k.m4ththings.tiles;
 
+import com.M4thG33k.m4ththings.reference.Configurations;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,14 +17,17 @@ import net.minecraftforge.fluids.*;
 public class TileWaterGenerator extends TileEntity implements IFluidHandler {
 
     FluidTank tank = new FluidTank(2000);
+    int timer;
+    private int WATER_GEN = Configurations.WATER_GEN_PER_TICK;
 
     public TileWaterGenerator()
     {
-
+        timer = 0;
     }
 
     @Override
     public void updateEntity() {
+        advanceTimer();
         //first, try to get fluid from below
         if (tank.getFluidAmount()<tank.getCapacity() && worldObj.getBlock(xCoord,yCoord-1,zCoord)==Blocks.water)
         {
@@ -51,7 +55,7 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
 
             if (numSource>=2) //this means we have an infinite water source beneath us
             {
-                this.fill(ForgeDirection.DOWN,new FluidStack(FluidRegistry.getFluid("water"),100),true);
+                this.fill(ForgeDirection.DOWN,new FluidStack(FluidRegistry.getFluid("water"),WATER_GEN),true);
 //                tank.fill(new FluidStack(FluidRegistry.getFluid("water"),10),true);
 //                prepareSync();
             }
@@ -84,6 +88,15 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
             }
         }
 
+    }
+
+    public void advanceTimer()
+    {
+        timer += 1;
+        if (timer>=720)
+        {
+            timer = 0;
+        }
     }
 
     @Override
@@ -139,6 +152,8 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
         super.readFromNBT(tagCompound);
 
         tank.readFromNBT(tagCompound);
+
+        timer = tagCompound.getInteger("timer");
     }
 
     @Override
@@ -146,6 +161,8 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
         super.writeToNBT(tagCompound);
 
         tank.writeToNBT(tagCompound);
+
+        tagCompound.setInteger("timer",timer);
     }
 
     @Override
@@ -235,5 +252,10 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
                 }
             }
         }
+    }
+
+    public int getTimer()
+    {
+        return timer;
     }
 }

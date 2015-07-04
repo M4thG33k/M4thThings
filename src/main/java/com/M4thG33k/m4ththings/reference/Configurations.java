@@ -30,6 +30,10 @@ public class Configurations {
     public static boolean ENABLE_HATDANCE;
     public static int ALLOWED_CREEPSTER_SOUNDS = 0;
 
+    //water generation configs
+    public static int WATER_GEN_PER_TICK;
+    public static boolean ENABLE_WATER_GEN;
+
 
     public static void preInit(FMLPreInitializationEvent event)
     {
@@ -85,7 +89,9 @@ public class Configurations {
             ALLOWED_CREEPSTER_SOUNDS += 4;
         }
 
-//        LogHelper.info("ALLOWED_CREEPSTER_SOUNDS = " + ALLOWED_CREEPSTER_SOUNDS);
+        //water generation configs
+        WATER_GEN_PER_TICK = config.get("Aquam Accio","waterPerTick",50,"The amount in millibuckets the Aquam Accio will produce per tick.",1,2000).getInt();
+        ENABLE_WATER_GEN = config.get("Aquam Accio","enableWaterGen",true,"Setting this to false will remove the Aquem Accio (passive water generation) from the game.").getBoolean();
 
         config.save();
     }
