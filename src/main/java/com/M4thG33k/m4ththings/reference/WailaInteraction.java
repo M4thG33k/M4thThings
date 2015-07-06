@@ -26,6 +26,8 @@ public class WailaInteraction implements IWailaDataProvider {
         registrar.registerBodyProvider(INSTANCE,TileQuantumTank.class);
         registrar.registerNBTProvider(INSTANCE, TileQTComponent.class);
         registrar.registerBodyProvider(INSTANCE, TileSolarCollector.class);
+        registrar.registerBodyProvider(INSTANCE, TileWaterGenerator.class);
+        registrar.registerBodyProvider(INSTANCE, TileSolarGenerator.class);
 
 
         registrar.addConfig("M4thThings","option.m4ththings.showTankStorage");
@@ -109,6 +111,32 @@ public class WailaInteraction implements IWailaDataProvider {
             else
             {
                 currenttip.add("Solar Water: " + tileSolarCollector.getSolar());
+            }
+        }
+
+        //if it is a water generator
+        if (te instanceof TileWaterGenerator && config.getConfig("options.m4ththings.showTankStorage"))
+        {
+            if (((TileWaterGenerator)te).getFluidAmount()==0)
+            {
+                currenttip.add("Water: EMPTY");
+            }
+            else
+            {
+                currenttip.add("Water: " + ((TileWaterGenerator)te).getFluidAmount());
+            }
+        }
+
+        //if it is a solar generator
+        if (te instanceof TileSolarGenerator && config.getConfig("options.m4ththings.showTankStorage"))
+        {
+            if (((TileSolarGenerator)te).getFluidAmount()==0)
+            {
+                currenttip.add("Solar Water: EMPTY");
+            }
+            else
+            {
+                currenttip.add("Solar Water: " + ((TileSolarGenerator)te).getFluidAmount());
             }
         }
 

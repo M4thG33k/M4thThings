@@ -39,7 +39,7 @@ public class FluidSolarWater extends BlockFluidClassic {
 
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        return 15;
+        return 6;
     }
 
     @SideOnly(Side.CLIENT)
@@ -47,7 +47,7 @@ public class FluidSolarWater extends BlockFluidClassic {
     public void registerBlockIcons(IIconRegister reg)
     {
         stillIcon = reg.registerIcon(Reference.MOD_ID + ":" + "solarWater_still");//"solarWaterStill");
-        flowingIcon = reg.registerIcon(Reference.MOD_ID + ":" + "defaultTexture");//"solarWaterFlowing");
+        flowingIcon = reg.registerIcon(Reference.MOD_ID + ":" + "solarWater_flow");//"solarWaterFlowing");
 
         ModFluids.fluidSolarWater.setStillIcon(this.stillIcon);
         ModFluids.fluidSolarWater.setFlowingIcon(this.flowingIcon);

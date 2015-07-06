@@ -27,7 +27,8 @@ public class ModBlocks {
     public static final BlockEnergyCage blockEnergyCage = new BlockEnergyCage(Material.piston);
     public static final BlockSolarCollector blockSolarCollector = new BlockSolarCollector(Material.iron);
     public static final BlockTextureDummy blockTextureDummy = new BlockTextureDummy(Material.rock);
-    public static final BlockWaterGenerator blockWaterGenerator = new BlockWaterGenerator(Material.rock);
+    public static final BlockWaterGenerator blockWaterGenerator = new BlockWaterGenerator(Material.ground);
+    public static final BlockBaseRFGenerator blockBaseRFGenerator = new BlockBaseRFGenerator(Material.iron);
 
     public static void init()
     {
@@ -50,5 +51,6 @@ public class ModBlocks {
         if (Configurations.ENABLE_WATER_GEN) {
             GameRegistry.registerBlock(blockWaterGenerator, ItemWaterGenerator.class, "blockWaterGenerator");
         }
+        GameRegistry.registerBlock(blockBaseRFGenerator, ItemBlockBaseRFGenerator.class, "blockBaseRFGenerator");
     }
 }

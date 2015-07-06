@@ -1,8 +1,8 @@
 package com.M4thG33k.m4ththings.tiles;
 
-import com.M4thG33k.m4ththings.M4thThings;
 import com.M4thG33k.m4ththings.init.ModFluids;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import com.M4thG33k.m4ththings.utility.Location;
+import com.M4thG33k.m4ththings.utility.MiscHelper;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
@@ -19,6 +19,9 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
 
     protected FluidTank waterTank = new FluidTank(8000);
     protected FluidTank solarTank = new FluidTank(8000);
+    protected Location[] locations;
+    protected int numLocations;
+    protected int[] directions;
 
     public TileSolarCollector()
     {
@@ -27,13 +30,40 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
 
     @Override
     public void updateEntity() {
-        super.updateEntity();
 
-        if(worldObj.canBlockSeeTheSky(xCoord,yCoord,zCoord) && (waterTank.getFluidAmount()>0) && (solarTank.getFluidAmount() < solarTank.getCapacity()))
+        if (locations==null || directions==null)
         {
-            waterTank.drain(1,true);
-            solarTank.fill(new FluidStack(ModFluids.fluidSolarWater,1),true);
+            grabLocations();
         }
+
+
+
+        //attempt to transform water into Solar Water
+        if(worldObj.isDaytime() && worldObj.canBlockSeeTheSky(xCoord,yCoord,zCoord) && (waterTank.getFluidAmount()>=5) && (solarTank.getFluidAmount()+5 <= solarTank.getCapacity()))
+        {
+            waterTank.drain(5,true);
+            solarTank.fill(new FluidStack(ModFluids.fluidSolarWater,5),true);
+        }
+
+        //attempt to push solar water into adjacent tanks
+        attemptPush();
+    }
+
+    public void grabLocations()
+    {
+        locations = new Location[5];
+        directions = new int[5];
+        numLocations = 0;
+        directions[numLocations] = 1;
+        locations[numLocations++] = new Location(xCoord,yCoord-1,zCoord);
+        directions[numLocations] = 2;
+        locations[numLocations++] = new Location(xCoord,yCoord,zCoord-1);
+        directions[numLocations] = 3;
+        locations[numLocations++] = new Location(xCoord,yCoord,zCoord+1);
+        directions[numLocations] = 4;
+        locations[numLocations++] = new Location(xCoord-1,yCoord,zCoord);
+        directions[numLocations] = 5;
+        locations[numLocations++] = new Location(xCoord+1,yCoord,zCoord);
     }
 
     @Override
@@ -60,6 +90,7 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
             }
         }
 
+
     }
 
     @Override
@@ -79,6 +110,7 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
         tanks.appendTag(solarTag);
 
         tagCompound.setTag("TankData",tanks);
+
     }
 
     /* IFluidHandler */
@@ -176,5 +208,70 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
     {
         worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
         markDirty();
+    }
+
+    //attempts to push any/all of its Solar Water into an adjacent TE
+    public void attemptPush()
+    {
+        int amount = solarTank.getFluidAmount();
+
+        if (amount==0)
+        {
+            return;
+        }
+
+        TileEntity tileEntity;
+        FluidStack toTransfer = new FluidStack(ModFluids.fluidSolarWater,amount);
+        int transferred;
+        ForgeDirection opp;
+
+        for (int i=0;i<numLocations;i++)
+        {
+            tileEntity = worldObj.getTileEntity(locations[i].getX(),locations[i].getY(),locations[i].getZ());
+            opp = MiscHelper.getOppositeDirectionDirection(directions[i]);
+            if (tileEntity!=null && (tileEntity instanceof IFluidHandler) && (((IFluidHandler)tileEntity).canFill(opp,toTransfer.getFluid())))
+            {
+                transferred = ((IFluidHandler)tileEntity).fill(opp,toTransfer,true);
+                if (transferred>0)
+                {
+                    solarTank.drain(transferred, true);
+                    return;
+                }
+            }
+        }
+
+
+    }
+
+    public boolean canGiveSolarWater()
+    {
+        return (solarTank.getFluidAmount()>=1000);
+    }
+
+    public void removeBucketOfSolarWater()
+    {
+        if (solarTank.getFluidAmount()>=1000)
+        {
+            solarTank.drain(1000,true);
+            prepareSync();
+        }
+    }
+
+    public boolean canReceiveWaterBucket()
+    {
+        return ((waterTank.getCapacity()-waterTank.getFluidAmount())>=1000);
+    }
+
+    public void addBucketOfWater()
+    {
+        waterTank.fill(new FluidStack(FluidRegistry.getFluid("water"),1000),true);
+        prepareSync();
+    }
+
+    public int getLightValue()
+    {
+        int toReturn = (int)(6*getSolarPercentage());
+        prepareSync();
+        return toReturn;
     }
 }

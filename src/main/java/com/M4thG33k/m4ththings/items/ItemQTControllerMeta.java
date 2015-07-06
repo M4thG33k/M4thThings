@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class ItemQTControllerMeta extends ItemBlockWithMetadata {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add("§cNot intended for decoration!§r");
+        list.add(StatCollector.translateToLocal("notSafeForDecoration"));
+//        list.add("§cNot intended for decoration!§r");
     }
 }

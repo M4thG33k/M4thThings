@@ -8,18 +8,22 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * Created by M4thG33k on 7/3/2015.
  */
-public class ItemWaterGenerator extends ItemBlock {
+public class ItemWaterGenerator extends ItemBlockWithMetadata {
 
 
     public ItemWaterGenerator(Block block) {
-        super(block);
+        super(block,block);
     }
 
     @Override
@@ -35,19 +39,32 @@ public class ItemWaterGenerator extends ItemBlock {
 
             if (world.getBlock(i,j,k).getMaterial()== Material.water && world.getBlockMetadata(i,j,k)==0 && world.getBlock(i,j+1,k)==Blocks.air)
             {
-                world.setBlock(i,j+1,k, ModBlocks.blockWaterGenerator);
+//                LogHelper.info("The meta data is: " + itemStack.getItemDamage());
+                world.setBlock(i,j+1,k, ModBlocks.blockWaterGenerator,itemStack.getItemDamage(),3);
                 return true;
             }
         }
 
-//        if (block== Blocks.water)
-//        {
-//            LogHelper.info("It's water!");
-//        }
-//        else
-//        {
-//            LogHelper.info("Not water...");
-//        }
         return false;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return this.getUnlocalizedName() + "_" + stack.getItemDamage();
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+
+        list.add(StatCollector.translateToLocal("aquamAccioBase"));
+
+        if (stack.getItemDamage()==1)
+        {
+            list.add(StatCollector.translateToLocal("magnumAquamAccioText"));
+        }
+        else
+        {
+            list.add(StatCollector.translateToLocal("aquamAccioTest"));
+        }
     }
 }

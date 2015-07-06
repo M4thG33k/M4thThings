@@ -1,13 +1,17 @@
 package com.M4thG33k.m4ththings.blocks;
 
 import com.M4thG33k.m4ththings.creativetabs.CreativeTabM4thThings;
+import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileWaterGenerator;
 import com.M4thG33k.m4ththings.utility.StringHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
@@ -16,6 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by M4thG33k on 7/3/2015.
@@ -25,17 +30,26 @@ public class BlockWaterGenerator extends Block implements ITileEntityProvider {
     public BlockWaterGenerator(Material material)
     {
         super(material);
-        setHardness(1.0f);
+        setHardness(0.5f);
         setResistance(5.0f);
         setBlockName(StringHelper.nameHelper() + "blockWaterGenerator");
-        setBlockTextureName(StringHelper.iconHelper() + "defaultTexture");
+        setBlockTextureName(Reference.MOD_ID + ":" + "solarWater_still");
         setCreativeTab(CreativeTabM4thThings.M4THTHINGS_TAB);
-        setStepSound(Blocks.air.stepSound);
+        setStepSound(Blocks.stone.stepSound);
     }
 
     @Override
-    public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
-        return new TileWaterGenerator();
+    public TileEntity createNewTileEntity(World world, int meta) {
+        TileWaterGenerator tileWaterGenerator = new TileWaterGenerator();
+        if (meta==1)
+        {
+            tileWaterGenerator.setAdvanced(true);
+        }
+        else
+        {
+            tileWaterGenerator.setAdvanced(false);
+        }
+        return tileWaterGenerator;
     }
 
     @Override
@@ -78,4 +92,28 @@ public class BlockWaterGenerator extends Block implements ITileEntityProvider {
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         this.setBlockBounds(0,0,0,1,0.25f,1);
     }
+
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+        return true;
+    }
+
+    @Override
+    public boolean canProvidePower() {
+        return true;
+    }
+
+    @Override
+    public int damageDropped(int meta) {
+        return meta;
+    }
+
+    @Override
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List list) {
+        for (int i=0;i<2;i++)
+        {
+            list.add(new ItemStack(item,1,i));
+        }
+    }
+
 }

@@ -27,5 +27,6 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileQTComponentValveImport.class,"tileQTComponentValveImport");
         GameRegistry.registerTileEntity(TileQTComponentValveExport.class,"tileQTComponentValveExport");
         GameRegistry.registerTileEntity(TileWaterGenerator.class,"tileWaterGenerator");
+        GameRegistry.registerTileEntity(TileSolarGenerator.class,"tileSolarGenerator");
     }
 }

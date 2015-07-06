@@ -33,6 +33,7 @@ public class Configurations {
     //water generation configs
     public static int WATER_GEN_PER_TICK;
     public static boolean ENABLE_WATER_GEN;
+    public static boolean ENABLE_WATER_GEN_PARTICLES;
 
 
     public static void preInit(FMLPreInitializationEvent event)
@@ -90,8 +91,9 @@ public class Configurations {
         }
 
         //water generation configs
-        WATER_GEN_PER_TICK = config.get("Aquam Accio","waterPerTick",50,"The amount in millibuckets the Aquam Accio will produce per tick.",1,2000).getInt();
-        ENABLE_WATER_GEN = config.get("Aquam Accio","enableWaterGen",true,"Setting this to false will remove the Aquem Accio (passive water generation) from the game.").getBoolean();
+        WATER_GEN_PER_TICK = config.get("Aquam Accio","waterPerTick",25,"The amount in millibuckets the Aquam Accio will produce per tick.",1,2000).getInt();
+        ENABLE_WATER_GEN = config.get("Aquam Accio","enableWaterGen",true,"Setting this to false will remove the Aquam Accio (passive water generation) from the game.").getBoolean();
+        ENABLE_WATER_GEN_PARTICLES = config.get("Aquam Accio","enableParticles",true,"Settings this to false will remove all particle effects from the Aquam Accio. (This may make it difficult to see how they are behaving.)").getBoolean();
 
         config.save();
     }

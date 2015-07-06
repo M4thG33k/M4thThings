@@ -2,6 +2,7 @@ package com.M4thG33k.m4ththings.renderers;
 
 import com.M4thG33k.m4ththings.init.ModBlocks;
 import com.M4thG33k.m4ththings.init.ModFluids;
+import com.M4thG33k.m4ththings.reference.Reference;
 import com.M4thG33k.m4ththings.tiles.TileSolarCollector;
 import com.M4thG33k.m4ththings.utility.LogHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -22,15 +23,27 @@ import org.lwjgl.opengl.GL11;
 public class SolarCollectorRenderer extends TileEntitySpecialRenderer{
 
     private IModelCustom model;
+    private IModelCustom glassPanesModel;
+    private IModelCustom modelBase;
+    private IModelCustom tankModel;
     private ResourceLocation modelTexture;
     private ResourceLocation textureMap;
+    private ResourceLocation glassPaneTexture;
+    private ResourceLocation baseTexture;
+    private ResourceLocation tankTexture;
 
 
     public SolarCollectorRenderer()
     {
         model = AdvancedModelLoader.loadModel(new ResourceLocation("m4ththings","models/solarCollection.obj"));
+        glassPanesModel = AdvancedModelLoader.loadModel(new ResourceLocation(Reference.MOD_ID,"models/solarCollectionGlassPanes.obj"));
+        modelBase = AdvancedModelLoader.loadModel(new ResourceLocation(Reference.MOD_ID,"models/solarCollectionBase.obj"));
+        tankModel =  AdvancedModelLoader.loadModel(new ResourceLocation(Reference.MOD_ID,"models/solarCollectionTanks.obj"));
         modelTexture = new ResourceLocation("m4ththings","models/defaultTexture.png");
         textureMap = TextureMap.locationBlocksTexture;
+        glassPaneTexture = new ResourceLocation(Reference.MOD_ID,"textures/blocks/glassTest.png");
+        baseTexture = new ResourceLocation("m4ththings","models/solarCollectionBase.png");
+        tankTexture = new ResourceLocation("m4ththings","models/solarCollectionTanks.png");
     }
 
     @Override
@@ -41,12 +54,28 @@ public class SolarCollectorRenderer extends TileEntitySpecialRenderer{
         double waterPercentage = tile.getWaterPercentage();
         double solarPercentage = tile.getSolarPercentage();
 
-        //render main model
+//        //render main model
+//        GL11.glPushMatrix();
+//        GL11.glTranslated(x+0.5,y+0.5,z+0.5);
+//        bindTexture(modelTexture);
+//        model.renderAll();
+//        GL11.glPopMatrix();
+
+        //render the tanks
         GL11.glPushMatrix();
         GL11.glTranslated(x+0.5,y+0.5,z+0.5);
-        bindTexture(modelTexture);
-        model.renderAll();
+        bindTexture(tankTexture);
+        tankModel.renderAll();
         GL11.glPopMatrix();
+
+        //render the base
+        GL11.glPushMatrix();
+        GL11.glTranslated(x+0.5,y+0.5,z+0.5);
+        bindTexture(baseTexture);
+        modelBase.renderAll();
+        GL11.glPopMatrix();
+
+
 
         //render fluid panels if there is any water
         if (waterPercentage>0) {
@@ -54,6 +83,15 @@ public class SolarCollectorRenderer extends TileEntitySpecialRenderer{
             renderFluidMeters(x + 0.5, y + 0.5, z + 0.5, waterPercentage, Blocks.water.getIcon(0, 0));
 //        renderSingleFluidMeter(x + 0.5, y + 0.5, z + 0.5, .3, Blocks.water.getIcon(0, 0));
         }
+
+        //render glass covers for the cylinder tanks
+        GL11.glPushMatrix();
+        GL11.glTranslated(x+0.5,y+0.5,z+0.5);
+        GL11.glEnable(GL11.GL_BLEND);
+        bindTexture(glassPaneTexture);
+        glassPanesModel.renderAll();
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glPopMatrix();
 
         //render solar water
         if (solarPercentage>0) {

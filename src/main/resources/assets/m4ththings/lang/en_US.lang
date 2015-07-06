@@ -22,11 +22,18 @@ tile.m4ththings_blockQTComponent_3.name=Quantum Tank Export Valve
 tile.m4ththings_blockQuantumTank.name=Quantum Tank
 tile.m4ththings_blockM4thBlock_0.name=Gold Plated Iron Block
 tile.m4ththings_fluidSolarWater.name=§cSolar Water (WIP)§r
-tile.m4ththings_blockSolarCollector.name=§cSolar Collector (WIP)§r
-tile.m4ththings_blockWaterGenerator.name=§cAquam Accio (WIP)§r
+tile.m4ththings_blockSolarCollector.name=Solar Collector
+tile.m4ththings_blockWaterGenerator_0.name=Aquam Accio
+tile.m4ththings_blockWaterGenerator_1.name=§9Magnum Aquam Accio§r
 
 entity.BoomerHAHA.name=Creepster
 
 itemGroup.m4ththings=M4th Things
 
 fluid.solarwater=Solar Water
+
+notSafeForDecoration=§cNot intended for decoration!§r
+valveFlavorText=Can be used in place of Quantum Tank Valves in large structures.
+aquamAccioBase=Place on an infinite water source.
+magnumAquamAccioText=Able to supply water to tanks in a 5x3x5 area.
+aquamAccioTest=Able to supply water to adjacent tanks.
