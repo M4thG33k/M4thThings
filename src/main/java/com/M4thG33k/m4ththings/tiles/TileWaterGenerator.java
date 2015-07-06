@@ -1,9 +1,13 @@
 package com.M4thG33k.m4ththings.tiles;
 
+import com.M4thG33k.m4ththings.interfaces.IM4thNBTSync;
+import com.M4thG33k.m4ththings.packets.ModPackets;
+import com.M4thG33k.m4ththings.packets.PacketNBT;
 import com.M4thG33k.m4ththings.particles.ParticleFluidOrb;
 import com.M4thG33k.m4ththings.particles.ParticleFluidOrbArc;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.utility.*;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
@@ -21,7 +25,7 @@ import net.minecraftforge.fluids.*;
 /**
  * Created by M4thG33k on 7/3/2015.
  */
-public class TileWaterGenerator extends TileEntity implements IFluidHandler {
+public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4thNBTSync {
 
     FluidTank tank = new FluidTank(2000);
     int timer;
@@ -69,7 +73,7 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
             grabLocations();
         }
 
-        if (worldObj.isBlockIndirectlyGettingPowered(xCoord,yCoord,zCoord) || worldObj.getBlockPowerInput(xCoord,yCoord,zCoord)>0) //if the block is getting a redstone signal, it doesn't fill itself or any other tanks (also freezes the tile's timer)
+        if (worldObj.isBlockIndirectlyGettingPowered(xCoord,yCoord,zCoord) || worldObj.getBlockPowerInput(xCoord,yCoord,zCoord)>0 || worldObj.getStrongestIndirectPower(xCoord,yCoord,zCoord)>0) //if the block is getting a redstone signal, it doesn't fill itself or any other tanks (also freezes the tile's timer)
         {
             return;
         }
@@ -283,6 +287,7 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
 
         if (locations!=null)
         {
+
             NBTTagList tagList = new NBTTagList();
 
             for (int i=0;i<numLocations;i++)
@@ -315,8 +320,14 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
 
     public void prepareSync()
     {
-        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
-        markDirty();
+        if (!worldObj.isRemote)
+        {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            this.writeToNBT(tagCompound);
+            ModPackets.INSTANCE.sendToAllAround(new PacketNBT(xCoord,yCoord,zCoord,tagCompound),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+        }
+//        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+//        markDirty();
     }
 
     //attempt to fill an IFluidHandler with one bucket of water. returns true if successful (Will not fill if the target cannot accept at least 500mb)
@@ -504,5 +515,10 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler {
     {
         isAdvanced = value;
         locations = null;
+    }
+
+    @Override
+    public void receiveNBTPacket(NBTTagCompound tagCompound) {
+        this.readFromNBT(tagCompound);
     }
 }

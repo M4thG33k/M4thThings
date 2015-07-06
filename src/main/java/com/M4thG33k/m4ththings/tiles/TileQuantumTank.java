@@ -1,7 +1,9 @@
 package com.M4thG33k.m4ththings.tiles;
 
+import com.M4thG33k.m4ththings.interfaces.IM4thNBTSync;
 import com.M4thG33k.m4ththings.packets.ModPackets;
 import com.M4thG33k.m4ththings.packets.PacketFilling;
+import com.M4thG33k.m4ththings.packets.PacketNBT;
 import com.M4thG33k.m4ththings.particles.ParticleFluidOrb;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.utility.LogHelper;
@@ -22,7 +24,7 @@ import net.minecraftforge.fluids.*;
 /**
  * Created by M4thG33k on 7/3/2015.
  */
-public class TileQuantumTank extends TileFluidHandler {
+public class TileQuantumTank extends TileFluidHandler implements IM4thNBTSync{
     protected int timer;
     protected int cap;
     protected int orientation;
@@ -86,8 +88,14 @@ public class TileQuantumTank extends TileFluidHandler {
 
     public void prepareSync()
     {
-        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
-        markDirty();
+        if (!worldObj.isRemote)
+        {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            this.writeToNBT(tagCompound);
+            ModPackets.INSTANCE.sendToAllAround(new PacketNBT(xCoord,yCoord,zCoord,tagCompound),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+        }
+//        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+//        markDirty();
     }
 
     /* begin IFluidHandler */
@@ -562,5 +570,10 @@ public class TileQuantumTank extends TileFluidHandler {
     public void writeFluidDataToNBT(NBTTagCompound tagCompound)
     {
         tank.writeToNBT(tagCompound);
+    }
+
+    @Override
+    public void receiveNBTPacket(NBTTagCompound tagCompound) {
+        this.readFromNBT(tagCompound);
     }
 }

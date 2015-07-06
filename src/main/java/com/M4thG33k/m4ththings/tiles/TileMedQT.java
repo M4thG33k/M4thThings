@@ -447,16 +447,16 @@ public class TileMedQT extends TileQuantumTank{
 
     public int getLightValue()
     {
-        for (int i=-1;i<=1;i++)
-        {
-            for (int j=-1;j<=1;j++)
-            {
-                for (int k=-1;k<=1;k++)
-                {
-                    this.worldObj.markBlockForUpdate(xCoord+i,yCoord+k,zCoord+j);
-                }
-            }
-        }
+//        for (int i=-1;i<=1;i++)
+//        {
+//            for (int j=-1;j<=1;j++)
+//            {
+//                for (int k=-1;k<=1;k++)
+//                {
+//                    this.worldObj.markBlockForUpdate(xCoord+i,yCoord+k,zCoord+j);
+//                }
+//            }
+//        }
         if (tank.getFluidAmount()==0)
         {
             return 0;

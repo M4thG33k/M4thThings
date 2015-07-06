@@ -1,8 +1,12 @@
 package com.M4thG33k.m4ththings.tiles;
 
 import com.M4thG33k.m4ththings.init.ModFluids;
+import com.M4thG33k.m4ththings.interfaces.IM4thNBTSync;
+import com.M4thG33k.m4ththings.packets.ModPackets;
+import com.M4thG33k.m4ththings.packets.PacketNBT;
 import com.M4thG33k.m4ththings.utility.Location;
 import com.M4thG33k.m4ththings.utility.MiscHelper;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
@@ -15,7 +19,7 @@ import net.minecraftforge.fluids.*;
 /**
  * Created by M4thG33k on 6/30/2015.
  */
-public class TileSolarCollector extends TileEntity implements IFluidHandler{
+public class TileSolarCollector extends TileEntity implements IFluidHandler, IM4thNBTSync{
 
     protected FluidTank waterTank = new FluidTank(8000);
     protected FluidTank solarTank = new FluidTank(8000);
@@ -206,8 +210,14 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
 
     public void prepareSync()
     {
-        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
-        markDirty();
+        if (!worldObj.isRemote)
+        {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            this.writeToNBT(tagCompound);
+            ModPackets.INSTANCE.sendToAllAround(new PacketNBT(xCoord,yCoord,zCoord,tagCompound),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+        }
+//        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+//        markDirty();
     }
 
     //attempts to push any/all of its Solar Water into an adjacent TE
@@ -273,5 +283,10 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler{
         int toReturn = (int)(6*getSolarPercentage());
         prepareSync();
         return toReturn;
+    }
+
+    @Override
+    public void receiveNBTPacket(NBTTagCompound tagCompound) {
+        this.readFromNBT(tagCompound);
     }
 }

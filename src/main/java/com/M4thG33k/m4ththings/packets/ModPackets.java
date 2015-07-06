@@ -16,5 +16,6 @@ public class ModPackets {
     public static void init()
     {
         INSTANCE.registerMessage(PacketFillingHandler.class,PacketFilling.class,0, Side.CLIENT);
+        INSTANCE.registerMessage(PacketNBTHandler.class,PacketNBT.class,1,Side.CLIENT);
     }
 }

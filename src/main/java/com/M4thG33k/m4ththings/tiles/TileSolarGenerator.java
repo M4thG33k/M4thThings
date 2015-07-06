@@ -4,8 +4,13 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import com.M4thG33k.m4ththings.init.ModFluids;
+import com.M4thG33k.m4ththings.interfaces.IM4thNBTSync;
+import com.M4thG33k.m4ththings.packets.ModPackets;
+import com.M4thG33k.m4ththings.packets.PacketNBT;
 import com.M4thG33k.m4ththings.utility.Location;
+import com.M4thG33k.m4ththings.utility.LogHelper;
 import com.M4thG33k.m4ththings.utility.MiscHelper;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -17,7 +22,7 @@ import net.minecraftforge.fluids.*;
 /**
  * Created by M4thG33k on 7/6/2015.
  */
-public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEnergyProvider {
+public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEnergyProvider, IM4thNBTSync {
 
     protected EnergyStorage battery;
     protected FluidTank tank;
@@ -116,8 +121,14 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
 
     public void prepareSync()
     {
-        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
-        markDirty();
+        if (!worldObj.isRemote)
+        {
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            this.writeToNBT(tagCompound);
+            ModPackets.INSTANCE.sendToAllAround(new PacketNBT(xCoord,yCoord,zCoord,tagCompound),new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,xCoord,yCoord,zCoord,32));
+        }
+//        worldObj.markBlockForUpdate(xCoord,yCoord,zCoord);
+//        markDirty();
     }
 
     @Override
@@ -249,7 +260,7 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
 
             if (tileEntity!=null && tileEntity instanceof IEnergyReceiver)
             {
-                transferred = ((IEnergyReceiver)tileEntity).receiveEnergy(MiscHelper.getOppositeDirectionDirection(directions[i]),Math.min(battery.getMaxExtract(),battery.getEnergyStored()),true);
+                transferred = ((IEnergyReceiver)tileEntity).receiveEnergy(MiscHelper.getOppositeDirectionDirection(directions[i]),Math.min(battery.getMaxExtract(),battery.getEnergyStored()),false);
 
                 if (transferred>0)
                 {
@@ -259,5 +270,11 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
             }
 
         }
+    }
+
+    @Override
+    public void receiveNBTPacket(NBTTagCompound tagCompound)
+    {
+        this.readFromNBT(tagCompound);
     }
 }
