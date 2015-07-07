@@ -21,5 +21,7 @@ public class ModRenderers {
         ClientRegistry.bindTileEntitySpecialRenderer(TileWaterGenerator.class, new WaterGeneratorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockWaterGenerator),new WaterGeneratorItemRenderer(new WaterGeneratorRenderer(),new TileWaterGenerator()));
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockSolarCollector),new SolarCollectorItemRenderer(new SolarCollectorRenderer(),new TileSolarCollector()));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileSolarGenerator.class, new SolarGeneratorRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.blockBaseRFGenerator),new SolarGeneratorItemRenderer(new SolarGeneratorRenderer(),new TileSolarGenerator()));
     }
 }

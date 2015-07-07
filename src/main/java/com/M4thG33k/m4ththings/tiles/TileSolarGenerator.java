@@ -31,11 +31,14 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
     protected Location[] locations;
     protected int[] directions;
 
+    protected int timer;
+
     public TileSolarGenerator()
     {
         battery = new EnergyStorage(30000,0,120);
         tank = new FluidTank(4000);
         generationTimer = 0;
+        timer = 0;
     }
 
     /* IEnergyProvider */
@@ -153,6 +156,15 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
         {
             directions = tagCompound.getIntArray("EnergyDirections");
         }
+
+        if (tagCompound.hasKey("Timer"))
+        {
+            timer = tagCompound.getInteger("Timer");
+        }
+        else
+        {
+            timer = 0;
+        }
     }
 
     @Override
@@ -170,6 +182,8 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
         {
             tagCompound.setIntArray("EnergyDirections",directions);
         }
+
+        tagCompound.setInteger("Timer",timer);
     }
 
     public int getFluidAmount()
@@ -214,6 +228,11 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
 
         battery.modifyEnergyStored(30);
         generationTimer--;
+        timer++;
+        if (timer>=720)
+        {
+            timer = 0;
+        }
     }
 
     public boolean canIMakeRF()
@@ -276,5 +295,30 @@ public class TileSolarGenerator extends TileEntity implements IFluidHandler,IEne
     public void receiveNBTPacket(NBTTagCompound tagCompound)
     {
         this.readFromNBT(tagCompound);
+    }
+
+    public double getFluidPercentage()
+    {
+        return ((double)tank.getFluidAmount())/((double)tank.getCapacity());
+    }
+
+    public double getEnergyPercentage()
+    {
+        return ((double)battery.getEnergyStored())/((double)battery.getMaxEnergyStored());
+    }
+
+    public int getTimer()
+    {
+        return timer;
+    }
+
+    public boolean canReceiveBucket()
+    {
+        return (tank.getFluidAmount()+1000<=tank.getCapacity());
+    }
+
+    public void addBucket()
+    {
+        tank.fill(new FluidStack(ModFluids.fluidSolarWater,1000),true);
     }
 }

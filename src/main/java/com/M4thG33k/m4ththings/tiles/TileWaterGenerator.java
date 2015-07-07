@@ -73,6 +73,11 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4
             grabLocations();
         }
 
+//        LogHelper.info("is indirectly powered: " + worldObj.isBlockIndirectlyGettingPowered(xCoord,yCoord,zCoord));
+//        LogHelper.info("power input: " + worldObj.getBlockPowerInput(xCoord,yCoord,zCoord));
+//        LogHelper.info("strongest indirect powered: " + worldObj.getStrongestIndirectPower(xCoord,yCoord,zCoord));
+
+
         if (worldObj.isBlockIndirectlyGettingPowered(xCoord,yCoord,zCoord) || worldObj.getBlockPowerInput(xCoord,yCoord,zCoord)>0 || worldObj.getStrongestIndirectPower(xCoord,yCoord,zCoord)>0) //if the block is getting a redstone signal, it doesn't fill itself or any other tanks (also freezes the tile's timer)
         {
             return;

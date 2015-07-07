@@ -116,4 +116,13 @@ public class BlockWaterGenerator extends Block implements ITileEntityProvider {
         }
     }
 
+    @Override
+    public boolean shouldCheckWeakPower(IBlockAccess world, int x, int y, int z, int side) {
+        return true;
+    }
+
+    @Override
+    public boolean getWeakChanges(IBlockAccess world, int x, int y, int z) {
+        return true;
+    }
 }

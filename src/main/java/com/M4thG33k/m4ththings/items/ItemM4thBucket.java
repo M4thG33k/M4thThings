@@ -21,7 +21,7 @@ public class ItemM4thBucket extends ItemBucket {
 
     @Override
     public void registerIcons(IIconRegister reg) {
-        icon = reg.registerIcon(Reference.MOD_ID + ":" + "bucketSolarWater");
+        icon = reg.registerIcon(Reference.MOD_ID + ":" + "bucket_solarWater");
     }
 
     @Override

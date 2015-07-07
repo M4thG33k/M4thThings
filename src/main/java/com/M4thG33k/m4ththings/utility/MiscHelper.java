@@ -10,6 +10,53 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class MiscHelper {
 
+    public static IIcon icon64 = new IIcon() {
+        @Override
+        public int getIconWidth() {
+            return 64;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return 64;
+        }
+
+        @Override
+        public float getMinU() {
+            return 0;
+        }
+
+        @Override
+        public float getMaxU() {
+            return 1.0f;
+        }
+
+        @Override
+        public float getInterpolatedU(double input) {
+            return (float)(input/64.0);
+        }
+
+        @Override
+        public float getMinV() {
+            return 0;
+        }
+
+        @Override
+        public float getMaxV() {
+            return 1.0f;
+        }
+
+        @Override
+        public float getInterpolatedV(double input) {
+            return (float)(input/64.0);
+        }
+
+        @Override
+        public String getIconName() {
+            return "icon64";
+        }
+    };
+
     public static IIcon icon16 = new IIcon() {
         @Override
         public int getIconWidth() {
