@@ -1,4 +1,4 @@
-package com.M4thG33k.m4ththings.items;
+package com.M4thG33k.m4ththings.items.tankComponents;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

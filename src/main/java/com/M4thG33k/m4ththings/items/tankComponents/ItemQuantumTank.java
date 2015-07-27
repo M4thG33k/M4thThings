@@ -1,4 +1,4 @@
-package com.M4thG33k.m4ththings.items;
+package com.M4thG33k.m4ththings.items.tankComponents;
 
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.tiles.TileQuantumTank;

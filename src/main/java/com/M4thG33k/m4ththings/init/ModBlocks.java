@@ -1,7 +1,11 @@
 package com.M4thG33k.m4ththings.init;
 
 import com.M4thG33k.m4ththings.blocks.*;
+import com.M4thG33k.m4ththings.blocks.dyeSeeds.BlockDyeCrop;
 import com.M4thG33k.m4ththings.items.*;
+import com.M4thG33k.m4ththings.items.tankComponents.ItemQTControllerMeta;
+import com.M4thG33k.m4ththings.items.tankComponents.ItemQTValveMeta;
+import com.M4thG33k.m4ththings.items.tankComponents.ItemQuantumTank;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.material.Material;
@@ -29,6 +33,11 @@ public class ModBlocks {
     public static final BlockTextureDummy blockTextureDummy = new BlockTextureDummy(Material.rock);
     public static final BlockWaterGenerator blockWaterGenerator = new BlockWaterGenerator(Material.ground);
     public static final BlockBaseRFGenerator blockBaseRFGenerator = new BlockBaseRFGenerator(Material.iron);
+    public static final BlockTEST blockTEST = new BlockTEST(Material.ground);
+
+    //0.1.1
+    public static final BlockFluidTransferPipe blockFluidTransferPipe = new BlockFluidTransferPipe(Material.rock);
+    public static final BlockDyeCrop blockDyeCrop = new BlockDyeCrop();
 
     public static void init()
     {
@@ -52,5 +61,10 @@ public class ModBlocks {
             GameRegistry.registerBlock(blockWaterGenerator, ItemWaterGenerator.class, "blockWaterGenerator");
         }
         GameRegistry.registerBlock(blockBaseRFGenerator, ItemBlockBaseRFGenerator.class, "blockBaseRFGenerator");
+        //GameRegistry.registerBlock(blockTEST, "blockTEST");
+
+        //0.1.1
+        //GameRegistry.registerBlock(blockFluidTransferPipe, "blockFluidTransferPipe");
+        GameRegistry.registerBlock(blockDyeCrop,"dyeCrop");
     }
 }

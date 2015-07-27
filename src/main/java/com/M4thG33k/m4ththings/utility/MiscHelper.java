@@ -2,7 +2,9 @@ package com.M4thG33k.m4ththings.utility;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -288,6 +290,11 @@ public class MiscHelper {
         return directions;
     }
 
+    public static int getDirectionBlacklistValue(ForgeDirection direction)
+    {
+        return (int)(Math.pow(2.0,getDirectionInteger(direction)));
+    }
+
     public static void writeLocationArrayToNBT(String tagName,Location[] locations,NBTTagCompound tagCompound)
     {
         if (locations!=null)
@@ -324,4 +331,53 @@ public class MiscHelper {
         }
         return null;
     }
+
+    public static TileEntity getTileInDirection(World world, int x, int y, int z, int direcOrd)
+    {
+        switch (direcOrd)
+        {
+            case 1: //up
+                return world.getTileEntity(x,y+1,z);
+            case 2: //north
+                return world.getTileEntity(x,y,z-1);
+            case 3: //south
+                return world.getTileEntity(x,y,z+1);
+            case 4: //west
+                return world.getTileEntity(x-1,y,z);
+            case 5: //east
+                return world.getTileEntity(x+1,y,z);
+            default : //down
+                return world.getTileEntity(x,y-1,z);
+        }
+    }
+
+    public static TileEntity getTileInDirection(World world, int x, int y, int z, ForgeDirection direction)
+    {
+        return world.getTileEntity(x+direction.offsetX,y+direction.offsetY,z+direction.offsetZ);
+    }
+
+    public static int[] convertToIntegerArray(boolean[] array)
+    {
+        int[] toReturn = new int[array.length];
+
+        for (int i=0;i<array.length;i++)
+        {
+            toReturn[i] = (array[i]?1:0);
+        }
+
+        return toReturn;
+    }
+
+    public static boolean[] convertToBooleanArray(int[] array)
+    {
+        boolean[] toReturn = new boolean[array.length];
+
+        for (int i=0;i<array.length;i++)
+        {
+            toReturn[i] = array[i]==1;
+        }
+
+        return toReturn;
+    }
+
 }

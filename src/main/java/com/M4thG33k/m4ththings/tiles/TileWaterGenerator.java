@@ -439,7 +439,7 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4
 
     public void fillParticles()
     {
-        if (!PARTICLES_ALLOWED)
+        if (!PARTICLES_ALLOWED || !(worldObj.isRemote))
         {
             return;
         }
@@ -474,7 +474,7 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4
 
     public void transferParticles(double x,double y, double z,int transferred)
     {
-        if (!PARTICLES_ALLOWED)
+        if (!PARTICLES_ALLOWED || !(worldObj.isRemote))
         {
             return;
         }

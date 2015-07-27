@@ -37,6 +37,7 @@ public class BlockQuantumTank extends Block implements ITileEntityProvider {
         setStepSound(Blocks.glass.stepSound);
         setBlockName(Reference.MOD_ID + "_" + "blockQuantumTank");
         setCreativeTab(CreativeTabM4thThings.M4THTHINGS_TAB);
+        setHarvestLevel("pickaxe",2);
     }
 
     @Override

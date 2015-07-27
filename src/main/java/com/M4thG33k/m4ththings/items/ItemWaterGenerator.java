@@ -41,6 +41,7 @@ public class ItemWaterGenerator extends ItemBlockWithMetadata {
             {
 //                LogHelper.info("The meta data is: " + itemStack.getItemDamage());
                 world.setBlock(i,j+1,k, ModBlocks.blockWaterGenerator,itemStack.getItemDamage(),3);
+                --itemStack.stackSize;
                 return true;
             }
         }

@@ -310,6 +310,10 @@ public class TileQuantumTank extends TileFluidHandler implements IM4thNBTSync{
 
     public void fillParticles(int direction, int isFilling,Fluid fluid,int amount,int tankSize)
     {
+        if (!worldObj.isRemote)
+        {
+            return; //attempt to avoid spawning particles on the server
+        }
 
         EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
 

@@ -43,7 +43,7 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler, IM4
 
 
         //attempt to transform water into Solar Water
-        if(worldObj.isDaytime() && worldObj.canBlockSeeTheSky(xCoord,yCoord,zCoord) && (waterTank.getFluidAmount()>=5) && (solarTank.getFluidAmount()+5 <= solarTank.getCapacity()))
+        if(worldObj.isDaytime() && !(worldObj.isRaining()) && worldObj.canBlockSeeTheSky(xCoord,yCoord,zCoord) && (waterTank.getFluidAmount()>=5) && (solarTank.getFluidAmount()+5 <= solarTank.getCapacity()))
         {
             waterTank.drain(5,true);
             solarTank.fill(new FluidStack(ModFluids.fluidSolarWater,5),true);
@@ -128,12 +128,7 @@ public class TileSolarCollector extends TileEntity implements IFluidHandler, IM4
         else
         {
             prepareSync();
-            int toReturn = waterTank.fill(resource,doFill);
-            if (toReturn>0)
-            {
-                worldObj.spawnParticle("happyVillager",xCoord+1.5,yCoord+1.5+0.0,zCoord+1.5,0.0,0.0,0.0);
-            }
-            return toReturn;
+            return waterTank.fill(resource,doFill);
         }
     }
 

@@ -34,4 +34,50 @@ public class MathHelper {
     {
         return Math.sqrt((x-r)*(x-r)+(y-s)*(y-s)+(z-t)*(z-t));
     }
+
+    public static int getMax(int[] array)
+    {
+        int max = 0;
+        for (int value : array)
+        {
+            if (value > max)
+            {
+                max = value;
+            }
+        }
+
+        return max;
+    }
+
+    public static int getMinIgnoreZero(int[] array)
+    {
+        int min = 0;
+        for (int value : array)
+        {
+            if (value!=0)
+            {
+                if (min==0)
+                {
+                    min = value;
+                }
+                else if (value<min)
+                {
+                    min = value;
+                }
+            }
+        }
+
+        return min;
+    }
+
+    public static int sum(int[] array)
+    {
+        int total = 0;
+        for (int value : array)
+        {
+            total += value;
+        }
+
+        return total;
+    }
 }

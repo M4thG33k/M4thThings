@@ -80,7 +80,7 @@ public class ParticleFluidOrb extends EntityFX {
     @Override
     public void renderParticle(Tessellator tess, float partialTicks, float x, float y, float z, float u, float v)
     {
-        tess.draw();
+//        tess.draw();
 
 
         double umin = icon.getMinU();
@@ -106,14 +106,14 @@ public class ParticleFluidOrb extends EntityFX {
         tess.draw();
         GL11.glPopMatrix();
 
-        tess.startDrawingQuads();
+//        tess.startDrawingQuads();
 
     }
 
 
     @Override
     public int getFXLayer() {
-        return 0;
+        return 3;
     }
 
     @Override
