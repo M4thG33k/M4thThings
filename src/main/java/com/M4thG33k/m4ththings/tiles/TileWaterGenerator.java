@@ -5,6 +5,7 @@ import com.M4thG33k.m4ththings.packets.ModPackets;
 import com.M4thG33k.m4ththings.packets.PacketNBT;
 import com.M4thG33k.m4ththings.particles.ParticleFluidOrb;
 import com.M4thG33k.m4ththings.particles.ParticleFluidOrbArc;
+import com.M4thG33k.m4ththings.particles.ParticleManager;
 import com.M4thG33k.m4ththings.reference.Configurations;
 import com.M4thG33k.m4ththings.utility.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -119,7 +120,8 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4
                 this.fill(ForgeDirection.DOWN,new FluidStack(FluidRegistry.getFluid("water"),WATER_GEN),true);
                 if (worldObj.isRemote)
                 {
-                    fillParticles();
+                    ParticleManager.AAFillParticles(worldObj,xCoord,yCoord,zCoord);
+                    //fillParticles();
                 }
 //                tank.fill(new FluidStack(FluidRegistry.getFluid("water"),10),true);
 //                prepareSync();
@@ -362,7 +364,9 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4
 
                         if (worldObj.isRemote)
                         {
-                            transferParticles(x,y,z,transferred);
+                            ParticleManager.AATransferParticles(worldObj,xCoord,yCoord,zCoord,x,y,z,transferred);
+                            ParticleManager.AATransferParticles(worldObj,xCoord,yCoord,zCoord,x,y,z,transferred);
+                            //transferParticles(x,y,z,transferred);
                         }
                         return true;
                     }
@@ -437,69 +441,69 @@ public class TileWaterGenerator extends TileEntity implements IFluidHandler, IM4
         return timer;
     }
 
-    public void fillParticles()
-    {
-        if (!PARTICLES_ALLOWED || !(worldObj.isRemote))
-        {
-            return;
-        }
-        EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
-
-        double theta;
-        double radius;
-        double baseSpeed = 0.01;
-        double random;
-        double baseLife = 25;
-        EntityFX fluidOrb;
-        double d1;
-        double d2;
-
-        for (int i=0;i<=((int)((double)WATER_GEN/5.0));i++)
-        {
-            theta = MathHelper.randomRad();
-            radius = MathHelper.randomDoubleBetween(0.05,0.45);
-            random = MathHelper.randomDoubleBetween(0.75,1.0);
-            d1 = radius*Math.sin(theta);
-            d2 = radius*Math.cos(theta);
-
-            fluidOrb = new ParticleFluidOrb(worldObj,xCoord+0.5+d1,yCoord,zCoord+0.5+d2,-d1*random/baseLife,baseSpeed*random,-d2*random/baseLife,waterFluid,0,((int)(baseLife/random)));
-            renderer.addEffect(fluidOrb);
-        }
-    }
+//    public void fillParticles()
+//    {
+//        if (!PARTICLES_ALLOWED || !(worldObj.isRemote))
+//        {
+//            return;
+//        }
+//        EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
+//
+//        double theta;
+//        double radius;
+//        double baseSpeed = 0.01;
+//        double random;
+//        double baseLife = 25;
+//        EntityFX fluidOrb;
+//        double d1;
+//        double d2;
+//
+//        for (int i=0;i<=((int)((double)WATER_GEN/5.0));i++)
+//        {
+//            theta = MathHelper.randomRad();
+//            radius = MathHelper.randomDoubleBetween(0.05,0.45);
+//            random = MathHelper.randomDoubleBetween(0.75,1.0);
+//            d1 = radius*Math.sin(theta);
+//            d2 = radius*Math.cos(theta);
+//
+//            fluidOrb = new ParticleFluidOrb(worldObj,xCoord+0.5+d1,yCoord,zCoord+0.5+d2,-d1*random/baseLife,baseSpeed*random,-d2*random/baseLife,waterFluid,0,((int)(baseLife/random)));
+//            renderer.addEffect(fluidOrb);
+//        }
+//    }
 
     public double getFillPercentage()
     {
         return ((double)tank.getFluidAmount())/((double)tank.getCapacity());
     }
 
-    public void transferParticles(double x,double y, double z,int transferred)
-    {
-        if (!PARTICLES_ALLOWED || !(worldObj.isRemote))
-        {
-            return;
-        }
-
-//        LogHelper.info("Inside transferParticles");
-        EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
-
-        EntityFX fluidOrb;// = new ParticleFluidOrbArc(worldObj,this.xCoord+0.5,this.yCoord+0.51,this.zCoord+0.5,x+0.5,y+0.5,z+0.5,waterFluid,10);
-//        renderer.addEffect(fluidOrb);
-
-        int baseLife = 10;
-        int lifeRandomizer;
-        double xRand;
-        double zRand;
-        int numParticles = Math.max(1, (int) ((double) transferred / 250));
-
-        for (int i=0;i<numParticles;i++)
-        {
-            lifeRandomizer = MathHelper.randomIntInclusiveBetween(-1,1);
-            xRand = MathHelper.randomDoubleBetween(0.45,0.55);
-            zRand = MathHelper.randomDoubleBetween(0.45,0.55);
-            fluidOrb = new ParticleFluidOrbArc(worldObj,this.xCoord+xRand,this.yCoord+0.51,this.zCoord+zRand,x+0.5,y+0.5,z+0.5,waterFluid,baseLife+lifeRandomizer);
-            renderer.addEffect(fluidOrb);
-        }
-    }
+//    public void transferParticles(double x,double y, double z,int transferred)
+//    {
+//        if (!PARTICLES_ALLOWED || !(worldObj.isRemote))
+//        {
+//            return;
+//        }
+//
+////        LogHelper.info("Inside transferParticles");
+//        EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
+//
+//        EntityFX fluidOrb;// = new ParticleFluidOrbArc(worldObj,this.xCoord+0.5,this.yCoord+0.51,this.zCoord+0.5,x+0.5,y+0.5,z+0.5,waterFluid,10);
+////        renderer.addEffect(fluidOrb);
+//
+//        int baseLife = 10;
+//        int lifeRandomizer;
+//        double xRand;
+//        double zRand;
+//        int numParticles = Math.max(1, (int) ((double) transferred / 250));
+//
+//        for (int i=0;i<numParticles;i++)
+//        {
+//            lifeRandomizer = MathHelper.randomIntInclusiveBetween(-1,1);
+//            xRand = MathHelper.randomDoubleBetween(0.45,0.55);
+//            zRand = MathHelper.randomDoubleBetween(0.45,0.55);
+//            fluidOrb = new ParticleFluidOrbArc(worldObj,this.xCoord+xRand,this.yCoord+0.51,this.zCoord+zRand,x+0.5,y+0.5,z+0.5,waterFluid,baseLife+lifeRandomizer);
+//            renderer.addEffect(fluidOrb);
+//        }
+//    }
 
     public int getFluidAmount()
     {

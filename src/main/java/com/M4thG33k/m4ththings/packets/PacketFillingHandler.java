@@ -1,8 +1,7 @@
 package com.M4thG33k.m4ththings.packets;
 
+import com.M4thG33k.m4ththings.particles.ParticleManager;
 import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
-import com.M4thG33k.m4ththings.utility.LogHelper;
-import com.M4thG33k.m4ththings.utility.StringHelper;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -23,9 +22,10 @@ public class PacketFillingHandler implements IMessageHandler<PacketFilling,IMess
 //        Minecraft.getMinecraft().theWorld.spawnParticle("happyVillager", message.getX() + 1.0, message.getY() + 2.0, message.getZ() + 1.0, 0.0, 0.0, 0.0);
         TileEntity tileEntity = (Minecraft.getMinecraft().theWorld.getTileEntity( message.getX(), message.getY() , message.getZ()));
 
-        if (tileEntity!=null && tileEntity instanceof TileQuantumTank)
+        if (Minecraft.getMinecraft().theWorld.isRemote && tileEntity!=null && tileEntity instanceof TileQuantumTank)
         {
-            ((TileQuantumTank)tileEntity).fillParticles(message.getDirection(),message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()),message.getAmount(),message.getSize());
+            //((TileQuantumTank)tileEntity).tankFillParticles(message.getDirection(),message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()),message.getAmount(),message.getSize());
+            ParticleManager.tankFillParticles(Minecraft.getMinecraft().theWorld, message.getX(), message.getY(), message.getZ(), message.getDirection(), message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()), message.getAmount(), message.getSize());
         }
         return null;
     }

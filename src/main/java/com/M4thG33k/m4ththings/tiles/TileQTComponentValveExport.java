@@ -37,7 +37,7 @@ public class TileQTComponentValveExport extends TileQTComponentValve {
     @Override
     public void updateEntity() {
         TileMedQT myParent = getParentTank();
-        if (myParent.getFluidAmount()==0) //if the tank is empty, we can't really do much
+        if (myParent==null || myParent.getFluidAmount()==0) //if the tank is empty, we can't really do much
         {
             return;
         }
