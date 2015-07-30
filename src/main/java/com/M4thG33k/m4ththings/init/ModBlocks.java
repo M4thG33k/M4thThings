@@ -33,11 +33,13 @@ public class ModBlocks {
     public static final BlockTextureDummy blockTextureDummy = new BlockTextureDummy(Material.rock);
     public static final BlockWaterGenerator blockWaterGenerator = new BlockWaterGenerator(Material.ground);
     public static final BlockBaseRFGenerator blockBaseRFGenerator = new BlockBaseRFGenerator(Material.iron);
-    public static final BlockTEST blockTEST = new BlockTEST(Material.ground);
+//    public static final BlockTEST blockTEST = new BlockTEST(Material.ground);
 
     //0.1.1
-    public static final BlockFluidTransferPipe blockFluidTransferPipe = new BlockFluidTransferPipe(Material.rock);
     public static final BlockDyeCrop blockDyeCrop = new BlockDyeCrop();
+
+    //0.1.3
+    public static final BlockFluidTransferPipe blockFluidTransferPipe = new BlockFluidTransferPipe(Material.rock);
 
     public static void init()
     {
@@ -64,7 +66,9 @@ public class ModBlocks {
         //GameRegistry.registerBlock(blockTEST, "blockTEST");
 
         //0.1.1
-        //GameRegistry.registerBlock(blockFluidTransferPipe, "blockFluidTransferPipe");
         GameRegistry.registerBlock(blockDyeCrop,"dyeCrop");
+
+        //0.1.3
+//        GameRegistry.registerBlock(blockFluidTransferPipe, "blockFluidTransferPipe");
     }
 }

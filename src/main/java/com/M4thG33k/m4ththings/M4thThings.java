@@ -41,8 +41,8 @@ public class M4thThings {
         ModPackets.init();
         ModBlocks.init();
         ModFluids.init();
-        ModTiles.init();
         ModItems.init();
+        ModTiles.init();
         ModMobs.init();
     }
 

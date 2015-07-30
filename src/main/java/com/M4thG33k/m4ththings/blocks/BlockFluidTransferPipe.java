@@ -1,5 +1,6 @@
 package com.M4thG33k.m4ththings.blocks;
 
+import com.M4thG33k.m4ththings.tiles.TileFluidPipe;
 import com.M4thG33k.m4ththings.utility.StringHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +20,7 @@ public class BlockFluidTransferPipe extends BlockTransferPipe {
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        return null;
+        return new TileFluidPipe();
 //        return new TileFluidPipe();
 //        return new TileFluidTransferPipe();
 

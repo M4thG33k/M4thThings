@@ -31,7 +31,9 @@ public class ModTiles {
         GameRegistry.registerTileEntity(TileTEST.class,"tileTEST");
 
         //0.1.1
-        //GameRegistry.registerTileEntity(TileFluidTransferPipe.class,"tileFluidTransferPipe");
         //GameRegistry.registerTileEntity(TileFluidPipe.class,"tileFluidPipe");
+
+        //0.1.3
+//        GameRegistry.registerTileEntity(TileFluidPipe.class,"tileFluidPipe");
     }
 }

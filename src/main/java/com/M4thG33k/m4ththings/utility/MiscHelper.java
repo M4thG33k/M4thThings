@@ -380,4 +380,22 @@ public class MiscHelper {
         return toReturn;
     }
 
+    public static int[] combineIntArrays(int[] A, int[] B)
+    {
+        int[] toReturn = new int[A.length+B.length];
+        for (int i=0;i<toReturn.length;i++)
+        {
+            if (i<A.length)
+            {
+                toReturn[i] = A[i];
+            }
+            else
+            {
+                toReturn[i] = B[i-A.length];
+            }
+        }
+
+        return toReturn;
+    }
+
 }
