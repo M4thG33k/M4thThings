@@ -1,5 +1,6 @@
 package com.M4thG33k.m4ththings.packets;
 
+import com.M4thG33k.m4ththings.M4thThings;
 import com.M4thG33k.m4ththings.interfaces.IM4thNBTSync;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -15,16 +16,18 @@ public class PacketNBTHandler implements IMessageHandler<PacketNBT,IMessage> {
     @Override
     public IMessage onMessage(PacketNBT message, MessageContext ctx)
     {
-        if (message==null || ctx==null)
-        {
-            return null;
-        }
-        TileEntity tileEntity =  (Minecraft.getMinecraft().theWorld.getTileEntity(message.location[0],message.location[1],message.location[2]));
+//        if (message==null || ctx==null)
+//        {
+//            return null;
+//        }
+//        TileEntity tileEntity =  (Minecraft.getMinecraft().theWorld.getTileEntity(message.location[0],message.location[1],message.location[2]));
+//
+//        if (tileEntity!=null && tileEntity instanceof IM4thNBTSync)
+//        {
+//            ((IM4thNBTSync)tileEntity).receiveNBTPacket(message.tagCompound);
+//        }
 
-        if (tileEntity!=null && tileEntity instanceof IM4thNBTSync)
-        {
-            ((IM4thNBTSync)tileEntity).receiveNBTPacket(message.tagCompound);
-        }
+        M4thThings.proxy.handleNBTPacket(message);
 
         return null;
     }

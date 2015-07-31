@@ -1,5 +1,6 @@
 package com.M4thG33k.m4ththings.packets;
 
+import com.M4thG33k.m4ththings.M4thThings;
 import com.M4thG33k.m4ththings.particles.ParticleManager;
 import com.M4thG33k.m4ththings.tiles.TileQuantumTank;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -20,13 +21,16 @@ public class PacketFillingHandler implements IMessageHandler<PacketFilling,IMess
 //        LogHelper.info("Received message from the server! " + message.getDirection() + ":" + message.getIsFilling());
 //        LogHelper.info("I should be spawning a particle at: " + StringHelper.makeCoords(message.getX() + 1.0, message.getY() + 1.0, message.getZ() + 1.0));
 //        Minecraft.getMinecraft().theWorld.spawnParticle("happyVillager", message.getX() + 1.0, message.getY() + 2.0, message.getZ() + 1.0, 0.0, 0.0, 0.0);
-        TileEntity tileEntity = (Minecraft.getMinecraft().theWorld.getTileEntity( message.getX(), message.getY() , message.getZ()));
+//        TileEntity tileEntity = (Minecraft.getMinecraft().theWorld.getTileEntity( message.getX(), message.getY() , message.getZ()));
+//
+//        if (Minecraft.getMinecraft().theWorld.isRemote && tileEntity!=null && tileEntity instanceof TileQuantumTank)
+//        {
+//            //((TileQuantumTank)tileEntity).tankFillParticles(message.getDirection(),message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()),message.getAmount(),message.getSize());
+//            ParticleManager.tankFillParticles(Minecraft.getMinecraft().theWorld, message.getX(), message.getY(), message.getZ(), message.getDirection(), message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()), message.getAmount(), message.getSize());
+//        }
 
-        if (Minecraft.getMinecraft().theWorld.isRemote && tileEntity!=null && tileEntity instanceof TileQuantumTank)
-        {
-            //((TileQuantumTank)tileEntity).tankFillParticles(message.getDirection(),message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()),message.getAmount(),message.getSize());
-            ParticleManager.tankFillParticles(Minecraft.getMinecraft().theWorld, message.getX(), message.getY(), message.getZ(), message.getDirection(), message.getIsFilling(), FluidRegistry.getFluid(message.getFluidName()), message.getAmount(), message.getSize());
-        }
+        M4thThings.proxy.startParticleRendering(message);
+
         return null;
     }
 }
